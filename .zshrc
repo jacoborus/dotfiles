@@ -78,6 +78,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias lk="ls -1"
+alias lka="ls -1 -A"
 
 export DEFAULT_USER="jacobo"
 export TERM="xterm-256color"
