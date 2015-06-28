@@ -88,6 +88,38 @@ set nowb
 set noswapfile
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Turn persistent undo on
+"    means that you can undo even when you close a buffer/VIM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+try
+  set undodir=~/.vim_runtime/temp_dirs/undodir
+  set undofile
+catch
+endtry
+
+
 """""""""""""""""""""""""""""""""""""
 " VUNDLE
 """""""""""""""""""""""""""""""""""""
@@ -138,13 +170,6 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-
-" see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
 " SYNTASTIC
