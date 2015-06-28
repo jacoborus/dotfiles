@@ -1,9 +1,23 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set nocompatible
-filetype plugin on
-runtime macros/matchit.vim
+"""""""""""""""""""""""""""""""""""""""""
+" GENERAL
+"""""""""""""""""""""""""""""""""""""""""
 
+" Sets how many lines of history VIM has to remember
+set history=700
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+
+""""""""""""""""""""""""""""""""""""""""
+" USER INTERFACE
+""""""""""""""""""""""""""""""""""""""""
+
+colorscheme monokai
 " show quotes in json files
 let g:vim_json_syntax_conceal = 0
 
@@ -15,20 +29,73 @@ set splitright
 set foldmethod=indent
 set nofoldenable
 
-" Set to auto read when a file is changed from the outside
-set autoread
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
 
-" Enable mouse scrolling
-set mouse=a
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+" Add a bit extra margin to the left
+set foldcolumn=1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+
+" intelligent line numbers
+set number
+set relativenumber
 
 " Indent guides color and character
 let g:indentLine_color_term = 239
 let g:indentLine_char = '⦙'
 
-set number
-set relativenumber
 let g:localvimrc_ask=0
-set tabstop=2 softtabstop=2 expandtab shiftwidth=2 smarttab
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+
+"""""""""""""""""""""""""""""""""""""
+" VUNDLE
+"""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required by Vundle
+filetype off                  " required by Vundle
+set nocompatible
+runtime macros/matchit.vim
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -38,21 +105,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
@@ -80,16 +132,6 @@ Plugin 'pricco/vim-monokai'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-multiple-cursors'
 
-" SYNTASTIC
-set statusline+=%#WARNINGMSG#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -104,8 +146,9 @@ filetype plugin indent on    " required
 
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-colorscheme monokai
-set statusline+=%#warningmsg#
+
+" SYNTASTIC
+set statusline+=%#WARNINGMSG#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
@@ -114,7 +157,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" status line
+""""""""""""""""""""""""""""""""
+" ViM Lightline
+""""""""""""""""""""""""""""""""
+
 set laststatus=2
 let g:lightline = {
       \ 'colorscheme': 'wombat',
