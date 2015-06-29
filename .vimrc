@@ -12,7 +12,6 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 
-
 """"""""""""""""""""""""""""""""""""""""
 " USER INTERFACE
 """"""""""""""""""""""""""""""""""""""""
@@ -34,36 +33,25 @@ if has('mouse')
   set mouse=a
 endif
 
-
 " Highlight search results
 set hlsearch
-
 " Makes search act like search in modern browsers
 set incsearch
-
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
-
 " For regular expressions turn magic on
 set magic
-
 " Show matching brackets when text indicator is over them
 set showmatch
-
-" Add a bit extra margin to the left
-set foldcolumn=1
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
-
 " Be smart when using tabs ;)
 set smarttab
-
-" 1 tab == 4 spaces
+" 1 tab == 2 spaces
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
@@ -78,7 +66,6 @@ let g:indentLine_char = '⦙'
 
 let g:localvimrc_ask=0
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -86,7 +73,6 @@ let g:localvimrc_ask=0
 set nobackup
 set nowb
 set noswapfile
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -156,7 +142,7 @@ Plugin 'myusuf3/numbers.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'embear/vim-localvimrc'
 Plugin 'arecarn/fold-cycle.vim'
-" Plugin 'garbas/vim-snipmate'
+
 Plugin 'tpope/vim-commentary'
 Plugin 'scrooloose/nerdtree'
 
@@ -179,14 +165,14 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " SYNTASTIC
-set statusline+=%#WARNINGMSG#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#WARNINGMSG#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 """"""""""""""""""""""""""""""""
 " ViM Lightline
@@ -259,3 +245,13 @@ function! MyMode()
 endfunction
 
 highlight ExtraWhitespace ctermbg=52
+
+" ----- Raimondi/delimitMate settings -----
+let delimitMate_expand_cr = 1
+augroup mydelimitMate
+  au!
+  au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
+  au FileType tex let b:delimitMate_quotes = ""
+  au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
+  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+augroup END
