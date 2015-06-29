@@ -43,6 +43,8 @@ set lazyredraw
 set magic
 " Show matching brackets when text indicator is over them
 set showmatch
+" Highlight current line
+set cursorline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -55,7 +57,8 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
-
+" indent new line when cursor is between brackets, parentheses, ...
+let delimitMate_expand_cr=1
 " intelligent line numbers
 set number
 set relativenumber
@@ -87,13 +90,15 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" tab navigation
+map L :tabnext<CR>
+map H :tabprev<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
 map 0 ^
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on
