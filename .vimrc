@@ -45,6 +45,8 @@ set magic
 set showmatch
 " Highlight current line
 set cursorline
+" don't let the cursor touch the edge of the viewport
+set scrolloff=3
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
