@@ -17,8 +17,6 @@ set autoread
 """"""""""""""""""""""""""""""""""""""""
 
 colorscheme monokai
-" show quotes in json files
-let g:vim_json_syntax_conceal = 0
 
 " Open new split panes to right and bottom
 set splitbelow
@@ -47,6 +45,8 @@ set showmatch
 set cursorline
 " don't let the cursor touch the edge of the viewport
 set scrolloff=3
+" show quotes in json files
+autocmd BufNewFile,BufRead *.json set ft=javascript
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
