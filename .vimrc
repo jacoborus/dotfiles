@@ -163,6 +163,8 @@ Plugin 'pricco/vim-monokai'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-multiple-cursors'
 
+Plugin 'edkolev/tmuxline.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -262,3 +264,14 @@ augroup mydelimitMate
   au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
   au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
+
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'b'    : '#W',
+      \'c'    : '#H',
+      \'win'  : '#I #W',
+      \'cwin' : '#I #W',
+      \'x'    : '%R',
+      \'y'    : '#(whoami)',
+      \'z'    : '#H'}
+
