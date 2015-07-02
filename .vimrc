@@ -192,7 +192,12 @@ set nofoldenable
 if has('mouse')
   set mouse=a
 endif
-
+" enable mouse entire big screens
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
 " Highlight search results
 set hlsearch
 " Makes search act like search in modern browsers
