@@ -268,7 +268,6 @@ augroup END
 let g:tmuxline_preset = {
       \'a'    : '#S',
       \'b'    : '#W',
-      \'c'    : '#H',
       \'win'  : '#I #W',
       \'cwin' : '#I #W',
       \'x'    : '%R',
