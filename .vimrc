@@ -3,7 +3,6 @@
 """""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required by Vundle
 filetype off                  " required by Vundle
-set nocompatible
 runtime macros/matchit.vim
 
 " set the runtime path to include Vundle and initialize
@@ -21,6 +20,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-surround'
+" Plugin 'Shougo/neocomplete.vim'
 
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'moll/vim-node'
@@ -43,6 +43,9 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-multiple-cursors'
 
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'leshill/vim-json'
+
+Plugin 'junegunn/vim-github-dashboard'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -151,19 +154,20 @@ augroup mydelimitMate
   au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
 
-let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'b'    : '#W',
-      \'win'  : '#I #W',
-      \'cwin' : '#I #W',
-      \'x'    : '%R',
-      \'y'    : '#(whoami)',
-      \'z'    : '#H'}
+" Tmuxline settings
+" let g:tmuxline_preset = {
+"       \'a'    : '#S',
+"       \'b'    : '#W',
+"       \'win'  : '#I #W',
+"       \'cwin' : '#I #W',
+"       \'x'    : '%R',
+"       \'y'    : '#(whoami)',
+"       \'z'    : '#H'}
 
 """""""""""""""""""""""""""""""""""""""
 " CtrlSF
 """""""""""""""""""""""""""""""""""""""
-nmap     <C-S-f> <Plug>CtrlSFPrompt
+"nmap     <C-S-f> <Plug>CtrlSFPrompt
 
 """""""""""""""""""""""""""""""""""""""""
 " GENERAL
@@ -197,42 +201,33 @@ set nofoldenable
 if has('mouse')
   set mouse=a
 endif
-" enable mouse entire big screens
+" enable mouse in entire big screens
 if has("mouse_sgr")
   set ttymouse=sgr
 else
   set ttymouse=xterm2
 end
-" Highlight search results
-set hlsearch
-" Makes search act like search in modern browsers
-set incsearch
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
-" For regular expressions turn magic on
-set magic
-" Show matching brackets when text indicator is over them
-set showmatch
-" Highlight current line
-set cursorline
-" don't let the cursor touch the edge of the viewport
-set scrolloff=3
-" show quotes in json files
-autocmd BufNewFile,BufRead *.json set ft=javascript
+
+set hlsearch       " Highlight search results
+set incsearch      " Find as you type
+set lazyredraw     " Don't redraw while executing macros (good performance config)
+set magic          " For regular expressions turn magic on
+set showmatch      " Show matching brackets when text indicator is over them
+set cursorline     " Highlight current line
+set scrolloff=3    " don't let the cursor touch the edge of the viewport
+" autocmd BufNewFile,BufRead *.json set ft=javascript  " show quotes in json files
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
-" Be smart when using tabs ;)
-set smarttab
-" 1 tab == 2 spaces
-set shiftwidth=2
-set tabstop=2
+set expandtab      " Use spaces instead of tabs
+set smarttab       " Be smart when using tabs ;)
+set shiftwidth=2   " indent with 2 spoaces
+set tabstop=2      " 1 tab == 2 spaces
 set softtabstop=2
-" indent new line when cursor is between brackets, parentheses, ...
-let delimitMate_expand_cr=1
+
+let delimitMate_expand_cr=1 " indent new line when cursor is between brackets, parentheses, ...
+
 " intelligent line numbers
 set number
 set relativenumber
@@ -246,11 +241,11 @@ let g:localvimrc_ask=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" Turn backup off, since most stuff is in git 
 set nobackup
 set nowb
 set noswapfile
-
+set clipboard=unnamedplus " copy/paste to/from system clipboard
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -269,12 +264,12 @@ map L :tabnext<CR>
 map H :tabprev<CR>
 
 " move up/down single lines or selected ones
-inoremap <C-S-j> <Esc>:m .+1<CR>==gi
-inoremap <C-S-k> <Esc>:m .-2<CR>==gi
-nnoremap <C-S-j> :m .+1<CR>==
-nnoremap <C-S-k> :m .-2<CR>==
-vnoremap <C-S-j> :m '>+1<CR>gv=gv
-vnoremap <C-S-k> :m '<-2<CR>gv=gv
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+nnoremap <S-j> :m .+1<CR>==
+nnoremap <S-k> :m .-2<CR>==
+vnoremap <S-j> :m '>+1<CR>gv=gv
+vnoremap <S-k> :m '<-2<CR>gv=gv
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -292,10 +287,4 @@ try
 catch
 endtry
 
-""""""""""""""""""""""""""""""""""""
-" MISC
-""""""""""""""""""""""""""""""""""""
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
 
