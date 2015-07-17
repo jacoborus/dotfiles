@@ -43,8 +43,9 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-multiple-cursors'
 
 Plugin 'edkolev/tmuxline.vim'
-Plugin 'leshill/vim-json'
+Plugin 'elzr/vim-json'
 
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'junegunn/vim-github-dashboard'
 
 " All of your Plugins must be added before the following line
@@ -167,8 +168,14 @@ augroup END
 """""""""""""""""""""""""""""""""""""""
 " CtrlSF
 """""""""""""""""""""""""""""""""""""""
-"nmap     <C-S-f> <Plug>CtrlSFPrompt
+nmap     <C-f> <Plug>CtrlSFPrompt
 
+"""""""""""""""""""""""""""""""""""""""""
+" Syntax JSON
+"""""""""""""""""""""""""""""""""""""""""
+autocmd BufNewFile,BufRead .eslintrc setlocal filetype=json
+let g:vim_json_syntax_conceal = 0
+"""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""
 " GENERAL
 """""""""""""""""""""""""""""""""""""""""
@@ -215,7 +222,6 @@ set magic          " For regular expressions turn magic on
 set showmatch      " Show matching brackets when text indicator is over them
 set cursorline     " Highlight current line
 set scrolloff=3    " don't let the cursor touch the edge of the viewport
-" autocmd BufNewFile,BufRead *.json set ft=javascript  " show quotes in json files
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
