@@ -46,7 +46,6 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'elzr/vim-json'
 
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'junegunn/vim-github-dashboard'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -251,7 +250,9 @@ let g:localvimrc_ask=0
 set nobackup
 set nowb
 set noswapfile
-set clipboard=unnamedplus " copy/paste to/from system clipboard
+set clipboard=unnamedplus   " copy/paste to/from system clipboard
+:au CursorHold * checktime  " reload file when changed externally
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
