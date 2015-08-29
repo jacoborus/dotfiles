@@ -46,6 +46,7 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'elzr/vim-json'
 
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'heavenshell/vim-jsdoc'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -70,6 +71,11 @@ let g:syntastic_check_on_wq = 0
 " set eslint as javascript checker
 let g:syntastic_javascript_checkers = ['eslint']
 
+"""""""""""""""""""""""""""""""
+" vim-jsdoc
+"""""""""""""""""""""""""""""""
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_allow_shorthand=1
 """"""""""""""""""""""""""""""""
 " ViM Lightline
 """"""""""""""""""""""""""""""""
@@ -79,10 +85,15 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'mode_map': { 'ñ': 'NORMAL' },
       \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
       \ },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))'
       \ },
       \ 'component_function': {
       \   'modified': 'MyModified',
@@ -133,11 +144,12 @@ function! MyFiletype()
 endfunction
 
 function! MyFileencoding()
-  return winwidth(0) > 100 ? (strlen(&fenc) ? &fenc : &enc) : ''
+  return ''
+  " return winwidth(0) > 100 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
 function! MyMode()
-  return winwidth(0) > 120 ? lightline#mode() : ''
+  return winwidth(0) > 120 ? lightline#mode() : ' '
 endfunction
 
 highlight ExtraWhitespace ctermbg=52
@@ -193,6 +205,8 @@ set autoread
 " USER INTERFACE
 """"""""""""""""""""""""""""""""""""""""
 
+set t_Co=256
+set background=dark
 colorscheme monokai
 
 " Open new split panes to right and bottom
