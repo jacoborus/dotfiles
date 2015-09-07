@@ -75,7 +75,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 " vim-jsdoc
 """""""""""""""""""""""""""""""
 let g:jsdoc_allow_input_prompt = 1
-let g:jsdoc_allow_shorthand=1
+let g:jsdoc_enable_es6 = 1
 """"""""""""""""""""""""""""""""
 " ViM Lightline
 """"""""""""""""""""""""""""""""
@@ -190,6 +190,16 @@ let g:vim_json_syntax_conceal = 0
 """""""""""""""""""""""""""""""""""""""""
 " GENERAL
 """""""""""""""""""""""""""""""""""""""""
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
+" Fast saving
+nmap <leader>w :w<cr>
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Sets how many lines of history VIM has to remember
 set history=700
@@ -200,6 +210,9 @@ filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
+
+"Always show current position
+set ruler
 
 """"""""""""""""""""""""""""""""""""""""
 " USER INTERFACE
