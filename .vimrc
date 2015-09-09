@@ -64,7 +64,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -89,7 +89,8 @@ let g:lightline = {
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
       \ },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
@@ -104,6 +105,12 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
       \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
@@ -151,6 +158,16 @@ endfunction
 function! MyMode()
   return winwidth(0) > 120 ? lightline#mode() : ' '
 endfunction
+
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost * call s:syntastic()
+augroup END
 
 highlight ExtraWhitespace ctermbg=52
 
@@ -200,6 +217,10 @@ map <silent> <leader><cr> :noh<cr>
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" fast open/close quickfix
+nmap <leader>lo :lopen<cr>
+nmap <leader>lc :lcl<cr>
 
 " Sets how many lines of history VIM has to remember
 set history=700
