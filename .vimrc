@@ -18,12 +18,9 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
-
-if !has('nvim')
-  Plugin 'Valloric/YouCompleteMe'
-endif
 Plugin 'tpope/vim-surround'
-" Plugin 'Shougo/neocomplete.vim'
+
+Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'moll/vim-node'
@@ -61,6 +58,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 """"""""""""""""""""""""""""""""""
+
 " SYNTASTIC
 """"""""""""""""""""""""""""""""""
 set statusline+=%#WARNINGMSG#
