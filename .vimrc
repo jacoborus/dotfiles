@@ -18,7 +18,10 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
-Plugin 'Valloric/YouCompleteMe'
+
+if !has('nvim')
+  Plugin 'Valloric/YouCompleteMe'
+endif
 Plugin 'tpope/vim-surround'
 " Plugin 'Shougo/neocomplete.vim'
 
@@ -219,7 +222,7 @@ nmap     <C-f> <Plug>CtrlSFPrompt
 """""""""""""""""""""""""""""""""""""""""
 autocmd BufNewFile,BufRead .eslintrc setlocal filetype=json
 let g:vim_json_syntax_conceal = 0
-"""""""""""""""""""""""""""""""""""""""""
+
 """""""""""""""""""""""""""""""""""""""""
 " GENERAL
 """""""""""""""""""""""""""""""""""""""""
@@ -251,7 +254,7 @@ set autoread
 """"""""""""""""""""""""""""""""""""""""
 " USER INTERFACE
 """"""""""""""""""""""""""""""""""""""""
-
+syntax on
 set t_Co=256
 set background=dark
 colorscheme monokai

@@ -23,3 +23,7 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/$file
 done
+
+echo "Creating symlink for neovim rc file in home directory"
+ln -s $dir/.vimrc ~/.nvimrc
+echo "~/.vimrc and ~/.nvimrc are symlinks to the same file"
