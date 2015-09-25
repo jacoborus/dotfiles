@@ -47,12 +47,13 @@ Plugin 'elzr/vim-json'
 
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'heavenshell/vim-jsdoc'
+Plugin 'pangloss/vim-javascript'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+" filetype plugin on
 "
 " Put your non-Plugin stuff after this line
 
@@ -76,6 +77,21 @@ let g:syntastic_javascript_checkers = ['eslint']
 """""""""""""""""""""""""""""""
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_enable_es6 = 1
+""""""""""""""""""""""""""""""
+" emmet
+""""""""""""""""""""""""""""""
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_leader_key='<C-y>'
+""""""""""""""""""""""""""""""""
+" ctrlp
+""""""""""""""""""""""""""""""""
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
 """"""""""""""""""""""""""""""""
 " ViM Lightline
 """"""""""""""""""""""""""""""""
@@ -232,9 +248,6 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 
-"Always show current position
-set ruler
-
 """"""""""""""""""""""""""""""""""""""""
 " USER INTERFACE
 """"""""""""""""""""""""""""""""""""""""
@@ -259,7 +272,9 @@ endif
 if has("mouse_sgr")
   set ttymouse=sgr
 else
-  set ttymouse=xterm2
+  if !has('nvim')
+    set ttymouse=xterm2
+  endif
 end
 
 set hlsearch       " Highlight search results
