@@ -1,4 +1,3 @@
-"""""""""""""""""""""""""""""""""""""
 " VUNDLE
 """""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required by Vundle
@@ -31,6 +30,9 @@ Plugin 'arecarn/fold-cycle.vim'
 
 Plugin 'tpope/vim-commentary'
 Plugin 'scrooloose/nerdtree'
+" Required by vim-session
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
@@ -49,15 +51,11 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'heavenshell/vim-jsdoc'
 Plugin 'pangloss/vim-javascript'
 
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
-"
-" Put your non-Plugin stuff after this line
 
-""""""""""""""""""""""""""""""""""
 
 " SYNTASTIC
 """"""""""""""""""""""""""""""""""
@@ -69,34 +67,31 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
 " set eslint as javascript checker
 let g:syntastic_javascript_checkers = ['eslint']
 
-"""""""""""""""""""""""""""""""
 " vim-jsdoc
 """""""""""""""""""""""""""""""
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_enable_es6 = 1
-""""""""""""""""""""""""""""""
+
 " emmet
 """"""""""""""""""""""""""""""
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-y>'
-""""""""""""""""""""""""""""""""
+
 " ctrlp
 """"""""""""""""""""""""""""""""
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|\v(node_modules|bower_components)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
-""""""""""""""""""""""""""""""""
+
 " ViM Lightline
 """"""""""""""""""""""""""""""""
-
 set laststatus=2
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -188,7 +183,6 @@ augroup END
 
 highlight ExtraWhitespace ctermbg=52
 
-"""""""""""""""""""""""""""""""
 " Raimondi/delimitMate settings
 """""""""""""""""""""""""""""""
 let delimitMate_expand_cr = 1
@@ -210,12 +204,11 @@ augroup END
 "       \'y'    : '#(whoami)',
 "       \'z'    : '#H'}
 
-"""""""""""""""""""""""""""""""""""""""
+
 " CtrlSF
 """""""""""""""""""""""""""""""""""""""
 nmap     <C-f> <Plug>CtrlSFPrompt
 
-"""""""""""""""""""""""""""""""""""""""""
 " Syntax JSON
 """""""""""""""""""""""""""""""""""""""""
 autocmd BufNewFile,BufRead .eslintrc setlocal filetype=json
@@ -242,12 +235,28 @@ nmap <leader>lc :lcl<cr>
 " Sets how many lines of history VIM has to remember
 set history=700
 
+" This maps Leader + e to exit terminal mode.
+if has('nvim')
+  tnoremap <C-n> <C-\><C-n>
+endif
+
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
+
+" session management
+"""""""""""""""""""
+let g:session_directory = "~/.vim/session"
+let g:session_autoload = "no"
+let g:session_autosave = "no"
+
+nnoremap <leader>so :OpenSession<space>
+nnoremap <leader>ss :SaveSession<space>
+nnoremap <leader>sd :DeleteSession<space>
+nnoremap <leader>sc :CloseSession<space>
 
 """"""""""""""""""""""""""""""""""""""""
 " USER INTERFACE
@@ -285,7 +294,8 @@ set magic          " For regular expressions turn magic on
 set showmatch      " Show matching brackets when text indicator is over them
 set cursorline     " Highlight current line
 set scrolloff=3    " don't let the cursor touch the edge of the viewport
-
+set ignorecase
+set smartcase
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -310,7 +320,7 @@ let g:localvimrc_ask=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in git 
+" Turn backup off, since most stuff is in git
 set nobackup
 set nowb
 set noswapfile
