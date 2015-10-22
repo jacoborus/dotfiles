@@ -49,7 +49,11 @@ Plugin 'elzr/vim-json'
 
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'heavenshell/vim-jsdoc'
-Plugin 'pangloss/vim-javascript'
+" Plugin 'pangloss/vim-javascript'
+Plugin 'mbbill/undotree'
+Plugin 'othree/yajs.vim'
+Plugin 'ap/vim-css-color'
+Plugin 'mkitt/tabline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -214,6 +218,7 @@ nmap     <C-f> <Plug>CtrlSFPrompt
 autocmd BufNewFile,BufRead .eslintrc setlocal filetype=json
 let g:vim_json_syntax_conceal = 0
 
+
 """""""""""""""""""""""""""""""""""""""""
 " GENERAL
 """""""""""""""""""""""""""""""""""""""""
@@ -247,6 +252,10 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 
+" Switch syntax highlighting on, when the terminal has colors
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+endif
 " session management
 """""""""""""""""""
 let g:session_directory = "~/.vim/session"
@@ -258,7 +267,6 @@ nnoremap <leader>ss :SaveSession<space>
 nnoremap <leader>sd :DeleteSession<space>
 nnoremap <leader>sc :CloseSession<space>
 
-""""""""""""""""""""""""""""""""""""""""
 " USER INTERFACE
 """"""""""""""""""""""""""""""""""""""""
 syntax on
@@ -289,14 +297,14 @@ end
 
 set hlsearch       " Highlight search results
 set incsearch      " Find as you type
+set ignorecase
+set smartcase
 set lazyredraw     " Don't redraw while executing macros (good performance config)
 set magic          " For regular expressions turn magic on
 set showmatch      " Show matching brackets when text indicator is over them
 set cursorline     " Highlight current line
 set scrolloff=3    " don't let the cursor touch the edge of the viewport
-set ignorecase
-set smartcase
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab      " Use spaces instead of tabs
@@ -317,24 +325,24 @@ let g:indentLine_char = '⦙'
 
 let g:localvimrc_ask=0
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in git
 set nobackup
 set nowb
 set noswapfile
-set clipboard=unnamedplus   " copy/paste to/from system clipboard
-:au CursorHold * checktime  " reload file when changed externally
+" copy/paste to/from system clipboard
+set clipboard=unnamedplus
+" reload file when changed externally
+:au CursorHold * checktime
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Treat long lines as break lines (useful when moving around in them)
+" Moving around, tabs, windows and buffers
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Treat long lines as break lines
 map j gj
 map k gk
 
-" Smart way to move between windows
+" Move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -352,20 +360,16 @@ nnoremap <S-k> :m .-2<CR>==
 vnoremap <S-j> :m '>+1<CR>gv=gv
 vnoremap <S-k> :m '<-2<CR>gv=gv
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Turn persistent undo on
-"    means that you can undo even when you close a buffer/VIM
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-try
-  set undodir=~/.vim_runtime/temp_dirs/undodir
-  set undofile
-catch
-endtry
+" Turn persistent undo on
+if has("persistent_undo")
+    set undodir='~/.vim/.undodir/'
+    set undofile
+endif
 
-
+" tabline
+hi TabLine      ctermfg=246  ctermbg=237     cterm=NONE
+hi TabLineFill  ctermfg=Black  ctermbg=237     cterm=NONE
+hi TabLineSel   ctermfg=Black  ctermbg=White  cterm=NONE
