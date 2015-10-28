@@ -14,7 +14,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 Plugin 'tpope/vim-surround'
@@ -49,30 +48,15 @@ Plugin 'elzr/vim-json'
 
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'heavenshell/vim-jsdoc'
-" Plugin 'pangloss/vim-javascript'
 Plugin 'mbbill/undotree'
 Plugin 'othree/yajs.vim'
 Plugin 'ap/vim-css-color'
-Plugin 'mkitt/tabline.vim'
+Plugin 'benekastah/neomake'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
-
-
-" SYNTASTIC
-""""""""""""""""""""""""""""""""""
-set statusline+=%#WARNINGMSG#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" set eslint as javascript checker
-let g:syntastic_javascript_checkers = ['eslint']
 
 " vim-jsdoc
 """""""""""""""""""""""""""""""
@@ -106,7 +90,7 @@ let g:lightline = {
       \ },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
-      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
@@ -121,12 +105,6 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \ },
-      \ 'component_type': {
-      \   'syntastic': 'error',
       \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
@@ -174,16 +152,6 @@ endfunction
 function! MyMode()
   return winwidth(0) > 120 ? lightline#mode() : ' '
 endfunction
-
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
-
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost * call s:syntastic()
-augroup END
 
 highlight ExtraWhitespace ctermbg=52
 
@@ -303,6 +271,7 @@ set lazyredraw     " Don't redraw while executing macros (good performance confi
 set magic          " For regular expressions turn magic on
 set showmatch      " Show matching brackets when text indicator is over them
 set cursorline     " Highlight current line
+hi CursorLine   cterm=NONE ctermbg=236 ctermfg=NONE guibg=darkred guifg=white
 set scrolloff=3    " don't let the cursor touch the edge of the viewport
 
 " => Text, tab and indent related
@@ -369,7 +338,6 @@ if has("persistent_undo")
     set undofile
 endif
 
-" tabline
-hi TabLine      ctermfg=246  ctermbg=237     cterm=NONE
-hi TabLineFill  ctermfg=Black  ctermbg=237     cterm=NONE
-hi TabLineSel   ctermfg=Black  ctermbg=White  cterm=NONE
+" NEOMAKE
+let g:neomake_javascript_enabled_makers = ['eslint']
+autocmd! BufWritePost * Neomake
