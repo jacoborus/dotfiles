@@ -340,4 +340,30 @@ endif
 
 " NEOMAKE
 let g:neomake_javascript_enabled_makers = ['eslint']
-autocmd! BufWritePost * Neomake
+" run neomake when opening and writing javascript files
+autocmd! BufWritePost *.js Neomake
+au BufReadPost *.js Neomake
+
+" fix lprevius and lnext behaviour
+" https://github.com/scrooloose/syntastic/issues/32#issuecomment-40273385
+function! <SID>LocationPrevious()
+  try
+    lprev
+  catch /^Vim\%((\a\+)\)\=:E553/
+    llast
+  endtry
+endfunction
+
+function! <SID>LocationNext()
+  try
+    lnext
+  catch /^Vim\%((\a\+)\)\=:E553/
+    lfirst
+  endtry
+endfunction
+
+nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
+nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
+nmap <silent> <leader>lp    <Plug>LocationPrevious
+nmap <silent> <leader>ln    <Plug>LocationNext
+
