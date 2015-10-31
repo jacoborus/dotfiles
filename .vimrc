@@ -4,56 +4,50 @@ set nocompatible              " be iMproved, required by Vundle
 filetype off                  " required by Vundle
 runtime macros/matchit.vim
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
+" Plug 'gmarik/Vundle.vim'
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-surround'
 
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'itchyny/lightline.vim'
-Plugin 'tpope/vim-surround'
+Plug 'Valloric/YouCompleteMe'
 
-Plugin 'Valloric/YouCompleteMe'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'moll/vim-node'
+Plug 'myusuf3/numbers.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'embear/vim-localvimrc'
+Plug 'arecarn/fold-cycle.vim'
 
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'moll/vim-node'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'embear/vim-localvimrc'
-Plugin 'arecarn/fold-cycle.vim'
-
-Plugin 'tpope/vim-commentary'
-Plugin 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'scrooloose/nerdtree'
 " Required by vim-session
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'regedarek/ZoomWin'
-Plugin 'mattn/emmet-vim'
-Plugin 'pricco/vim-monokai'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'terryma/vim-multiple-cursors'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'dyng/ctrlsf.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'regedarek/ZoomWin'
+Plug 'mattn/emmet-vim'
+Plug 'pricco/vim-monokai'
+Plug 'suan/vim-instant-markdown'
+Plug 'terryma/vim-multiple-cursors'
 
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'elzr/vim-json'
+Plug 'edkolev/tmuxline.vim'
+Plug 'elzr/vim-json'
 
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'heavenshell/vim-jsdoc'
-Plugin 'mbbill/undotree'
-Plugin 'othree/yajs.vim'
-Plugin 'ap/vim-css-color'
-Plugin 'benekastah/neomake'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'mbbill/undotree'
+Plug 'othree/yajs.vim'
+Plug 'ap/vim-css-color'
+Plug 'benekastah/neomake'
 
-call vundle#end()            " required
+call plug#end()
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
@@ -179,7 +173,7 @@ augroup END
 
 " CtrlSF
 """""""""""""""""""""""""""""""""""""""
-nmap     <C-f> <Plug>CtrlSFPrompt
+nmap     <leader>f <Plug>CtrlSFPrompt
 
 " Syntax JSON
 """""""""""""""""""""""""""""""""""""""""
