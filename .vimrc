@@ -328,7 +328,7 @@ map 0 ^
 
 " Turn persistent undo on
 if has("persistent_undo")
-    set undodir='~/.vim/.undodir/'
+    set undodir=~/.vim/.undodir/
     set undofile
 endif
 
