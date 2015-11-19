@@ -72,6 +72,10 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
+" Instant Markdown
+""""""""""""""""""
+let g:instant_markdown_autostart = 0
+
 " ViM Lightline
 """"""""""""""""""""""""""""""""
 set laststatus=2
@@ -155,8 +159,6 @@ let delimitMate_expand_cr = 1
 augroup mydelimitMate
   au!
   au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
-  au FileType tex let b:delimitMate_quotes = ""
-  au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
   au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
 
@@ -186,6 +188,7 @@ let g:vim_json_syntax_conceal = 0
 """""""""""""""""""""""""""""""""""""""""
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
+
 " Fast saving
 nmap <leader>w :w<cr>
 
