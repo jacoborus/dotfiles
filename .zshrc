@@ -79,6 +79,7 @@ alias vimrc="vim ~/.vimrc"
 alias lk="ls -1"
 alias lka="ls -1 -A"
 alias rf="rm -rf"
+alias vi='nvim'
 
 export DEFAULT_USER="jacobo"
 export TERM="xterm-256color"

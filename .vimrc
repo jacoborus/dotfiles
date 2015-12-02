@@ -5,7 +5,6 @@ filetype off                  " required by Vundle
 runtime macros/matchit.vim
 
 call plug#begin('~/.vim/plugged')
-" Plug 'gmarik/Vundle.vim'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -78,7 +77,7 @@ let g:instant_markdown_autostart = 0
 
 " ViM Lightline
 """"""""""""""""""""""""""""""""
-set laststatus=2
+set laststatus=2 " Always show status line
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'mode_map': { 'ñ': 'NORMAL' },
