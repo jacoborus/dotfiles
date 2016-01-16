@@ -119,6 +119,3 @@ fi
 
 export EDITOR=/usr/bin/vim
 
-alias tmux='TERM=xterm-256color /usr/bin/tmux -2'
-alias nvim='TERM=xterm-256color /usr/bin/nvim'
-export COLORTERM=xterm-256color

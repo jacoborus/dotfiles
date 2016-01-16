@@ -1,3 +1,5 @@
+" enable true color in neovim
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " VUNDLE
 """""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required by Vundle
@@ -45,6 +47,12 @@ Plug 'mbbill/undotree'
 Plug 'othree/yajs.vim'
 Plug 'ap/vim-css-color'
 Plug 'benekastah/neomake'
+"Plug 'sjl/badwolf'
+Plug 'morhetz/gruvbox'
+" Plug 'fatih/molokai'
+
+let g:molokai_original = 1
+let g:rehash256 = 1
 
 call plug#end()
 filetype plugin indent on    " required
@@ -174,7 +182,8 @@ augroup END
 
 " CtrlSF
 """""""""""""""""""""""""""""""""""""""
-nmap     <leader>f <Plug>CtrlSFPrompt
+nnoremap <leader>ff :CtrlSF<space>
+nnoremap <leader>fo :CtrlSFOpen<cr>
 
 " Syntax JSON
 """""""""""""""""""""""""""""""""""""""""
@@ -187,6 +196,10 @@ let g:vim_json_syntax_conceal = 0
 """""""""""""""""""""""""""""""""""""""""
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
+
+" change buffer
+nmap <leader>bn :bn<cr>
+nmap <leader>bp :bp<cr>
 
 " Fast saving
 nmap <leader>w :w<cr>
@@ -237,6 +250,9 @@ syntax on
 set t_Co=256
 set background=dark
 colorscheme monokai
+" colorscheme gruvbox
+" colorscheme badwolf
+" colorscheme predawn
 
 " Open new split panes to right and bottom
 set splitbelow
@@ -267,7 +283,7 @@ set lazyredraw     " Don't redraw while executing macros (good performance confi
 set magic          " For regular expressions turn magic on
 set showmatch      " Show matching brackets when text indicator is over them
 set cursorline     " Highlight current line
-hi CursorLine   cterm=NONE ctermbg=236 ctermfg=NONE guibg=darkred guifg=white
+" hi CursorLine   cterm=NONE ctermbg=236 ctermfg=NONE guibg=darkred guifg=white
 set scrolloff=3    " don't let the cursor touch the edge of the viewport
 
 " => Text, tab and indent related
@@ -362,4 +378,3 @@ nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPreviou
 nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
 nmap <silent> <leader>lp    <Plug>LocationPrevious
 nmap <silent> <leader>ln    <Plug>LocationNext
-
