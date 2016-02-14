@@ -24,8 +24,8 @@ Plug 'arecarn/fold-cycle.vim'
 
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
-" Required by vim-session
-Plug 'xolox/vim-misc'
+
+Plug 'xolox/vim-misc' " Required by vim-session
 Plug 'xolox/vim-session'
 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -44,12 +44,12 @@ Plug 'elzr/vim-json'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'mbbill/undotree'
-Plug 'othree/yajs.vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
 Plug 'ap/vim-css-color'
 Plug 'benekastah/neomake'
-"Plug 'sjl/badwolf'
-Plug 'morhetz/gruvbox'
-" Plug 'fatih/molokai'
+" Plug 'sjl/badwolf'
+" Plug 'morhetz/gruvbox'
 
 let g:molokai_original = 1
 let g:rehash256 = 1
@@ -155,10 +155,9 @@ function! MyFileencoding()
 endfunction
 
 function! MyMode()
-  return winwidth(0) > 120 ? lightline#mode() : ' '
+  return winwidth(0) > 90 ? lightline#mode() : ' '
 endfunction
 
-highlight ExtraWhitespace ctermbg=52
 
 " Raimondi/delimitMate settings
 """""""""""""""""""""""""""""""
@@ -179,11 +178,6 @@ augroup END
 "       \'y'    : '#(whoami)',
 "       \'z'    : '#H'}
 
-
-" CtrlSF
-"""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>ff :CtrlSF<space>
-nnoremap <leader>fo :CtrlSFOpen<cr>
 
 " Syntax JSON
 """""""""""""""""""""""""""""""""""""""""
@@ -283,7 +277,6 @@ set lazyredraw     " Don't redraw while executing macros (good performance confi
 set magic          " For regular expressions turn magic on
 set showmatch      " Show matching brackets when text indicator is over them
 set cursorline     " Highlight current line
-" hi CursorLine   cterm=NONE ctermbg=236 ctermfg=NONE guibg=darkred guifg=white
 set scrolloff=3    " don't let the cursor touch the edge of the viewport
 
 " => Text, tab and indent related
@@ -301,7 +294,7 @@ set number
 set relativenumber
 
 " Indent guides color and character
-let g:indentLine_color_term = 239
+let g:indentLine_color_term = 238
 let g:indentLine_char = '⦙'
 
 let g:localvimrc_ask=0
@@ -344,6 +337,13 @@ vnoremap <S-k> :m '<-2<CR>gv=gv
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
+" Preserve selection after indentation
+vmap > >gv
+vmap < <gv
+" Map tab to indent in visual mode
+vmap <Tab> >gv
+vmap <S-Tab> <gv
+
 " Turn persistent undo on
 if has("persistent_undo")
     set undodir=~/.vim/.undodir/
@@ -351,10 +351,15 @@ if has("persistent_undo")
 endif
 
 " NEOMAKE
-let g:neomake_javascript_enabled_makers = ['eslint']
 " run neomake when opening and writing javascript files
 autocmd! BufWritePost *.js Neomake
 au BufReadPost *.js Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_error_sign = {'text': '⦆'}
+" another pretty symbols ɛ ∊ ƭ ℯ Ҽ ⨉ × ʗ ᚛ ᚜ ⌁ ▸ ⦆ ⬮ ⬯ ⬥
+
+" gitgutter
+let g:gitgutter_sign_modified_removed = '÷'
 
 " fix lprevius and lnext behaviour
 " https://github.com/scrooloose/syntastic/issues/32#issuecomment-40273385
@@ -378,3 +383,30 @@ nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPreviou
 nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
 nmap <silent> <leader>lp    <Plug>LocationPrevious
 nmap <silent> <leader>ln    <Plug>LocationNext
+
+" CtrlSF
+"""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>ff :CtrlSF<space>
+nnoremap <leader>fo :CtrlSFOpen<cr>
+
+"""" theme tweaks
+" show cursorline just in current buffer
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+au InsertEnter * hi CursorLineNr ctermfg=148
+au InsertLeave * hi CursorLineNr ctermfg=81
+
+hi GitGutterAdd ctermfg=148
+hi GitGutterDelete ctermfg=197
+hi GitGutterChange ctermfg=81
+hi GitGutterChangeDelete ctermfg=141
+
+
+hi LineNr ctermfg=239 ctermbg=235 cterm=NONE guifg=#75715e guibg=#272822 gui=NONE
+hi VertSplit ctermfg=235 ctermbg=235 cterm=NONE guifg=#64645e guibg=#64645e gui=NONE
+hi SignColumn ctermfg=231 ctermbg=235 cterm=NONE guifg=#f8f8f2 guibg=#272822 gui=NONE
+hi ExtraWhitespace ctermbg=52
