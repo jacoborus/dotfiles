@@ -50,9 +50,8 @@ Plug 'ap/vim-css-color'
 Plug 'benekastah/neomake'
 " Plug 'sjl/badwolf'
 " Plug 'morhetz/gruvbox'
-
-let g:molokai_original = 1
-let g:rehash256 = 1
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'wavded/vim-stylus'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -67,7 +66,7 @@ let g:jsdoc_enable_es6 = 1
 " emmet
 """"""""""""""""""""""""""""""
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css, php EmmetInstall
 let g:user_emmet_leader_key='<C-y>'
 
 " ctrlp
@@ -85,17 +84,21 @@ let g:instant_markdown_autostart = 0
 
 " ViM Lightline
 """"""""""""""""""""""""""""""""
+so ~/.vim/plugged/lightline-monokai/plugin/lightline-monokai.vim
 set laststatus=2 " Always show status line
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'monokai',
       \ 'mode_map': { 'ñ': 'NORMAL' },
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
       \ },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
-      \   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ],
+      \   'right': [ [ 'percent' ], ['fugitive'] ]
+      \ },
+      \ 'inactive': {
+      \   'right': [ [ 'percent' ] ]
       \ },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
@@ -111,8 +114,6 @@ let g:lightline = {
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
       \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
 function! MyModified()
@@ -227,6 +228,11 @@ set autoread
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
+
+" NERDTree
+""""""""""
+nnoremap <leader>n :NERDTreeToggle<cr>
+
 " session management
 """""""""""""""""""
 let g:session_directory = "~/.vim/session"
@@ -405,8 +411,10 @@ hi GitGutterDelete ctermfg=197
 hi GitGutterChange ctermfg=81
 hi GitGutterChangeDelete ctermfg=141
 
-
+" molokai tweaks
 hi LineNr ctermfg=239 ctermbg=235 cterm=NONE guifg=#75715e guibg=#272822 gui=NONE
 hi VertSplit ctermfg=235 ctermbg=235 cterm=NONE guifg=#64645e guibg=#64645e gui=NONE
 hi SignColumn ctermfg=231 ctermbg=235 cterm=NONE guifg=#f8f8f2 guibg=#272822 gui=NONE
 hi ExtraWhitespace ctermbg=52
+" marks TODO, FIXME, etc...
+hi javaScriptCommentTodo ctermfg=197 ctermbg=235 cterm=bold guifg=#f92672 guibg=NONE gui=NONE
