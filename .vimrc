@@ -52,6 +52,7 @@ Plug 'benekastah/neomake'
 " Plug 'morhetz/gruvbox'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wavded/vim-stylus'
+Plug 'terryma/vim-expand-region'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -208,6 +209,9 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 " fast open/close quickfix
 nmap <leader>lo :lopen<cr>
 nmap <leader>lc :lcl<cr>
+
+" fast open/close quickfix
+nmap <leader>jj :JsDoc<cr>
 
 " Sets how many lines of history VIM has to remember
 set history=700
