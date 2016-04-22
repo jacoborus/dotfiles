@@ -67,8 +67,9 @@ let g:jsdoc_enable_es6 = 1
 " emmet
 """"""""""""""""""""""""""""""
 let g:user_emmet_install_global = 0
-autocmd FileType html,css, php EmmetInstall
-let g:user_emmet_leader_key='<C-y>'
+autocmd FileType html,css EmmetInstall
+" expand html with tab
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " ctrlp
 """"""""""""""""""""""""""""""""
