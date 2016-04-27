@@ -92,6 +92,9 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias lk='ls -1'
+alias tmux='tmux -2'
+alias vi='NVIM_TUI_ENABLE_TRUE_COLOR=1 /usr/bin/nvim'
+alias nvim='NVIM_TUI_ENABLE_TRUE_COLOR=1 /usr/bin/nvim'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

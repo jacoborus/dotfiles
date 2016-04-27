@@ -69,6 +69,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+export DEFAULT_USER="jacobo"
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -76,9 +77,9 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 #
 alias zshconfig="vim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
+alias tmux='tmux -2'
 alias lk="ls -1"
 alias lka="ls -1 -A"
 alias rf="rm -rf"
-
-export DEFAULT_USER="jacobo"
 alias vi='NVIM_TUI_ENABLE_TRUE_COLOR=1 /usr/bin/nvim'
+alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 /usr/bin/nvim'
