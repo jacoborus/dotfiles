@@ -1,20 +1,35 @@
 " enable true color in neovim
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
 " VUNDLE
 """""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required by Vundle
 filetype off                  " required by Vundle
 runtime macros/matchit.vim
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 
-Plug 'Valloric/YouCompleteMe'
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
+Plug 'carlitux/deoplete-ternjs'
+
+function! BuildTern(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install
+  endif
+endfunction
+Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
+
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'moll/vim-node'
 Plug 'myusuf3/numbers.vim'
@@ -34,7 +49,6 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'regedarek/ZoomWin'
 Plug 'mattn/emmet-vim'
-Plug 'pricco/vim-monokai'
 Plug 'suan/vim-instant-markdown'
 Plug 'terryma/vim-multiple-cursors'
 
@@ -48,16 +62,29 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'ap/vim-css-color'
 Plug 'benekastah/neomake'
-" Plug 'sjl/badwolf'
-" Plug 'morhetz/gruvbox'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wavded/vim-stylus'
 Plug 'terryma/vim-expand-region'
+Plug 'gerw/vim-HiLinkTrace'
+
+Plug '~/dev/tender'
+" Plug '~/dev/tierno'
+
 
 call plug#end()
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-" filetype plugin on
+filetype plugin indent on
+
+let g:deoplete#enable_at_startup = 1
+let g:tern_request_timeout = 1
+" let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
+ 
+" Let <Tab> also do completion
+inoremap <silent><expr> <Tab>
+\ pumvisible() ? "\<C-n>" :
+\ deoplete#mappings#manual_complete()
+
+" Close the documentation window when completion is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " vim-jsdoc
 """""""""""""""""""""""""""""""
@@ -69,7 +96,7 @@ let g:jsdoc_enable_es6 = 1
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 " expand html with tab
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+autocmd FileType html,css imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " ctrlp
 """"""""""""""""""""""""""""""""
@@ -86,11 +113,10 @@ let g:instant_markdown_autostart = 0
 
 " ViM Lightline
 """"""""""""""""""""""""""""""""
-so ~/.vim/plugged/lightline-monokai/plugin/lightline-monokai.vim
 set laststatus=2 " Always show status line
 let g:lightline = {
-      \ 'colorscheme': 'monokai',
-      \ 'mode_map': { 'ñ': 'NORMAL' },
+      \ 'colorscheme': 'tender',
+      \ 'mode_map': { 'n': 'NORMAL' },
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
@@ -116,6 +142,8 @@ let g:lightline = {
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
       \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
 function! MyModified()
@@ -178,7 +206,6 @@ augroup END
 "       \'win'  : '#I #W',
 "       \'cwin' : '#I #W',
 "       \'x'    : '%R',
-"       \'y'    : '#(whoami)',
 "       \'z'    : '#H'}
 
 
@@ -254,10 +281,7 @@ nnoremap <leader>sc :CloseSession<space>
 syntax on
 set t_Co=256
 set background=dark
-colorscheme monokai
-" colorscheme gruvbox
-" colorscheme badwolf
-" colorscheme predawn
+colorscheme tender
 
 " Open new split panes to right and bottom
 set splitbelow
@@ -416,10 +440,8 @@ hi GitGutterDelete ctermfg=197
 hi GitGutterChange ctermfg=81
 hi GitGutterChangeDelete ctermfg=141
 
-" molokai tweaks
-hi LineNr ctermfg=239 ctermbg=235 cterm=NONE guifg=#75715e guibg=#272822 gui=NONE
-hi VertSplit ctermfg=235 ctermbg=235 cterm=NONE guifg=#64645e guibg=#64645e gui=NONE
-hi SignColumn ctermfg=231 ctermbg=235 cterm=NONE guifg=#f8f8f2 guibg=#272822 gui=NONE
-hi ExtraWhitespace ctermbg=52
-" marks TODO, FIXME, etc...
-hi javaScriptCommentTodo ctermfg=197 ctermbg=235 cterm=bold guifg=#f92672 guibg=NONE gui=NONE
+" HLinkTrace
+"""""""""""""""""""""""""""
+nnoremap <leader>hh :HLT<CR>
+
+" hi ExtraWhitespace ctermbg=52
