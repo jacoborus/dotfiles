@@ -2,6 +2,7 @@
 """""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
 
+Plug '~/dev/tender'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
@@ -59,6 +60,5 @@ Plug 'benekastah/neomake'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'gerw/vim-HiLinkTrace'
 
-Plug '~/dev/tender'
 
 call plug#end()
