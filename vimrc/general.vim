@@ -194,3 +194,12 @@ if has("persistent_undo")
     set undofile
 endif
 
+" show cursorline just in current buffer
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+au InsertEnter * hi CursorLineNr guifg=#bec468 ctermfg=149
+au InsertLeave * hi CursorLineNr guifg=#66afce ctermfg=74

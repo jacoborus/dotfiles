@@ -92,28 +92,17 @@ autocmd! BufWritePost *.js Neomake
 au BufReadPost *.js Neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_error_sign = {'text': 'ƭ'}
-" another pretty symbols ɛ ∊ ƭ ℯ Ҽ ⨉ × ʗ ᚛ ᚜ ⌁ ▸ ⦆ ⬮ ⬯ ⬥
+" another pretty symbols for errors ɛ ∊ ƭ ℯ Ҽ ⨉ × ʗ ᚛ ᚜ ⌁ ▸ ⦆
 
 
 " gitgutter
 let g:gitgutter_sign_modified_removed = '÷'
-
+" ⋍
 
 " CtrlSF
 """""""""""""""""""""""""""""""""""""""
 nnoremap <leader>ff :CtrlSF<space>
 nnoremap <leader>fo :CtrlSFOpen<cr>
-
-
-" show cursorline just in current buffer
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
-
-au InsertEnter * hi CursorLineNr ctermfg=148
-au InsertLeave * hi CursorLineNr ctermfg=81
 
 
 " HLinkTrace
