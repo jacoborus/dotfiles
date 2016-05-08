@@ -34,6 +34,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'dyng/ctrlsf.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'terryma/vim-expand-region'
+Plug 'haya14busa/incsearch.vim'
 
 " Plug 'edkolev/tmuxline.vim'
 
@@ -51,6 +52,7 @@ Plug 'elzr/vim-json'
 " JS
 Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
+" Plug '~/dev/vim-jsdoc'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 
