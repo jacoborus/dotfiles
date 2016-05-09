@@ -29,6 +29,12 @@ nmap <leader>lc :lcl<cr>
 " fast launch JsDoc
 nmap <leader>jj :JsDoc<cr>
 
+" resize splits faster
+map <leader>> 10<C-w>>
+map <leader>< 10<C-w><
+map <leader>= 5<C-w>+ 
+map <leader>- 5<C-w>-
+
 " Sets how many lines of history VIM has to remember
 set history=700
 
@@ -99,9 +105,6 @@ set softtabstop=2
 set number
 set relativenumber
 
-" This prevents * from jumping to the next match.
-nnoremap * *``
- 
 let delimitMate_expand_cr=1 " indent new line when cursor is between brackets, parentheses, ...
 
 " Indent guides color and character
@@ -148,6 +151,9 @@ vnoremap <S-k> :m '<-2<CR>gv=gv
 
 " Remap VIM 0 to first non-blank character
 map 0 ^
+
+" This prevents * from jumping to the next match.
+nnoremap * :keepjumps normal! mi*`i<CR>
 
 " Preserve selection after indentation
 vmap > >gv
