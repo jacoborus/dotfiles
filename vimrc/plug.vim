@@ -46,7 +46,7 @@ Plug 'terryma/vim-multiple-cursors'
 
 Plug 'mattn/emmet-vim'
 Plug 'ap/vim-css-color'
-Plug 'digitaltoad/vim-jade'
+Plug 'digitaltoad/vim-pug'
 Plug 'wavded/vim-stylus'
 Plug 'elzr/vim-json'
 " JS

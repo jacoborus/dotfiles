@@ -99,6 +99,9 @@ set softtabstop=2
 set number
 set relativenumber
 
+" This prevents * from jumping to the next match.
+nnoremap * *``
+ 
 let delimitMate_expand_cr=1 " indent new line when cursor is between brackets, parentheses, ...
 
 " Indent guides color and character
