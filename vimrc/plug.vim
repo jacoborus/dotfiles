@@ -52,7 +52,6 @@ Plug 'elzr/vim-json'
 " JS
 Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
-" Plug '~/dev/vim-jsdoc'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 

@@ -138,16 +138,14 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " tab navigation
-map L :tabnext<CR>
-map H :tabprev<CR>
+map <m-l> :tabnext<CR>
+map <m-h> :tabprev<CR>
 
 " move up/down single lines or selected ones
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-nnoremap <S-j> :m .+1<CR>==
-nnoremap <S-k> :m .-2<CR>==
-vnoremap <S-j> :m '>+1<CR>gv=gv
-vnoremap <S-k> :m '<-2<CR>gv=gv
+nnoremap J :m .+1<CR>==
+nnoremap K :m .-2<CR>==
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " Remap VIM 0 to first non-blank character
 map 0 ^
