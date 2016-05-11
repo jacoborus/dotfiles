@@ -44,9 +44,11 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# Vi mode
+bindkey -v
+
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
-
 export DEFAULT_USER="jacobo"
 # For a full list of active aliases, run `alias`.
 #
