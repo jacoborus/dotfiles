@@ -16,6 +16,9 @@ nmap <leader>bp :bp<cr>
 " Fast saving
 nmap <leader>w :w<cr>
 
+" fast copy to the end of the line
+nmap Y y$
+
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
