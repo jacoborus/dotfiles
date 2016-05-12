@@ -108,8 +108,9 @@ nnoremap <leader>fo :CtrlSFOpen<cr>
 """""""""""""""""""""""""""
 nnoremap <leader>hh :HLT<CR>
 
-" hi ExtraWhitespace ctermbg=52
-
+" ntpeters/vim-better-whitespace
+""""""""""""""""""""""""""""""""
+hi ExtraWhitespace ctermbg=238 guibg=#444444
 
 " haya14busa/incsearch.vim
 """"""""""""""""""""""""""
