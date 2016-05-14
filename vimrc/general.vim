@@ -3,7 +3,7 @@
 """""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
 " enable true color in neovim
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
 set nocompatible              " be iMproved
 
 let mapleader = "\<Space>"
@@ -62,8 +62,10 @@ endif
 """"""""""""""""""""""""""""""""""""""""
 syntax on
 set t_Co=256
+
 set background=dark
 colorscheme tender
+let g:tender_lightline = 1
 
 " Open new split panes to right and bottom
 set splitbelow
