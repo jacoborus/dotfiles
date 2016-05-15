@@ -50,7 +50,7 @@ function! MyFilename()
 endfunction
 
 function! MyFugitive()
-  if winwidth(0) > 90
+  if winwidth(0) > 70
     if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
       let _ = fugitive#head()
       return strlen(_) ? ' '._ : ''
@@ -60,11 +60,11 @@ function! MyFugitive()
 endfunction
 
 function! MyFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
+  return winwidth(0) > 50 ? &fileformat : ''
 endfunction
 
 function! MyFiletype()
-  return winwidth(0) > 60 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+  return winwidth(0) > 40 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 
 function! MyFileencoding()
@@ -73,7 +73,7 @@ function! MyFileencoding()
 endfunction
 
 function! MyMode()
-  return winwidth(0) > 90 ? lightline#mode() : ' '
+  return winwidth(0) > 70 ? lightline#mode() : ' '
 endfunction
 
 

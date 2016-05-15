@@ -35,7 +35,7 @@ nmap <leader>jj :JsDoc<cr>
 " resize splits faster
 map <leader>> 10<C-w>>
 map <leader>< 10<C-w><
-map <leader>= 5<C-w>+ 
+map <leader>= 5<C-w>+
 map <leader>- 5<C-w>-
 
 " Sets how many lines of history VIM has to remember
