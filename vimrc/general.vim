@@ -132,6 +132,10 @@ set clipboard=unnamedplus
 
 " Moving around, tabs, windows and buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" move to the line and column instead just to the line
+noremap ' `
+noremap ` '
+
 " Treat long lines as break lines
 map j gj
 map k gk
