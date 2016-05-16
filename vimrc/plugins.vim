@@ -112,7 +112,12 @@ nnoremap <leader>hh :HLT<CR>
 " ntpeters/vim-better-whitespace
 """"""""""""""""""""""""""""""""
 hi ExtraWhitespace ctermbg=238 guibg=#444444
-
+" indentline
+"""""""""""""
+" Vim
+let g:indentLine_color_term = 238
+"GVim
+let g:indentLine_color_gui = '#444444'
 " haya14busa/incsearch.vim
 """"""""""""""""""""""""""
 let g:incsearch#auto_nohlsearch = 1
