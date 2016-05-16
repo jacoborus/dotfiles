@@ -89,7 +89,8 @@ nnoremap <leader>sc :CloseSession<space>
 " run neomake when opening and writing javascript files
 autocmd! BufWritePost *.js Neomake
 au BufReadPost *.js Neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['standard']
+" let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_error_sign = {'text': 'ƭ'}
 " another pretty symbols for errors ɛ ∊ ƭ ℯ Ҽ ⨉ × ʗ ᚛ ᚜ ⌁ ▸ ⦆
 
