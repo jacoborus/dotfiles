@@ -1,20 +1,27 @@
 """""""""""""""""""""""""""""""""""""""""
 " GENERAL
 """""""""""""""""""""""""""""""""""""""""
-filetype plugin indent on
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
 " enable true color in neovim
 set termguicolors
-set nocompatible              " be iMproved
 
+" be iMproved
+set nocompatible
+
+" <space> as leader key
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
+
+" Fast saving
+nmap <leader>w :w<cr>
 
 " change buffer
 nmap <leader>bn :bn<cr>
 nmap <leader>bp :bp<cr>
-
-" Fast saving
-nmap <leader>w :w<cr>
 
 " fast copy to the end of the line
 nmap Y y$
@@ -24,10 +31,6 @@ map <silent> <leader><cr> :noh<cr>
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" fast open/close quickfix
-nmap <leader>lo :lopen<cr>
-nmap <leader>lc :lcl<cr>
 
 " fast launch JsDoc
 nmap <leader>jj :JsDoc<cr>
@@ -41,31 +44,27 @@ map <leader>- 5<C-w>-
 " Sets how many lines of history VIM has to remember
 set history=700
 
-" This maps Leader + e to exit terminal mode.
+" This maps control+n to exit terminal mode.
 if has('nvim')
   tnoremap <C-n> <C-\><C-n>
 endif
 
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
-
 " Set to auto read when a file is changed from the outside
 set autoread
+
+" USER INTERFACE
+""""""""""""""""""""""""""""""""""""""""
 
 " Switch syntax highlighting on, when the terminal has colors
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
-" USER INTERFACE
-""""""""""""""""""""""""""""""""""""""""
-syntax on
 set t_Co=256
 
-set background=dark
-colorscheme tender
+" set color scheme
 let g:tender_lightline = 1
+colorscheme tender
 
 " Open new split panes to right and bottom
 set splitbelow
@@ -79,6 +78,7 @@ set nofoldenable
 if has('mouse')
   set mouse=a
 endif
+
 " enable mouse in entire big screens
 if has("mouse_sgr")
   set ttymouse=sgr
@@ -92,9 +92,9 @@ set hlsearch       " Highlight search results
 set incsearch      " Find as you type
 set ignorecase
 set smartcase
-set lazyredraw     " Don't redraw while executing macros (good performance config)
+set lazyredraw     " Don't redraw while executing macros
 set magic          " For regular expressions turn magic on
-set showmatch      " Show matching brackets when text indicator is over them
+set showmatch      " Highlight matching brackets under cursor
 set cursorline     " Highlight current line
 set scrolloff=3    " don't let the cursor touch the edge of the viewport
 
@@ -112,10 +112,6 @@ set relativenumber
 
 let delimitMate_expand_cr=1 " indent new line when cursor is between brackets, parentheses, ...
 
-" Indent guides color and character
-let g:indentLine_color_term = 238
-let g:indentLine_char = '⦙'
-
 " don't ask before loading .vimrc file
 let g:localvimrc_ask=0
 
@@ -132,7 +128,7 @@ set clipboard=unnamedplus
 
 " Moving around, tabs, windows and buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" move to the line and column instead just to the line
+" move to the exact position on marks
 noremap ' `
 noremap ` '
 
@@ -146,7 +142,7 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" tab navigation
+" tab navigation with alt+l / alt+h
 map <m-l> :tabnext<CR>
 map <m-h> :tabprev<CR>
 
@@ -192,6 +188,10 @@ nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPreviou
 nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
 nmap <silent> <leader>lp    <Plug>LocationPrevious
 nmap <silent> <leader>ln    <Plug>LocationNext
+
+" fast open/close quickfix
+nmap <leader>lo :lopen<cr>
+nmap <leader>lc :lcl<cr>
 
 
 " omnifuncs

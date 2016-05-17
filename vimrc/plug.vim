@@ -2,7 +2,8 @@
 """""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
 
-Plug '~/dev/tender'
+" Plug '~/dev/tender'
+Plug 'jacoborus/tender'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
