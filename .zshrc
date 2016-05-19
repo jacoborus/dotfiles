@@ -60,6 +60,7 @@ alias lka="ls -1 -A"
 alias rf="rm -rf"
 alias vi='/usr/bin/nvim'
 alias vim='/usr/bin/nvim'
+alias rmrf='rm -rf'
 
 # http://superuser.com/questions/1073869/how-can-i-make-my-own-shell-commands-e-g-mkdir-cd-combo/1073874#1073874
 mkcd() {
