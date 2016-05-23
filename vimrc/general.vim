@@ -219,3 +219,7 @@ augroup END
 
 au InsertEnter * hi CursorLineNr guifg=#bec468 ctermfg=149
 au InsertLeave * hi CursorLineNr guifg=#66afce ctermfg=74
+
+" Abbreviations
+"""""""""""""""""""""""
+:iabbrev fucntion function
