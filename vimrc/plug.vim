@@ -2,8 +2,8 @@
 """""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
 
-" Plug '~/dev/tender'
-Plug 'jacoborus/tender'
+Plug '~/dev/tender'
+" Plug 'jacoborus/tender'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
@@ -30,7 +30,9 @@ Plug 'Raimondi/delimitMate'
 Plug 'myusuf3/numbers.vim'
 Plug 'arecarn/fold-cycle.vim'
 Plug 'tpope/vim-commentary'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Shougo/unite.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'dyng/ctrlsf.vim'
 Plug 'Yggdroot/indentLine'
