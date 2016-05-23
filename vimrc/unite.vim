@@ -22,6 +22,8 @@ function! s:unite_settings()
   imap <buffer> <Tab> <Plug>(unite_insert_leave)
   nmap <buffer> <C-r> <Plug>(unite_redraw)
   imap <buffer> <C-r> <Plug>(unite_redraw)
+  imap <silent><buffer><expr> <C-s> unite#do_action('split')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
 endfunction
 
 " Start in insert mode
