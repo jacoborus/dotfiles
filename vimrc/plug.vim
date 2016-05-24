@@ -33,6 +33,7 @@ Plug 'tpope/vim-commentary'
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite-outline'
 Plug 'scrooloose/nerdtree'
 Plug 'dyng/ctrlsf.vim'
 Plug 'Yggdroot/indentLine'
