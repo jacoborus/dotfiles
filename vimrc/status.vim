@@ -34,16 +34,21 @@ let g:lightline = {
       \ }
 
 function! MyModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+  let fname = expand('%:t')
+  return (fname =~ 'NERD_tree' ? '' :
+       \ &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-')
 endfunction
+
 function! MyReadonly()
   return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '' : ''
 endfunction
 
 function! MyFilename()
+  let fname = expand('%:t')
   return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-       \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-       \  &ft == 'unite' ? unite#get_status_string() :
+       \ (&ft == 'unite' ? unite#get_status_string() :
+       \  fname =~ 'NERD_tree' ? '' :
+       \  &ft == 'vimfiler' ? vimfiler#get_status_string() :
        \  &ft == 'vimshell' ? vimshell#get_status_string() :
        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
        \ ('' != MyModified() ? ' ' . MyModified() : '')
@@ -73,7 +78,11 @@ function! MyFileencoding()
 endfunction
 
 function! MyMode()
-  return winwidth(0) > 70 ? lightline#mode() : ' '
+  let fname = expand('%:t')
+  return fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'help' ? 'HELP' :
+        \ &ft == 'unite' ? 'UNITE' :
+        \ &ft == 'vimfiler' ? '' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-
-
