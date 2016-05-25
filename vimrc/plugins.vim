@@ -2,15 +2,36 @@
 """""""""""""""""""""""""""""""""""""""""""
 let g:deoplete#enable_at_startup = 1
 let g:tern_request_timeout = 1
-" let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
 
+" neosnippet
+""""""""""""""
+function! s:go_tab()
+  if pumvisible()
+    return "\<C-n>"
+  else
+    if neosnippet#expandable_or_jumpable()
+      return "\<Plug>(neosnippet_expand_or_jump)"
+    else
+      return "\<Tab>"
+    endif
+  endif
+endfunction
 " Let <Tab> also do completion
-inoremap <silent><expr> <Tab>
-\ pumvisible() ? "\<C-n>" :
-\ deoplete#mappings#manual_complete()
+imap <silent><expr> <Tab> <SID>go_tab()
+
 " Close the documentation window when completion is done
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
+function! s:neosnippet_complete()
+  if pumvisible()
+    if neosnippet#expandable_or_jumpable()
+      return "\<Plug>(neosnippet_expand_or_jump)"
+    endif
+    return "\<CR>"
+  endif
+endfunction
+
+imap <expr><CR> <SID>neosnippet_complete()
 
 " vim-jsdoc
 """""""""""""""""""""""""""""""

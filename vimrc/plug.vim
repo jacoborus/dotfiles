@@ -11,15 +11,18 @@ Plug 'itchyny/lightline.vim'
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-
-Plug 'carlitux/deoplete-ternjs'
 
 function! BuildTern(info)
   if a:info.status == 'installed' || a:info.force
     !npm install
   endif
 endfunction
+
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/context_filetype.vim'
+Plug 'carlitux/deoplete-ternjs'
 Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
 
 " Plug 'tpope/vim-dispatch'
