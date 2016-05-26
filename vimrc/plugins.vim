@@ -27,8 +27,8 @@ function! s:neosnippet_complete()
     if neosnippet#expandable_or_jumpable()
       return "\<Plug>(neosnippet_expand_or_jump)"
     endif
-    return "\<CR>"
   endif
+  return "\<CR>"
 endfunction
 
 imap <expr><CR> <SID>neosnippet_complete()
