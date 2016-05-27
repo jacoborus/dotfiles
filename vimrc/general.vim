@@ -220,6 +220,16 @@ augroup END
 au InsertEnter * hi CursorLineNr guifg=#bec468 ctermfg=149
 au InsertLeave * hi CursorLineNr guifg=#66afce ctermfg=74
 
+" Execute macro over visual range (line by line)
+" https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+
 " Abbreviations
 """""""""""""""""""""""
 :iabbrev fucntion function

@@ -49,7 +49,7 @@ Plug 'xolox/vim-misc' " Required by vim-session
 Plug 'xolox/vim-session'
 
 Plug 'suan/vim-instant-markdown'
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 
 Plug 'mattn/emmet-vim'
 Plug 'ap/vim-css-color'
