@@ -16,6 +16,8 @@ if executable('ag')
   let g:unite_source_grep_recursive_opt = ''
 endif
 
+" Set to some better time formats
+let g:unite_source_buffer_time_format = "%Y-%m-%d  %H:%M:%S  "
 let g:unite_update_time	= 500
 let g:unite_prompt = '» '
 " Custom mappings for the unite buffer

@@ -79,7 +79,7 @@ endfunction
 
 function! MyMode()
   let fname = expand('%:t')
-  return fname =~ 'NERD_tree' ? 'NERDTree' :
+  return fname =~ 'NERD_tree' ? 'TREE' :
         \ &ft == 'help' ? 'HELP' :
         \ &ft == 'unite' ? 'UNITE' :
         \ &ft == 'vimfiler' ? '' :
