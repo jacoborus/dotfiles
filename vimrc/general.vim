@@ -36,10 +36,10 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 nmap <leader>jj :JsDoc<cr>
 
 " resize splits faster
-map <leader>> 10<C-w>>
-map <leader>< 10<C-w><
-map <leader>= 5<C-w>+
-map <leader>- 5<C-w>-
+map <leader>> <C-w>10>
+map <leader>< <C-w>10<
+map <leader>= <C-w>5+
+map <leader>- <C-w>5-
 
 " Sets how many lines of history VIM has to remember
 set history=700
