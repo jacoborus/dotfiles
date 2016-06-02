@@ -37,7 +37,7 @@ let g:unite_enable_start_insert = 1
 " Open in bottom right
 let g:unite_split_rule = "botright"
 " replace controlP with unite
-nnoremap <C-p> :<C-u>Unite -start-insert file_rec/async<CR>
+nnoremap <C-p> :<C-u>Unite -start-insert file_rec/neovim<CR>
 
 " grep in current directory
 nnoremap <leader>fc :Unite grep:.<CR>
