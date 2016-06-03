@@ -105,6 +105,7 @@ set smarttab       " Be smart when using tabs ;)
 set shiftwidth=2   " indent with 2 spoaces
 set tabstop=2      " 1 tab == 2 spaces
 set softtabstop=2
+set pumheight=15   " limit completion menu height
 
 " intelligent line numbers
 set number
