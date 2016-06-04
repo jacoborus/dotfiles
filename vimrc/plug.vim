@@ -58,7 +58,7 @@ Plug 'elzr/vim-json'
 " JS
 Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
-Plug 'jelera/vim-javascript-syntax'
+Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript'
 
 Plug 'embear/vim-localvimrc'
