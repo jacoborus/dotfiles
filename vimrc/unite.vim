@@ -19,14 +19,11 @@ endif
 " Set to some better time formats
 let g:unite_source_buffer_time_format = "%Y-%m-%d  %H:%M:%S  "
 let g:unite_update_time	= 500
-let g:unite_prompt = '» '
+let g:unite_prompt = '»'
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
   nmap <buffer> <ESC> <Plug>(unite_exit)
-  " nmap <buffer> <tab> <Plug>(unite_loop_cursor_down)
-  " nmap <buffer> <s-tab> <Plug>(unite_loop_cursor_up)
-  " imap <buffer> <Tab> <Plug>(unite_insert_leave)
   imap <buffer> <C-r> <Plug>(unite_redraw)
   imap <silent><buffer><expr> <C-s> unite#do_action('split')
   imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
@@ -40,10 +37,9 @@ let g:unite_split_rule = "botright"
 nnoremap <C-p> :<C-u>Unite -start-insert file_rec/neovim<CR>
 
 " grep in current directory
-nnoremap <leader>fc :Unite grep:.<CR>
 nnoremap <leader>fa :Unite line:buffers<CR>
 nnoremap <leader>o :Unite outline<CR>
 " grep in cwd
-execute "nnoremap <leader>fp :Unite grep:" . unite#util#path2project_directory(getcwd()) . "<CR>"
+execute "nnoremap <leader>fg :Unite grep:" . unite#util#path2project_directory(getcwd()) . "<CR>"
 " resume grep
 nnoremap <leader>fr :UniteResume<CR>
