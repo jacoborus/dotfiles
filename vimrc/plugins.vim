@@ -36,7 +36,7 @@ function! s:neosnippet_complete()
       return "\<Plug>(neosnippet_expand_or_jump)"
     endif
   endif
-  return "\<CR>"
+  return "\<Plug>delimitMateCR"
 endfunction
 
 imap <expr><CR> <SID>neosnippet_complete()
@@ -71,7 +71,7 @@ let g:instant_markdown_autostart = 0
 
 " Raimondi/delimitMate settings
 """""""""""""""""""""""""""""""
-let delimitMate_expand_cr = 1
+let delimitMate_expand_cr=1 " indent new line when cursor is between brackets, parentheses, ...
 augroup mydelimitMate
   au!
   au FileType markdown let b:delimitMate_nesting_quotes = ["`"]

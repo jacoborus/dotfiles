@@ -33,7 +33,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'myusuf3/numbers.vim'
 Plug 'arecarn/fold-cycle.vim'
 Plug 'tpope/vim-commentary'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'scrooloose/nerdtree'
@@ -48,7 +47,6 @@ Plug 'xolox/vim-misc' " Required by vim-session
 Plug 'xolox/vim-session'
 
 Plug 'suan/vim-instant-markdown'
-" Plug 'terryma/vim-multiple-cursors'
 
 Plug 'mattn/emmet-vim'
 Plug 'ap/vim-css-color'

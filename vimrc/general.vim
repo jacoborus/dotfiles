@@ -101,8 +101,8 @@ set scrolloff=3    " don't let the cursor touch the edge of the viewport
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab      " Use spaces instead of tabs
-set smarttab       " Be smart when using tabs ;)
-set shiftwidth=2   " indent with 2 spoaces
+set smarttab       " Be smart when using tabs
+set shiftwidth=2   " indent with 2 spaces
 set tabstop=2      " 1 tab == 2 spaces
 set softtabstop=2
 set pumheight=15   " limit completion menu height
