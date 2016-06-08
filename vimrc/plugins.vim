@@ -41,6 +41,11 @@ endfunction
 
 imap <expr><CR> <SID>neosnippet_complete()
 
+" vim-localvimrc
+"""""""""""""""""""""""""""
+" don't ask before loading .vimrc file
+let g:localvimrc_ask=0
+
 " vim-jsdoc
 """""""""""""""""""""""""""""""
 let g:jsdoc_allow_input_prompt = 1

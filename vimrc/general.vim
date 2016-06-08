@@ -111,10 +111,6 @@ set pumheight=15   " limit completion menu height
 set number
 set relativenumber
 
-let delimitMate_expand_cr=1 " indent new line when cursor is between brackets, parentheses, ...
-
-" don't ask before loading .vimrc file
-let g:localvimrc_ask=0
 
 " Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
