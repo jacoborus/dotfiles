@@ -230,3 +230,4 @@ endfunction
 " Abbreviations
 """""""""""""""""""""""
 :iabbrev fucntion function
+:iabbrev cosnt const

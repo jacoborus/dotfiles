@@ -1,15 +1,15 @@
 " deoplete
 """""""""""""""""""""""""""""""""""""""""""
 let g:deoplete#enable_at_startup = 1
-let g:tern_request_timeout = 1
+let g:tern_request_timeout = 2
 let g:deoplete#enable_refresh_always = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-autocmd CompleteDone * pclose!
-set omnifunc=syntaxcomplete#Complete
-set completeopt=longest,menuone,preview,noinsert
+" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+" autocmd CompleteDone * pclose!
+" set omnifunc=syntaxcomplete#Complete
+" set completeopt=longest,menuone,preview,noinsert
 
 " neosnippet
 """"""""""""""
