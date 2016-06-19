@@ -53,6 +53,7 @@ Plug 'ap/vim-css-color'
 Plug 'digitaltoad/vim-pug'
 Plug 'wavded/vim-stylus'
 Plug 'elzr/vim-json'
+Plug 'zchee/deoplete-jedi'
 " JS
 Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
