@@ -74,9 +74,9 @@ prompt_git() {
     dirty=$(parse_git_dirty)
     ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
     if [[ -n $dirty ]]; then
-      prompt_segment 239 9
+      prompt_segment 9 239
     else
-      prompt_segment 239  10
+      prompt_segment 10 239
     fi
 
     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
