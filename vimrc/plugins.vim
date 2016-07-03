@@ -1,11 +1,16 @@
 " deoplete
 """""""""""""""""""""""""""""""""""""""""""
 let g:deoplete#enable_at_startup = 1
-let g:tern_request_timeout = 2
+let g:tern_request_timeout = 1
+" Use tern_for_vim.
+" let g:tern#command = ["tern"]
+" let g:tern#arguments = ["--persistent"]
+
 let g:deoplete#enable_refresh_always = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
+
 " call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
 " autocmd CompleteDone * pclose!
 " set omnifunc=syntaxcomplete#Complete
@@ -58,16 +63,6 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css,php EmmetInstall
 " expand html with tab
 autocmd FileType html,css,php map <tab> <plug>(emmet-expand-abbr)i
-
-" ctrlp
-""""""""""""""""""""""""""""""""
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|\v(node_modules|bower_components)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
 
 " Instant Markdown
 """"""""""""""""""

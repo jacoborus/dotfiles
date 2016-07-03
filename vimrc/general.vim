@@ -1,6 +1,8 @@
 """""""""""""""""""""""""""""""""""""""""
 " GENERAL
 """""""""""""""""""""""""""""""""""""""""
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
 
 " Enable filetype plugins
 filetype plugin on
@@ -25,6 +27,9 @@ nmap <leader>bp :bp<cr>
 
 " fast copy to the end of the line
 nmap Y y$
+
+set wildmenu
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -63,8 +68,15 @@ endif
 set t_Co=256
 
 " set color scheme
-let g:tender_lightline = 1
 colorscheme tender
+
+" Status bar theme
+""""""""""""""""
+let g:tender_lightline = 1
+
+" let g:tender_airline = 1
+" let g:airline_theme = 'tender'
+" let g:airline_powerline_fonts = 1
 
 " Open new split panes to right and bottom
 set splitbelow
@@ -120,6 +132,7 @@ set nowb
 set noswapfile
 " copy/paste to/from system clipboard
 set clipboard=unnamedplus
+map <c-p> "0p
 " reload file when changed externally
 :au CursorHold * checktime
 
@@ -208,11 +221,11 @@ if has("persistent_undo")
 endif
 
 " show cursorline just in current buffer
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
+" augroup CursorLine
+"   au!
+"   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"   au WinLeave * setlocal nocursorline
+" augroup END
 
 au InsertEnter * hi CursorLineNr guifg=#bec468 ctermfg=149
 au InsertLeave * hi CursorLineNr guifg=#66afce ctermfg=74
