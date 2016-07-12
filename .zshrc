@@ -59,7 +59,7 @@ alias lk="ls -1"
 alias lka="ls -1 -A"
 alias rf="rm -rf"
 alias vi='/usr/bin/nvim'
-alias vim='/usr/bin/nvim'
+alias nvim='/usr/bin/nvim'
 alias rmrf='rm -rf'
 alias e='nvim'
 

@@ -92,7 +92,6 @@ alias lk='ls -1'
 alias tmux='tmux -2'
 alias vi='/usr/bin/nvim'
 alias nvim='/usr/bin/nvim'
-alias vim='/usr/bin/nvim'
 alias rmrf='rm -rf'
 alias e='nvim'
 
