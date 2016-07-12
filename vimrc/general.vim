@@ -133,6 +133,7 @@ set noswapfile
 " copy/paste to/from system clipboard
 set clipboard=unnamedplus
 map <c-p> "0p
+map <m-p> "0P
 " reload file when changed externally
 :au CursorHold * checktime
 
