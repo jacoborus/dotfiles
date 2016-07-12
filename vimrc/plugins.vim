@@ -104,7 +104,7 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 
 " session management
 """""""""""""""""""
-let g:session_directory = "~/.vim/session"
+let g:session_directory = "~/.config/nvim/session"
 let g:session_autoload = "no"
 let g:session_autosave = "no"
 

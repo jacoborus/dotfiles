@@ -12,18 +12,11 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
-function! BuildTern(info)
-  if a:info.status == 'installed' || a:info.force
-    !npm install
-  endif
-endfunction
-
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/context_filetype.vim'
 Plug 'carlitux/deoplete-ternjs'
-Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
 
 " Plug 'tpope/vim-dispatch'
 " Plug 'radenling/vim-dispatch-neovim'
@@ -40,7 +33,8 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'terryma/vim-expand-region'
 Plug 'haya14busa/incsearch.vim'
-
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 " Plug 'edkolev/tmuxline.vim'
 
 Plug 'xolox/vim-misc' " Required by vim-session
@@ -53,7 +47,7 @@ Plug 'ap/vim-css-color'
 Plug 'digitaltoad/vim-pug'
 Plug 'wavded/vim-stylus'
 Plug 'elzr/vim-json'
-Plug 'zchee/deoplete-jedi'
+
 " JS
 Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
