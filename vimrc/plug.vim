@@ -36,7 +36,7 @@ Plug 'haya14busa/incsearch.vim'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'edkolev/tmuxline.vim'
-
+Plug 'KabbAmine/vCoolor.vim'
 Plug 'xolox/vim-misc' " Required by vim-session
 Plug 'xolox/vim-session'
 
