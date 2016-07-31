@@ -12,10 +12,17 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
+function! BuildTern(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install
+  endif
+endfunction
+
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/context_filetype.vim'
+Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
 Plug 'carlitux/deoplete-ternjs'
 
 " Plug 'tpope/vim-dispatch'

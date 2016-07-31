@@ -3,8 +3,8 @@
 let g:deoplete#enable_at_startup = 1
 let g:tern_request_timeout = 1
 " Use tern_for_vim.
-" let g:tern#command = ["tern"]
-" let g:tern#arguments = ["--persistent"]
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
 
 let g:deoplete#enable_refresh_always = 1
 let g:deoplete#enable_ignore_case = 1
@@ -143,16 +143,16 @@ nnoremap <leader>hh :HLT<CR>
 
 " ntpeters/vim-better-whitespace
 """"""""""""""""""""""""""""""""
-hi ExtraWhitespace ctermbg=238 guibg=#444444
+hi ExtraWhitespace ctermbg=238 guibg=#666666
 
 " indentline
 """""""""""""
-" Indent guides color and character
-let g:indentLine_char = '⦙'
+" Indent guides color and character┆│¦⦙
+let g:indentLine_char = '¦'
 " Vim
 let g:indentLine_color_term = 238
 "GVim
-let g:indentLine_color_gui = '#444444'
+let g:indentLine_color_gui = '#3A3A3A'
 
 " haya14busa/incsearch.vim
 """"""""""""""""""""""""""
