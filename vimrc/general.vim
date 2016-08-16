@@ -57,6 +57,18 @@ endif
 " Set to auto read when a file is changed from the outside
 set autoread
 
+" Check if files changed externally
+augroup checktime
+  au!
+  if !has("gui_running")
+    "silent! necessary otherwise throws errors when using command
+    "line window.
+    autocmd BufEnter,CursorHold,CursorHoldI,CursorMoved,CursorMovedI,FocusGained,BufEnter,FocusLost,WinLeave * checktime
+  endif
+augroup END
+
+
+
 " USER INTERFACE
 """"""""""""""""""""""""""""""""""""""""
 
