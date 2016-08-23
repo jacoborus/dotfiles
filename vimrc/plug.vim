@@ -7,6 +7,7 @@ Plug '~/dev/tender'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
+Plug 'metakirby5/codi.vim'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
