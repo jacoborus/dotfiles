@@ -2,7 +2,7 @@
 """"""""""""""""""""""""""""""""
 set laststatus=2 " Always show status line
 let g:lightline = {
-      \ 'colorscheme': 'tender',
+      \ 'colorscheme': 'tenderplus',
       \ 'mode_map': { 'n': 'NORMAL' },
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
