@@ -25,6 +25,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/context_filetype.vim'
 Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
 Plug 'carlitux/deoplete-ternjs'
+Plug 'junegunn/gv.vim'
 
 " Plug 'tpope/vim-dispatch'
 " Plug 'radenling/vim-dispatch-neovim'
