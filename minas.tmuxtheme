@@ -1,12 +1,11 @@
-# This tmux statusbar config was created by tmuxline.vim
-# on sáb, 07 may 2016
 
 set -g status-bg "colour234"
 set -g message-command-fg "colour235"
 set -g status-justify "left"
 set -g status-left-length "100"
 set -g status "on"
-set -g pane-active-border-fg "colour237"
+set -g pane-active-border-fg "colour234"
+set -g pane-active-border-bg "colour234"
 set -g message-bg "colour250"
 set -g status-right-length "100"
 set -g status-right-attr "none"
