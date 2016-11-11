@@ -4,8 +4,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug '~/dev/tender'
 " Plug 'jacoborus/tender'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'metakirby5/codi.vim'
 
@@ -26,9 +26,8 @@ Plug 'Shougo/context_filetype.vim'
 Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
 Plug 'carlitux/deoplete-ternjs'
 Plug 'junegunn/gv.vim'
+" Plug 'mustache/vim-mustache-handlebars'
 
-" Plug 'tpope/vim-dispatch'
-" Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-surround'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Raimondi/delimitMate'
@@ -38,10 +37,11 @@ Plug 'tpope/vim-commentary'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'scrooloose/nerdtree'
+
 Plug 'dyng/ctrlsf.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'terryma/vim-expand-region'
-Plug 'haya14busa/incsearch.vim'
+" Plug 'haya14busa/incsearch.vim'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'edkolev/tmuxline.vim'
@@ -49,8 +49,7 @@ Plug 'KabbAmine/vCoolor.vim'
 Plug 'xolox/vim-misc' " Required by vim-session
 Plug 'xolox/vim-session'
 
-Plug 'suan/vim-instant-markdown'
-
+" Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
 Plug 'ap/vim-css-color'
 Plug 'digitaltoad/vim-pug'
@@ -62,6 +61,7 @@ Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
 
 Plug 'embear/vim-localvimrc'
 Plug 'editorconfig/editorconfig-vim'

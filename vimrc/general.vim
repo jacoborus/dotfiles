@@ -46,6 +46,11 @@ map <leader>< <C-w>10<
 map <leader>= <C-w>5+
 map <leader>- <C-w>5-
 
+" live sustitution
+if exists('&inccommand')
+  set inccommand=split
+endif
+
 " Sets how many lines of history VIM has to remember
 set history=700
 
@@ -67,26 +72,16 @@ augroup checktime
   endif
 augroup END
 
-
+au BufRead,BufNewFile *.vue set ft=html
 
 " USER INTERFACE
 """"""""""""""""""""""""""""""""""""""""
-
-" Switch syntax highlighting on, when the terminal has colors
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
-
-set t_Co=256
 
 " set color scheme
 colorscheme tender
 
 " Status bar theme
 """"""""""""""""
-let g:tender_lightline = 1
-
-" let g:tender_airline = 1
 " let g:airline_theme = 'tender'
 " let g:airline_powerline_fonts = 1
 
@@ -221,9 +216,10 @@ nmap <leader>lc :lcl<cr>
 augroup omnifuncs
   autocmd!
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType html,markdown setlocal omnifunc=
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup end
 
 

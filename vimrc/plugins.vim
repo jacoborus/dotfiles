@@ -1,20 +1,21 @@
+" Use tern_for_vim.
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+
 " deoplete
 """""""""""""""""""""""""""""""""""""""""""
 let g:deoplete#enable_at_startup = 1
 let g:tern_request_timeout = 1
-" Use tern_for_vim.
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
 
 let g:deoplete#enable_refresh_always = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 
-" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" autocmd CompleteDone * pclose!
+call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+autocmd CompleteDone * pclose!
 " set omnifunc=syntaxcomplete#Complete
-" set completeopt=longest,menuone,preview,noinsert
+set completeopt=longest,menuone,preview,noinsert
 
 " neosnippet
 """"""""""""""
@@ -64,10 +65,6 @@ autocmd FileType html,css,php EmmetInstall
 " expand html with tab
 autocmd FileType html,css,php map <tab> <plug>(emmet-expand-abbr)i
 
-" Instant Markdown
-""""""""""""""""""
-let g:instant_markdown_autostart = 0
-
 
 " Raimondi/delimitMate settings
 """""""""""""""""""""""""""""""
@@ -112,7 +109,6 @@ nnoremap <leader>so :OpenSession<space>
 nnoremap <leader>ss :SaveSession<space>
 nnoremap <leader>sd :DeleteSession<space>
 nnoremap <leader>sc :CloseSession<space>
-
 
 " NEOMAKE
 " run neomake when opening and writing javascript and shell files
