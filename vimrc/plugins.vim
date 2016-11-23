@@ -12,10 +12,10 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-autocmd CompleteDone * pclose!
+" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+" autocmd CompleteDone * pclose!
 " set omnifunc=syntaxcomplete#Complete
-set completeopt=longest,menuone,preview,noinsert
+" set completeopt=longest,menuone,preview,noinsert
 
 " neosnippet
 """"""""""""""

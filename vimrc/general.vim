@@ -215,11 +215,13 @@ nmap <leader>lc :lcl<cr>
 " omnifuncs
 augroup omnifuncs
   autocmd!
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  " autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType html,markdown setlocal omnifunc=
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType css,stylus setlocal omnifunc=
+  autocmd FileType html,markdown setlocal omnifunc=
+  autocmd FileType python setlocal omnifunc=
 augroup end
 
 
