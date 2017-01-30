@@ -8,6 +8,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'metakirby5/codi.vim'
+Plug 'posva/vim-vue'
+Plug 'lambdalisue/vim-gista'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -32,7 +34,7 @@ Plug 'tpope/vim-surround'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'myusuf3/numbers.vim'
-Plug 'arecarn/fold-cycle.vim'
+" Plug 'arecarn/fold-cycle.vim'
 Plug 'tpope/vim-commentary'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
@@ -41,14 +43,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'dyng/ctrlsf.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'terryma/vim-expand-region'
-" Plug 'haya14busa/incsearch.vim'
 " Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 " Plug 'edkolev/tmuxline.vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'xolox/vim-misc' " Required by vim-session
 Plug 'xolox/vim-session'
 
+Plug 'kostacoffee/vim-pug'
+Plug 'kostacoffee/html5.vim'
 " Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
 Plug 'ap/vim-css-color'
@@ -59,9 +61,8 @@ Plug 'elzr/vim-json'
 " JS
 Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
-Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
+" Plug 'othree/yajs.vim'
 
 Plug 'embear/vim-localvimrc'
 Plug 'editorconfig/editorconfig-vim'
@@ -69,5 +70,6 @@ Plug 'benekastah/neomake'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'gerw/vim-HiLinkTrace'
 
+Plug 'mrtazz/simplenote.vim'
 
 call plug#end()

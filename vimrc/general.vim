@@ -4,6 +4,11 @@
 let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
 
+" simplenote
+so ~/.simplenoterc
+let g:SimplenoteVertical=1
+let g:gista#client#default_username='jacoborus'
+
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -72,7 +77,9 @@ augroup checktime
   endif
 augroup END
 
-au BufRead,BufNewFile *.vue set ft=html
+" au BufRead,BufNewFile *.vue set ft=html.vue
+" au BufRead,BufNewFile *.vue set ft=html
+" au BufRead,BufNewFile *.vue set ft=vue.html
 
 " USER INTERFACE
 """"""""""""""""""""""""""""""""""""""""
@@ -215,11 +222,13 @@ nmap <leader>lc :lcl<cr>
 " omnifuncs
 augroup omnifuncs
   autocmd!
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  " autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType html,markdown setlocal omnifunc=
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType css,stylus setlocal omnifunc=
+  autocmd FileType html,markdown setlocal omnifunc=
+  autocmd FileType python setlocal omnifunc=
 augroup end
 
 

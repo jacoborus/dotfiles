@@ -12,10 +12,10 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-autocmd CompleteDone * pclose!
+" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+" autocmd CompleteDone * pclose!
 " set omnifunc=syntaxcomplete#Complete
-set completeopt=longest,menuone,preview,noinsert
+" set completeopt=longest,menuone,preview,noinsert
 
 " neosnippet
 """"""""""""""
@@ -61,9 +61,9 @@ let g:jsdoc_enable_es6 = 1
 " emmet
 """"""""""""""""""""""""""""""
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,php EmmetInstall
+autocmd FileType html,css,php,vue EmmetInstall
 " expand html with tab
-autocmd FileType html,css,php map <tab> <plug>(emmet-expand-abbr)i
+autocmd FileType html,css,php,vue map <tab> <plug>(emmet-expand-abbr)i
 
 
 " Raimondi/delimitMate settings
@@ -112,14 +112,40 @@ nnoremap <leader>sc :CloseSession<space>
 
 " NEOMAKE
 " run neomake when opening and writing javascript and shell files
+let g:neomake_html_standard_maker = {
+    \ 'args': ['--plugin', 'html'],
+    \ 'errorformat': '%W  %f:%l:%c: %m'
+    \ }
+let g:neomake_html_enabled_makers = ['standard']
+
+
+" function! neomake#makers#ft#html#standard() abort
+" return {
+"     \ 'args': ['--plugin', 'html'],
+"     \ 'errorformat': '%W  %f:%l:%c: %m'
+"     \ }
+" endfunction
+
+
 autocmd! BufWritePost *.js Neomake
+autocmd! BufWritePost *.vue Neomake
+autocmd! BufWritePost *.html Neomake
 autocmd! BufWritePost *.sh Neomake
+au BufReadPost *.vue Neomake
+au BufReadPost *.html Neomake
 au BufReadPost *.js Neomake
 au BufReadPost *.sh Neomake
 let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_vue_enabled_makers = ['standard']
 let g:neomake_sh_enabled_makers = ['shellcheck']
 " let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_error_sign = {'text': 'ƭ'}
+let g:neomake_error_sign = {'text': 'ℯ'}
+let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_warning_sign = {
+   \   'text': 'ℯ',
+   \   'texthl': 'NeomakeWarningSign',
+   \ }
+call neomake#signs#RedefineErrorSign()
 " another pretty symbols for errors ɛ ∊ ƭ ℯ Ҽ ⨉ × ʗ ᚛ ᚜ ⌁ ▸ ⦆
 
 
@@ -152,13 +178,13 @@ let g:indentLine_color_gui = '#3A3A3A'
 
 " haya14busa/incsearch.vim
 """"""""""""""""""""""""""
-let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" let g:incsearch#auto_nohlsearch = 1
+" map n  <Plug>(incsearch-nohl-n)
+" map N  <Plug>(incsearch-nohl-N)
+" map *  <Plug>(incsearch-nohl-*)
+" map #  <Plug>(incsearch-nohl-#)
+" map g* <Plug>(incsearch-nohl-g*)
+" map g# <Plug>(incsearch-nohl-g#)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
