@@ -101,14 +101,14 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 
 " session management
 """""""""""""""""""
-let g:session_directory = "~/.config/nvim/session"
-let g:session_autoload = "no"
-let g:session_autosave = "no"
+" let g:session_directory = "~/.config/nvim/session"
+" let g:session_autoload = "no"
+" let g:session_autosave = "no"
 
-nnoremap <leader>so :OpenSession<space>
-nnoremap <leader>ss :SaveSession<space>
-nnoremap <leader>sd :DeleteSession<space>
-nnoremap <leader>sc :CloseSession<space>
+" nnoremap <leader>so :OpenSession<space>
+" nnoremap <leader>ss :SaveSession<space>
+" nnoremap <leader>sd :DeleteSession<space>
+" nnoremap <leader>sc :CloseSession<space>
 
 " NEOMAKE
 " run neomake when opening and writing javascript and shell files

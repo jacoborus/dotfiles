@@ -57,7 +57,6 @@ alias vimrc="vim ~/.vimrc"
 alias tmux='tmux -2'
 alias lk="ls -1"
 alias lka="ls -1 -A"
-alias rf="rm -rf"
 alias vi='/usr/bin/nvim'
 alias nvim='/usr/bin/nvim'
 alias rmrf='rm -rf'
@@ -72,3 +71,6 @@ mkcd() {
     fi && cd "$1"
 }
 alias mk=mkcd
+alias runspin='~/.runspin'
+
+export PATH="$HOME/.local/bin:$PATH"

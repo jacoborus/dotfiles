@@ -4,6 +4,8 @@
 let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
 
+set guicursor=
+
 " simplenote
 so ~/.simplenoterc
 let g:SimplenoteVertical=1
@@ -234,7 +236,7 @@ augroup end
 
 " Turn persistent undo on
 if has("persistent_undo")
-    set undodir=~/.vim/.undodir/
+    set undodir=~/.config/nvim/undodir/
     set undofile
 endif
 
@@ -261,4 +263,6 @@ endfunction
 " Abbreviations
 """""""""""""""""""""""
 :iabbrev fucntion function
+:iabbrev fucntino function
+:iabbrev functino function
 :iabbrev cosnt const
