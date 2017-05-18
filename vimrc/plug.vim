@@ -19,13 +19,14 @@ function! BuildTern(info)
   endif
 endfunction
 
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/context_filetype.vim'
-Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
-Plug 'carlitux/deoplete-ternjs'
-Plug 'junegunn/gv.vim'
+" Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/context_filetype.vim'
+" Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
+" Plug 'carlitux/deoplete-ternjs'
+
+" Plug 'junegunn/gv.vim'
 " Plug 'mustache/vim-mustache-handlebars'
 
 Plug 'tpope/vim-surround'
@@ -34,7 +35,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'myusuf3/numbers.vim'
 Plug 'tpope/vim-commentary'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline'
+" Plug 'Shougo/unite-outline'
 Plug 'scrooloose/nerdtree'
 
 Plug 'dyng/ctrlsf.vim'

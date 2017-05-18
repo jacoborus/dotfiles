@@ -38,7 +38,7 @@ nnoremap <leader>p :<C-u>Unite -start-insert file_rec/neovim<CR>
 
 " grep in current directory
 nnoremap <leader>fa :Unite line:buffers<CR>
-nnoremap <leader>o :Unite outline<CR>
+" nnoremap <leader>o :Unite outline<CR>
 " grep in cwd
 execute "nnoremap <leader>fg :Unite grep:" . unite#util#path2project_directory(getcwd()) . "<CR>"
 " resume grep
