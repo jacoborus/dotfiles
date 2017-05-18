@@ -6,7 +6,7 @@ Plug '~/dev/tender'
 " Plug 'jacoborus/tender'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'posva/vim-vue'
 
 function! DoRemote(arg)
