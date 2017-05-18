@@ -6,11 +6,6 @@ let g:python3_host_prog = '/usr/bin/python3'
 
 set guicursor=
 
-" simplenote
-so ~/.simplenoterc
-let g:SimplenoteVertical=1
-let g:gista#client#default_username='jacoborus'
-
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
