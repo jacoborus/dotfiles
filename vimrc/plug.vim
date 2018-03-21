@@ -43,6 +43,7 @@ Plug 'Yggdroot/indentLine'
 " Plug 'vim-airline/vim-airline'
 " Plug 'edkolev/tmuxline.vim'
 
+Plug 'jacoborus/tender'
 Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
 " Plug 'ap/vim-css-color'
