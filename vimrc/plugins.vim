@@ -62,6 +62,8 @@ let g:jsdoc_enable_es6 = 1
 
 " vim-vue / fix syntax highlighting
 autocmd FileType vue syntax sync fromstart
+" disable checking for prepocessors to improve performance on vue files
+let g:vue_disable_pre_processors=1
 
 " emmet
 """"""""""""""""""""""""""""""
