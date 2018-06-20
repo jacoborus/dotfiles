@@ -64,4 +64,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'gerw/vim-HiLinkTrace'
 Plug 'wesQ3/vim-windowswap'
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()

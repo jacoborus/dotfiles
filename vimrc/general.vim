@@ -18,6 +18,8 @@ filetype indent on
 " enable true color in neovim
 set termguicolors
 
+set conceallevel=0
+
 " be iMproved
 set nocompatible
 

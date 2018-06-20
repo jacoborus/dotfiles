@@ -2,6 +2,9 @@
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 
+" Vim-windowswap
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>m :call WindowSwap#EasyWindowSwap()<CR>
 " deoplete
 """""""""""""""""""""""""""""""""""""""""""
 let g:deoplete#enable_at_startup = 1
@@ -57,6 +60,8 @@ let g:localvimrc_ask=0
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_enable_es6 = 1
 
+" vim-vue / fix syntax highlighting
+autocmd FileType vue syntax sync fromstart
 
 " emmet
 """"""""""""""""""""""""""""""
@@ -188,3 +193,6 @@ let g:indentLine_color_gui = '#3A3A3A'
 " map /  <Plug>(incsearch-forward)
 " map ?  <Plug>(incsearch-backward)
 " map g/ <Plug>(incsearch-stay)
+"
+
+

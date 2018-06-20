@@ -34,7 +34,8 @@ let g:unite_enable_start_insert = 1
 " Open in bottom right
 let g:unite_split_rule = "botright"
 " replace controlP with unite
-nnoremap <leader>p :<C-u>Unite -start-insert file_rec/neovim<CR>
+" nnoremap <leader>p :<C-u>Unite -start-insert file_rec/neovim<CR>
+nnoremap <leader>p :Files<CR>
 
 " grep in current directory
 nnoremap <leader>fa :Unite line:buffers<CR>
