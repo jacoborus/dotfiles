@@ -6,7 +6,7 @@ Dotfiles for Ubuntu 16.10
 Install dependencies:
 
 ```sh
-sudo apt install git ssh meld xclip xsel saidar tree
+sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag
 ```
 
 ```
