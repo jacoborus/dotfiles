@@ -50,6 +50,9 @@ endfunction
 
 imap <expr><CR> <SID>neosnippet_complete()
 
+" FZF
+nnoremap <leader>p :Files<CR>
+
 " vim-localvimrc
 """""""""""""""""""""""""""
 " don't ask before loading .vimrc file

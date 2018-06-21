@@ -46,8 +46,7 @@ endfunction
 function! MyFilename()
   let fname = expand('%:t')
   return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-       \ (&ft == 'unite' ? unite#get_status_string() :
-       \  fname =~ 'NERD_tree' ? '' :
+       \ (fname =~ 'NERD_tree' ? '' :
        \  &ft == 'vimfiler' ? vimfiler#get_status_string() :
        \  &ft == 'vimshell' ? vimshell#get_status_string() :
        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
@@ -81,7 +80,6 @@ function! MyMode()
   let fname = expand('%:t')
   return fname =~ 'NERD_tree' ? 'TREE' :
         \ &ft == 'help' ? 'HELP' :
-        \ &ft == 'unite' ? 'UNITE' :
         \ &ft == 'vimfiler' ? '' :
         \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''

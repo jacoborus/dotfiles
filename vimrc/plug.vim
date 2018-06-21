@@ -2,8 +2,8 @@
 """""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
 
-Plug '~/dev/tender'
-" Plug 'jacoborus/tender'
+" Plug '~/dev/tender'
+Plug 'jacoborus/tender'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
@@ -33,8 +33,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'myusuf3/numbers.vim'
 Plug 'tyru/caw.vim'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline'
 Plug 'scrooloose/nerdtree'
 
 Plug 'dyng/ctrlsf.vim'
@@ -43,7 +41,6 @@ Plug 'Yggdroot/indentLine'
 " Plug 'vim-airline/vim-airline'
 " Plug 'edkolev/tmuxline.vim'
 
-Plug 'jacoborus/tender'
 Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
 " Plug 'ap/vim-css-color'

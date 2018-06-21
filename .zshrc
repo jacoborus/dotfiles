@@ -74,3 +74,5 @@ alias mk=mkcd
 alias runspin='~/.runspin'
 
 export PATH="$HOME/.local/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
