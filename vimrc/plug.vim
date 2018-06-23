@@ -8,6 +8,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'posva/vim-vue'
+Plug 'nelstrom/vim-markdown-folding'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
