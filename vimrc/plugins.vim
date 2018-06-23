@@ -51,6 +51,7 @@ endfunction
 imap <expr><CR> <SID>neosnippet_complete()
 
 " FZF
+let $FZF_DEFAULT_COMMAND = 'ag -g "" --path-to-ignore .gitignore --hidden --ignore .git'
 nnoremap <leader>p :Files<CR>
 
 " vim-localvimrc
