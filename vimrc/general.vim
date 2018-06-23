@@ -34,6 +34,9 @@ nmap <leader>w :w<cr>
 nmap <leader>bn :bn<cr>
 nmap <leader>bp :bp<cr>
 
+" repeat last command line command
+nnoremap <leader>r @:<CR>
+
 " fast copy to the end of the line
 nmap Y y$
 
