@@ -1,17 +1,11 @@
 # vim:ft=zsh ts=2 sw=2 sts=2
 #
-# agnoster's Theme - https://gist.github.com/3712874
-# A Powerline-inspired theme for ZSH
+# Adesis Theme
+# ============
+#
+# Based on agnoster's Theme - https://gist.github.com/3712874
 #
 # # README
-#
-# In order for this theme to render correctly, you will need a
-# [Powerline-patched font](https://github.com/Lokaltog/powerline-fonts).
-#
-# In addition, I recommend the
-# [Solarized theme](https://github.com/altercation/solarized/) and, if you're
-# using it on Mac OS X, [iTerm 2](http://www.iterm2.com/) over Terminal.app -
-# it has significantly better color fidelity.
 #
 # # Goals
 #
@@ -26,7 +20,7 @@
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
-SEGMENT_SEPARATOR=''
+SEGMENT_SEPARATOR=''
 
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
