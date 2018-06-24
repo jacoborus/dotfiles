@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+
 ZSH_THEME="adesis"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -38,14 +39,15 @@ ZSH_THEME="adesis"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast bower autojump command-not-found common-aliases npm)
+plugins=(z gitfast command-not-found common-aliases npm git fasd)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
 # Vi mode
-bindkey -v
+# bindkey -v
+set -o vi
+
+# User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -61,6 +63,10 @@ alias vi='/usr/bin/nvim'
 alias nvim='/usr/bin/nvim'
 alias rmrf='rm -rf'
 alias e='nvim'
+alias dtf='nvim ~/.dotfiles'
+alias f='vim $(fzf)'
+
+export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
 
 # http://superuser.com/questions/1073869/how-can-i-make-my-own-shell-commands-e-g-mkdir-cd-combo/1073874#1073874
 mkcd() {
