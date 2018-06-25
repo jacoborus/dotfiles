@@ -54,6 +54,7 @@ imap <expr><CR> <SID>neosnippet_complete()
 let $FZF_DEFAULT_COMMAND = 'ag -g "" --path-to-ignore .gitignore --hidden --ignore .git'
 let $FZF_DEFAULT_OPTS=""
 nnoremap <leader>p :Files<CR>
+nnoremap <leader>a :Ag<space>
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
