@@ -179,6 +179,13 @@ call neomake#signs#RedefineErrorSign()
 
 " gitgutter
 let g:gitgutter_sign_modified_removed = '÷'
+nnoremap <leader>gh :GitGutterLineHighlightsToggle<cr>
+nmap ]g <Plug>GitGutterNextHunk
+nmap [g <Plug>GitGutterPrevHunk
+" update the signs when saving a file
+autocmd BufWritePost * GitGutter
+" update after focusing Vim
+let g:gitgutter_terminal_reports_focus=0
 " ⋍
 
 " CtrlSF
