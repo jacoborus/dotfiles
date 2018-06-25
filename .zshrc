@@ -65,6 +65,7 @@ alias rmrf='rm -rf'
 alias e='nvim'
 alias dtf='nvim ~/.dotfiles'
 alias f='vim $(fzf)'
+alias mk=mkcd
 
 export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
 
@@ -76,8 +77,6 @@ mkcd() {
         mkdir -p "$1" 
     fi && cd "$1"
 }
-alias mk=mkcd
-alias runspin='~/.runspin'
 
 export PATH="$HOME/.local/bin:$PATH"
 

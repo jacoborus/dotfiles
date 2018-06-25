@@ -94,6 +94,11 @@ alias vi='/usr/bin/nvim'
 alias nvim='/usr/bin/nvim'
 alias rmrf='rm -rf'
 alias e='nvim'
+alias dtf='nvim ~/.dotfiles'
+alias f='vim $(fzf)'
+alias mk=mkcd
+
+export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
 
 # http://superuser.com/questions/1073869/how-can-i-make-my-own-shell-commands-e-g-mkdir-cd-combo/1073874#1073874
 mkcd() {
@@ -118,3 +123,4 @@ fi
 
 export EDITOR=/usr/bin/nvim
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
