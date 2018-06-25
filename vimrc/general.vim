@@ -49,9 +49,6 @@ map <silent> <leader><cr> :noh<cr>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" fast launch JsDoc
-nmap <leader>jj :JsDoc<cr>
-
 " resize splits faster
 map <leader>> <C-w>10>
 map <leader>< <C-w>10<

@@ -115,6 +115,9 @@ augroup END
 "       \'z'    : '#H'}
 
 
+" fast launch JsDoc
+nmap <leader>jj :JsDoc<cr>
+
 
 " Syntax JSON
 """""""""""""""""""""""""""""""""""""""""
