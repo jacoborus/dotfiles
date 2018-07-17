@@ -12,7 +12,7 @@ sudo apt-add-repository ppa:neovim-ppa/stable
 Install dependencies:
 
 ```sh
-sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux highlight python-dev python-pip python3-dev python3-pip neovim p7zip-full
+sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux highlight python-dev python-pip python3-dev python3-pip neovim p7zip-full jq git-extras
 ```
 
 Install vim-plug in neovim (linux)
