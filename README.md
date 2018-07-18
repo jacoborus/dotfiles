@@ -9,10 +9,12 @@ Install NeoVim PPA:
 sudo apt-add-repository ppa:neovim-ppa/stable
 ```
 
-Install dependencies:
+Install software:
 
 ```sh
-sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux highlight python-dev python-pip python3-dev python3-pip neovim p7zip-full jq git-extras
+sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux\
+     highlight python-dev python-pip python3-dev python3-pip neovim p7zip-full jq\
+     git-extras redis mongodb
 ```
 
 Install vim-plug in neovim (linux)
@@ -29,7 +31,7 @@ chmod +x bootstrap.sh
 Install global node.js packages:
 
 ```
-sudo npm i -g nodemon standard tern npm-check trash-cli
+sudo npm i -g nodemon standard tern npm-check trash-cli sloc
 ```
 
 Install python packages:
