@@ -193,8 +193,13 @@ let g:gitgutter_terminal_reports_focus=0
 
 " CtrlSF
 """""""""""""""""""""""""""""""""""""""
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+    \ }
 nnoremap <leader>ff :CtrlSF<space>
 nnoremap <leader>fo :CtrlSFOpen<cr>
+nnoremap <leader>fw <Plug>CtrlSFVwordExec
+nnoremap <leader>ft :CtrlSFToggle<cr>
 
 
 " HLinkTrace
