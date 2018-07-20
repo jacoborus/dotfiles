@@ -31,7 +31,7 @@ chmod +x bootstrap.sh
 Install global node.js packages:
 
 ```
-sudo npm i -g nodemon standard tern npm-check trash-cli sloc
+sudo npm i -g nodemon standard tern npm-check trash-cli sloc npx
 ```
 
 Install python packages:
