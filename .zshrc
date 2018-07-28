@@ -39,7 +39,7 @@ ZSH_THEME="adesis"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(z vi-mode gitfast command-not-found common-aliases npm git fasd history-substring-search)
+plugins=(z vi-mode gitfast command-not-found common-aliases npm git fasd history-substring-search redis-cli)
 
 source $ZSH/oh-my-zsh.sh
 
