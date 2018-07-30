@@ -14,7 +14,7 @@ Install software:
 ```sh
 sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux\
      highlight python-dev python-pip python3-dev python3-pip neovim p7zip-full jq\
-     git-extras redis mongodb
+     git-extras redis mongodb whois
 ```
 
 Install vim-plug in neovim (linux)
