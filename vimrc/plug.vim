@@ -4,11 +4,17 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Plug '~/dev/tender'
 Plug 'jacoborus/tender'
+
+" Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/lightline.vim'
-Plug 'posva/vim-vue'
+Plug 'junegunn/gv.vim'
+
+" Markdown
 Plug 'nelstrom/vim-markdown-folding'
+Plug 'dhruvasagar/vim-table-mode'
+
+Plug 'itchyny/lightline.vim'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -26,22 +32,26 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/context_filetype.vim'
 Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
 Plug 'carlitux/deoplete-ternjs'
-Plug 'junegunn/gv.vim'
 " Plug 'mustache/vim-mustache-handlebars'
 
+" General utils
 Plug 'tpope/vim-surround'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'myusuf3/numbers.vim'
-Plug 'tyru/caw.vim'
-Plug 'scrooloose/nerdtree'
-
-Plug 'dyng/ctrlsf.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'tyru/caw.vim' " comment plugin
+Plug 'scrooloose/nerdtree'
+Plug 'kana/vim-repeat'
+Plug 'dyng/ctrlsf.vim'
+Plug 'wesQ3/vim-windowswap'
+
 " Plug 'terryma/vim-expand-region'
 " Plug 'vim-airline/vim-airline'
 " Plug 'edkolev/tmuxline.vim'
 
+" Languages and syntaxes
+Plug 'posva/vim-vue'
 Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
 " Plug 'ap/vim-css-color'
@@ -60,9 +70,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'benekastah/neomake'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'gerw/vim-HiLinkTrace'
-Plug 'wesQ3/vim-windowswap'
-Plug 'kana/vim-repeat'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
 call plug#end()

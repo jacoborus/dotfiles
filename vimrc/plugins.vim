@@ -93,6 +93,8 @@ autocmd FileType html,css,php,vue EmmetInstall
 " expand html with tab
 autocmd FileType html,css,php,vue map <tab> <plug>(emmet-expand-abbr)i
 
+" Vim Table Mode
+let g:table_mode_corner='|'
 
 " Raimondi/delimitMate settings
 """""""""""""""""""""""""""""""
