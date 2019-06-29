@@ -5,50 +5,6 @@ let g:tern#arguments = ["--persistent"]
 " Vim-windowswap
 let g:windowswap_map_keys = 0 "prevent default bindings
 nnoremap <silent> <leader>m :call WindowSwap#EasyWindowSwap()<CR>
-" deoplete
-"""""""""""""""""""""""""""""""""""""""""""
-let g:deoplete#enable_at_startup = 1
-let g:tern_request_timeout = 1
-
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-
-" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" autocmd CompleteDone * pclose!
-" set omnifunc=syntaxcomplete#Complete
-" set completeopt=longest,menuone,preview,noinsert
-
-" neosnippet
-""""""""""""""
-function! s:go_tab()
-  if pumvisible()
-    return "\<C-n>"
-  else
-    if neosnippet#expandable_or_jumpable()
-      return "\<Plug>(neosnippet_expand_or_jump)"
-    else
-      return "\<Tab>"
-    endif
-  endif
-endfunction
-" Let <Tab> also do completion
-imap <silent><expr> <Tab> <SID>go_tab()
-
-" Close the documentation window when completion is done
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-function! s:neosnippet_complete()
-  if pumvisible()
-    if neosnippet#expandable_or_jumpable()
-      return "\<Plug>(neosnippet_expand_or_jump)"
-    endif
-  endif
-  return "\<Plug>delimitMateCR"
-endfunction
-
-imap <expr><CR> <SID>neosnippet_complete()
 
 " FZF
 let $FZF_DEFAULT_COMMAND = 'ag -g "" --path-to-ignore .gitignore --hidden --ignore .git'
@@ -132,57 +88,8 @@ let g:vim_json_syntax_conceal = 0
 nnoremap <leader>n :NERDTreeToggle<cr>
 
 
-" session management
-"""""""""""""""""""
-" let g:session_directory = "~/.config/nvim/session"
-" let g:session_autoload = "no"
-" let g:session_autosave = "no"
-
-" nnoremap <leader>so :OpenSession<space>
-" nnoremap <leader>ss :SaveSession<space>
-" nnoremap <leader>sd :DeleteSession<space>
-" nnoremap <leader>sc :CloseSession<space>
-
-" NEOMAKE
-" run neomake when opening and writing javascript and shell files
-let g:neomake_html_standard_maker = {
-    \ 'args': ['--plugin', 'html'],
-    \ 'errorformat': '%W  %f:%l:%c: %m'
-    \ }
-let g:neomake_html_enabled_makers = ['standard']
-
-
-" function! neomake#makers#ft#html#standard() abort
-" return {
-"     \ 'args': ['--plugin', 'html'],
-"     \ 'errorformat': '%W  %f:%l:%c: %m'
-"     \ }
-" endfunction
-
-
-autocmd! BufWritePost *.js Neomake
-autocmd! BufWritePost *.vue Neomake
-autocmd! BufWritePost *.html Neomake
-autocmd! BufWritePost *.sh Neomake
-au BufReadPost *.vue Neomake
-au BufReadPost *.html Neomake
-au BufReadPost *.js Neomake
-au BufReadPost *.sh Neomake
-let g:neomake_javascript_enabled_makers = ['standard']
-let g:neomake_vue_enabled_makers = ['standard']
-let g:neomake_sh_enabled_makers = ['shellcheck']
-" let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_error_sign = {'text': 'ℯ'}
-let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_warning_sign = {
-   \   'text': 'ℯ',
-   \   'texthl': 'NeomakeWarningSign',
-   \ }
-call neomake#signs#RedefineErrorSign()
-" another pretty symbols for errors ɛ ∊ ƭ ℯ Ҽ ⨉ × ʗ ᚛ ᚜ ⌁ ▸ ⦆
-
-
-" gitgutter
+" GitGutter
+"""""""""""
 let g:gitgutter_sign_modified_removed = '÷'
 nnoremap <leader>gh :GitGutterLineHighlightsToggle<cr>
 nmap ]g <Plug>GitGutterNextHunk
