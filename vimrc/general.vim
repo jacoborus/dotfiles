@@ -19,6 +19,10 @@ filetype indent on
 set termguicolors
 
 set conceallevel=0
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
 
 " be iMproved
 set nocompatible
@@ -194,6 +198,9 @@ vmap < <gv
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+" allow comments in json files
+autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd FileType json syntax match Comment +\/\*.\+$+
 
 " fix lprevius and lnext behaviour
 " https://github.com/scrooloose/syntastic/issues/32#issuecomment-40273385

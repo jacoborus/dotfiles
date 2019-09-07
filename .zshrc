@@ -67,6 +67,7 @@ alias dtf='nvim ~/.dotfiles'
 alias f='vim $(fzf)'
 alias mk=mkcd
 alias redis=redis-cli
+alias o=open-cli
 
 export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
 

@@ -1,56 +1,31 @@
-" Use tern_for_vim.
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-
 " Vim-windowswap
 let g:windowswap_map_keys = 0 "prevent default bindings
 nnoremap <silent> <leader>m :call WindowSwap#EasyWindowSwap()<CR>
-" deoplete
-"""""""""""""""""""""""""""""""""""""""""""
-let g:deoplete#enable_at_startup = 1
-let g:tern_request_timeout = 1
 
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
+" COC
+""""""""""""""""""""""""""""""
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" autocmd CompleteDone * pclose!
-" set omnifunc=syntaxcomplete#Complete
-" set completeopt=longest,menuone,preview,noinsert
-
-" neosnippet
-""""""""""""""
-function! s:go_tab()
-  if pumvisible()
-    return "\<C-n>"
-  else
-    if neosnippet#expandable_or_jumpable()
-      return "\<Plug>(neosnippet_expand_or_jump)"
-    else
-      return "\<Tab>"
-    endif
-  endif
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-" Let <Tab> also do completion
-imap <silent><expr> <Tab> <SID>go_tab()
-
-" Close the documentation window when completion is done
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-function! s:neosnippet_complete()
-  if pumvisible()
-    if neosnippet#expandable_or_jumpable()
-      return "\<Plug>(neosnippet_expand_or_jump)"
-    endif
-  endif
-  return "\<Plug>delimitMateCR"
-endfunction
-
-imap <expr><CR> <SID>neosnippet_complete()
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " FZF
+""""""""""""""""""""""""""""""
 let $FZF_DEFAULT_COMMAND = 'ag -g "" --path-to-ignore .gitignore --hidden --ignore .git'
 let $FZF_DEFAULT_OPTS=""
 nnoremap <leader>p :Files<CR>
@@ -132,56 +107,6 @@ let g:vim_json_syntax_conceal = 0
 nnoremap <leader>n :NERDTreeToggle<cr>
 
 
-" session management
-"""""""""""""""""""
-" let g:session_directory = "~/.config/nvim/session"
-" let g:session_autoload = "no"
-" let g:session_autosave = "no"
-
-" nnoremap <leader>so :OpenSession<space>
-" nnoremap <leader>ss :SaveSession<space>
-" nnoremap <leader>sd :DeleteSession<space>
-" nnoremap <leader>sc :CloseSession<space>
-
-" NEOMAKE
-" run neomake when opening and writing javascript and shell files
-let g:neomake_html_standard_maker = {
-    \ 'args': ['--plugin', 'html'],
-    \ 'errorformat': '%W  %f:%l:%c: %m'
-    \ }
-let g:neomake_html_enabled_makers = ['standard']
-
-
-" function! neomake#makers#ft#html#standard() abort
-" return {
-"     \ 'args': ['--plugin', 'html'],
-"     \ 'errorformat': '%W  %f:%l:%c: %m'
-"     \ }
-" endfunction
-
-
-autocmd! BufWritePost *.js Neomake
-autocmd! BufWritePost *.vue Neomake
-autocmd! BufWritePost *.html Neomake
-autocmd! BufWritePost *.sh Neomake
-au BufReadPost *.vue Neomake
-au BufReadPost *.html Neomake
-au BufReadPost *.js Neomake
-au BufReadPost *.sh Neomake
-let g:neomake_javascript_enabled_makers = ['standard']
-let g:neomake_vue_enabled_makers = ['standard']
-let g:neomake_sh_enabled_makers = ['shellcheck']
-" let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_error_sign = {'text': 'ℯ'}
-let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
-let g:neomake_warning_sign = {
-   \   'text': 'ℯ',
-   \   'texthl': 'NeomakeWarningSign',
-   \ }
-call neomake#signs#RedefineErrorSign()
-" another pretty symbols for errors ɛ ∊ ƭ ℯ Ҽ ⨉ × ʗ ᚛ ᚜ ⌁ ▸ ⦆
-
-
 " gitgutter
 let g:gitgutter_sign_modified_removed = '÷'
 nnoremap <leader>gh :GitGutterLineHighlightsToggle<cr>
@@ -206,7 +131,7 @@ nnoremap <leader>ft :CtrlSFToggle<cr>
 
 " HLinkTrace
 """""""""""""""""""""""""""
-nnoremap <leader>hh :HLT<CR>
+" nnoremap <leader>hh :HLT<CR>
 
 " ntpeters/vim-better-whitespace
 """"""""""""""""""""""""""""""""
@@ -220,19 +145,3 @@ let g:indentLine_char = '¦'
 let g:indentLine_color_term = 238
 "GVim
 let g:indentLine_color_gui = '#3A3A3A'
-
-" haya14busa/incsearch.vim
-""""""""""""""""""""""""""
-" let g:incsearch#auto_nohlsearch = 1
-" map n  <Plug>(incsearch-nohl-n)
-" map N  <Plug>(incsearch-nohl-N)
-" map *  <Plug>(incsearch-nohl-*)
-" map #  <Plug>(incsearch-nohl-#)
-" map g* <Plug>(incsearch-nohl-g*)
-" map g# <Plug>(incsearch-nohl-g#)
-" map /  <Plug>(incsearch-forward)
-" map ?  <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
-"
-
-

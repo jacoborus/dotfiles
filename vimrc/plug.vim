@@ -16,22 +16,6 @@ Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'itchyny/lightline.vim'
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-
-function! BuildTern(info)
-  if a:info.status == 'installed' || a:info.force
-    !npm install
-  endif
-endfunction
-
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/context_filetype.vim'
-Plug 'ternjs/tern_for_vim', { 'do': function('BuildTern') }
-Plug 'carlitux/deoplete-ternjs'
 " Plug 'mustache/vim-mustache-handlebars'
 
 " General utils
@@ -54,9 +38,8 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'posva/vim-vue'
 Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
-" Plug 'ap/vim-css-color'
 Plug 'digitaltoad/vim-pug'
-Plug 'wavded/vim-stylus'
+Plug 'iloginow/vim-stylus'
 Plug 'elzr/vim-json'
 
 " JS
@@ -65,9 +48,10 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'pangloss/vim-javascript'
 " Plug 'othree/yajs.vim'
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'embear/vim-localvimrc'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'benekastah/neomake'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'gerw/vim-HiLinkTrace'
 
