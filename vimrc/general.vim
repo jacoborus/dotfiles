@@ -146,8 +146,14 @@ set relativenumber
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in git
 set nobackup
+set nowritebackup
 set nowb
 set noswapfile
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
 " copy/paste to/from system clipboard
 set clipboard=unnamedplus
 map <c-p> "0p
