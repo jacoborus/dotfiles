@@ -39,7 +39,6 @@ Plug 'junegunn/fzf.vim'
 
 " Plug 'gerw/vim-HiLinkTrace'
 
-
 " Plug 'edkolev/tmuxline.vim'
 
 " Languages and syntaxes
@@ -58,7 +57,7 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 " Plug 'othree/yajs.vim'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
-" :CocInstall coc-json coc-tsserver coc-html coc-css coc-vetur coc-yaml coc-python coc-emmet coc-lists coc-git coc-eslint
+" :CocInstall coc-json coc-tsserver coc-html coc-css coc-vetur coc-yaml coc-emmet coc-lists coc-git coc-eslint
