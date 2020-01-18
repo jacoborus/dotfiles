@@ -32,6 +32,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+map <silent> <leader>cr :CocRestart<cr>
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " Using CocList
@@ -92,16 +93,6 @@ autocmd FileType html,css,php,vue map <tab> <plug>(emmet-expand-abbr)i
 " Vim Table Mode
 """"""""""""""""
 let g:table_mode_corner='|'
-
-" Raimondi/delimitMate settings
-"""""""""""""""""""""""""""""""
-let delimitMate_expand_cr=1 " indent new line when cursor is between brackets, parentheses, ...
-augroup mydelimitMate
-  au!
-  au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
-  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
-augroup END
-
 
 " Tmuxline settings
 """""""""""""""""""
