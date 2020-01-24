@@ -5,7 +5,7 @@ let g:lightline = {
       \ 'colorscheme': 'tender',
       \ 'mode_map': { 'n': 'NORMAL' },
       \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"ꙭ":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
       \ },
       \ 'active': {
@@ -38,7 +38,7 @@ function! MyModified()
 endfunction
 
 function! MyReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '' : ''
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'ꙭ' : ''
 endfunction
 
 function! MyFilename()
