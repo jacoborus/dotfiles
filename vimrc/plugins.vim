@@ -39,10 +39,12 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 
+
 " Vim-windowswap
 """"""""""""""""
 let g:windowswap_map_keys = 0 "prevent default bindings
 nnoremap <silent> <leader>m :call WindowSwap#EasyWindowSwap()<CR>
+
 
 " FZF
 """""
@@ -66,10 +68,12 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+
 " vim-localvimrc
 """"""""""""""""
 " don't ask before loading .vimrc file
 let g:localvimrc_ask=0
+
 
 " vim-jsdoc
 """""""""""""""""""""""""""""""
@@ -78,10 +82,12 @@ let g:jsdoc_enable_es6 = 1
 " fast launch JsDoc
 nmap <leader>jj :JsDoc<cr>
 
+
 " vim-vue / fix syntax highlighting
 autocmd FileType vue syntax sync fromstart
 " disable checking for prepocessors to improve performance on vue files
 let g:vue_disable_pre_processors=1
+
 
 " emmet
 """""""
@@ -90,19 +96,10 @@ autocmd FileType html,css,php,vue EmmetInstall
 " expand html with tab
 autocmd FileType html,css,php,vue map <tab> <plug>(emmet-expand-abbr)i
 
+
 " Vim Table Mode
 """"""""""""""""
 let g:table_mode_corner='|'
-
-" Tmuxline settings
-"""""""""""""""""""
-" let g:tmuxline_preset = {
-"       \'a'    : '#S',
-"       \'b'    : '#W',
-"       \'win'  : '#I #W',
-"       \'cwin' : '#I #W',
-"       \'x'    : '%R',
-"       \'z'    : '#H'}
 
 
 " Syntax JSON
@@ -128,6 +125,7 @@ autocmd BufWritePost * GitGutter
 let g:gitgutter_terminal_reports_focus=0
 " ⋍
 
+
 " CtrlSF
 """""""""""""""""""""""""""""""""""""""
 let g:ctrlsf_auto_focus = {
@@ -143,9 +141,11 @@ nnoremap <leader>ft :CtrlSFToggle<cr>
 """""""""""""""""""""""""""
 nnoremap <leader>hh :HLT<CR>
 
+
 " ntpeters/vim-better-whitespace
 """"""""""""""""""""""""""""""""
 hi ExtraWhitespace ctermbg=238 guibg=#666666
+
 
 " indentline
 """""""""""""
@@ -155,19 +155,3 @@ let g:indentLine_char = '¦'
 let g:indentLine_color_term = 238
 "GVim
 let g:indentLine_color_gui = '#3A3A3A'
-
-" haya14busa/incsearch.vim
-""""""""""""""""""""""""""
-" let g:incsearch#auto_nohlsearch = 1
-" map n  <Plug>(incsearch-nohl-n)
-" map N  <Plug>(incsearch-nohl-N)
-" map *  <Plug>(incsearch-nohl-*)
-" map #  <Plug>(incsearch-nohl-#)
-" map g* <Plug>(incsearch-nohl-g*)
-" map g# <Plug>(incsearch-nohl-g#)
-" map /  <Plug>(incsearch-forward)
-" map ?  <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
-"
-
-

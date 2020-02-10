@@ -2,7 +2,6 @@
 """""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
 
-" Plug '~/dev/tender'
 Plug '~/dev/tender.vim'
 
 " Git
@@ -13,6 +12,7 @@ Plug 'junegunn/gv.vim'
 " Markdown
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'junegunn/goyo.vim'
 
 " Status
 Plug 'itchyny/lightline.vim'
@@ -37,9 +37,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Plug 'gerw/vim-HiLinkTrace'
-
-" Plug 'edkolev/tmuxline.vim'
+Plug 'gerw/vim-HiLinkTrace'
 
 " Languages and syntaxes
 Plug 'posva/vim-vue'
@@ -49,15 +47,15 @@ Plug 'mattn/emmet-vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'wavded/vim-stylus'
 Plug 'iloginow/vim-stylus'
-Plug 'elzr/vim-json'
+" Plug 'elzr/vim-json'
 
 " JS
 Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
 " Plug 'othree/yajs.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'kevinoid/vim-jsonc'
 
 call plug#end()
 " :CocInstall coc-json coc-tsserver coc-html coc-css coc-vetur coc-yaml coc-emmet coc-lists coc-git coc-eslint
