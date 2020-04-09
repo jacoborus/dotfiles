@@ -125,3 +125,5 @@ fi
 export EDITOR=/usr/bin/nvim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

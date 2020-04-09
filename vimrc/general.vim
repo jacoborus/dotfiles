@@ -6,11 +6,6 @@ let g:python3_host_prog = '/usr/bin/python3'
 
 set guicursor=
 
-" simplenote
-" so ~/.simplenoterc
-" let g:SimplenoteVertical=1
-" let g:gista#client#default_username='jacoborus'
-
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -80,10 +75,6 @@ augroup checktime
     autocmd BufEnter,CursorHold,CursorHoldI,CursorMoved,CursorMovedI,FocusGained,BufEnter,FocusLost,WinLeave * checktime
   endif
 augroup END
-
-" au BufRead,BufNewFile *.vue set ft=html.vue
-" au BufRead,BufNewFile *.vue set ft=html
-" au BufRead,BufNewFile *.vue set ft=vue.html
 
 " USER INTERFACE
 """"""""""""""""""""""""""""""""""""""""
@@ -274,3 +265,4 @@ endfunction
 :iabbrev fucntino function
 :iabbrev functino function
 :iabbrev cosnt const
+:iabbrev exprot export

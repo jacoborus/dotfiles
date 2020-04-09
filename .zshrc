@@ -67,6 +67,7 @@ alias dtf='nvim ~/.dotfiles'
 alias f='vim $(fzf)'
 alias mk=mkcd
 alias redis=redis-cli
+alias open=open-cli
 
 export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
 
@@ -80,5 +81,7 @@ mkcd() {
 }
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/var/lib/flatpak/exports/share:$PATH"
+export PATH="/home/jacobo/.local/share/flatpak/exports/share:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
