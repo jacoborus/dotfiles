@@ -23,7 +23,7 @@ sudo snap install redis-desktop-manager
 General:
 
 ```sh
-sudo apt install vlc inkscape gimp ubuntu-restricted-extras qbittorrent
+sudo apt install vlc inkscape gimp ubuntu-restricted-extras qbittorrent gnome-sushi
 ```
 
 
