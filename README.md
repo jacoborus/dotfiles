@@ -10,8 +10,8 @@ Dotfiles for Ubuntu with minimal installation
 Development:
 
 ```sh
-sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux\
-     python-dev python-pip python3-dev python3-pip neovim p7zip-full jq git-extras whois
+sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux curl\
+      python3-pip neovim p7zip-full jq git-extras whois
 ```
 
 DBs:
@@ -23,7 +23,7 @@ sudo snap install redis-desktop-manager
 General:
 
 ```sh
-sudo apt install vlc inkscape gimp ubuntu-restricted-extras qbittorrent gnome-sushi
+sudo apt install vlc inkscape gimp ubuntu-restricted-extras qbittorrent gnome-sushi gnome-tweak-tool
 ```
 
 
@@ -45,24 +45,17 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 
 ## Node.js packages
 
-Install nodejs (this: `setup_13.x` will install v13, change it if needed
+Install nodejs
 
 ```sh
-curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
-```
-
-Install Yarn:
-
-```sh
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 ```
 
 Install global node.js packages:
 
 ```sh
-sudo npm i -g nodemon standard tern npm-check trash-cli sloc npx pm2
+sudo npm i -g npm-check trash-cli sloc
 ```
 
 ## Python utils
