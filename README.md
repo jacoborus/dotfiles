@@ -58,18 +58,12 @@ Install global node.js packages:
 sudo npm i -g npm-check trash-cli sloc
 ```
 
-## Python utils
-
-Install python packages:
-
-```
-sudo pip install cheat && pip2 install neovim && pip3 install neovim
-```
-
-
 ## Gnome
 
 ### Extensions
 
 - [Dash to panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
 - [Top Panel workspace scroll](https://extensions.gnome.org/extension/701/top-panel-workspace-scroll/)
+- [Impatience](https://extensions.gnome.org/extension/277/impatience/)
+- [Horizontal workspaces](https://extensions.gnome.org/extension/2141/horizontal-workspaces/)
+- [Arc menu](https://extensions.gnome.org/extension/1228/arc-menu/)
