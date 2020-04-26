@@ -58,12 +58,12 @@ Install global node.js packages:
 sudo npm i -g npm-check trash-cli sloc
 ```
 
-## Gnome
-
-### Extensions
+## Gnome Extensions
 
 - [Dash to panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
 - [Top Panel workspace scroll](https://extensions.gnome.org/extension/701/top-panel-workspace-scroll/)
 - [Impatience](https://extensions.gnome.org/extension/277/impatience/)
 - [Horizontal workspaces](https://extensions.gnome.org/extension/2141/horizontal-workspaces/)
 - [Arc menu](https://extensions.gnome.org/extension/1228/arc-menu/)
+- [Sound Input & Output Device Chooser](https://extensions.gnome.org/extension/906/sound-output-device-chooser/)
+- [Bluetooth quick connect](https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/)
