@@ -11,7 +11,7 @@ Development:
 
 ```sh
 sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux curl\
-      python3-pip neovim p7zip-full jq git-extras whois
+      python3-pip neovim p7zip-full jq git-extras whois gpick
 ```
 
 DBs:
