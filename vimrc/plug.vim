@@ -45,7 +45,6 @@ Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
 " Plug 'ap/vim-css-color'
 Plug 'digitaltoad/vim-pug'
-Plug 'wavded/vim-stylus'
 Plug 'iloginow/vim-stylus'
 " Plug 'elzr/vim-json'
 
