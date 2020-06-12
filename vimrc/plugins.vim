@@ -105,6 +105,7 @@ let g:table_mode_corner='|'
 " Syntax JSON
 """""""""""""""""""""""""""""""""""""""""
 autocmd BufNewFile,BufRead .eslintrc setlocal filetype=json
+autocmd BufNewFile,BufRead .eslintrc setlocal conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
 

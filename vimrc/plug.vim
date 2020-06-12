@@ -46,7 +46,7 @@ Plug 'mattn/emmet-vim'
 " Plug 'ap/vim-css-color'
 Plug 'digitaltoad/vim-pug'
 Plug 'iloginow/vim-stylus'
-" Plug 'elzr/vim-json'
+Plug 'elzr/vim-json'
 
 " JS
 Plug 'moll/vim-node'
