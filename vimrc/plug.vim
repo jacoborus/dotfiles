@@ -24,7 +24,6 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'myusuf3/numbers.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tyru/caw.vim' " comment plugin
 Plug 'scrooloose/nerdtree'
