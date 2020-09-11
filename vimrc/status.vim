@@ -47,7 +47,7 @@ function! MyFilename()
        \ (fname =~ 'NERD_tree' ? '' :
        \  &ft == 'vimfiler' ? vimfiler#get_status_string() :
        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-       \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ '' != expand('%:t') ? expand('%') : '[No Name]') .
        \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
