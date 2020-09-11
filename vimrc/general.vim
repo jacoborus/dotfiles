@@ -23,7 +23,7 @@ let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 
 " Fast saving
-nmap <leader>w :w<cr>
+nmap <leader>s :w<cr>
 
 " change buffer
 nmap <leader>bn :bn<cr>

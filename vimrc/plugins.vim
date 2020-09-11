@@ -171,19 +171,12 @@ augroup END
 
 " VimWiki
 " let g:vimwiki_conceallevel = 0
-let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-" global mappings
-nmap <Leader>vv <Plug>VimwikiIndex
-nmap <Leader>vt <Plug>VimwikiTabIndex
-nmap <Leader>vs <Plug>VimwikiUISelect
-nmap <Leader>vd <Plug>VimwikiDeleteFile
-nmap <Leader>vr <Plug>VimwikiRenameFile
-" diary mappings
-nmap <Leader>vi <Plug>VimwikiDiaryIndex
-nmap <Leader>v<Leader>v <Plug>VimwikiMakeDiaryNote
-nmap <Leader>v<Leader>t <Plug>VimwikiMakeTabDiaryNote
-nmap <Leader>v<Leader>y <Plug>VimwikiMakeYesterdayDiaryNote
-nmap <Leader>v<Leader>m <Plug>VimwikiMakeTomorrowDiaryNote
-" local mappings
-nmap <Leader>v<Leader>i <Plug>VimwikiDiaryGenerateLinks
-nmap <Leader>vn <Plug>VimwikiGoto
+let g:vimwiki_list = [{
+  \ 'path': '~/vimwiki',
+  \ 'syntax': 'markdown',
+  \ 'ext': '.md',
+  \ 'auto_diary_index': 1
+  \ }]
+
+nmap <Leader>wc <Plug>VimwikiSplitLink
+nmap <Leader>wv <Plug>VimwikiVSplitLink
