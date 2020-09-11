@@ -54,6 +54,7 @@ Plug 'pangloss/vim-javascript'
 " Plug 'othree/yajs.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kevinoid/vim-jsonc'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 " :CocInstall coc-json coc-tsserver coc-html coc-css coc-vetur coc-yaml coc-emmet coc-lists coc-git coc-eslint

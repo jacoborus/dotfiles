@@ -156,3 +156,34 @@ let g:indentLine_char = '¦'
 let g:indentLine_color_term = 238
 "GVim
 let g:indentLine_color_gui = '#3A3A3A'
+let g:indentLine_faster = 0
+" let g:indentLine_concealcursor = ''
+
+" autocmd FileType vimwiki let b:indentLine_enabled=0
+" autocmd FileType vimwiki let b:indentLine_setConceal=0
+
+augroup FILETYPES
+  " autocmd FileType vimwiki let b:indentLine_enabled = 0
+  autocmd FileType markdown let b:indentLine_enabled = 0
+  autocmd FileType markdown let b:vimwiki_conceallevel = 0
+  " autocmd FileType markdown setlocal conceallevel=0
+augroup END
+
+" VimWiki
+" let g:vimwiki_conceallevel = 0
+let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+" global mappings
+nmap <Leader>vv <Plug>VimwikiIndex
+nmap <Leader>vt <Plug>VimwikiTabIndex
+nmap <Leader>vs <Plug>VimwikiUISelect
+nmap <Leader>vd <Plug>VimwikiDeleteFile
+nmap <Leader>vr <Plug>VimwikiRenameFile
+" diary mappings
+nmap <Leader>vi <Plug>VimwikiDiaryIndex
+nmap <Leader>v<Leader>v <Plug>VimwikiMakeDiaryNote
+nmap <Leader>v<Leader>t <Plug>VimwikiMakeTabDiaryNote
+nmap <Leader>v<Leader>y <Plug>VimwikiMakeYesterdayDiaryNote
+nmap <Leader>v<Leader>m <Plug>VimwikiMakeTomorrowDiaryNote
+" local mappings
+nmap <Leader>v<Leader>i <Plug>VimwikiDiaryGenerateLinks
+nmap <Leader>vn <Plug>VimwikiGoto
