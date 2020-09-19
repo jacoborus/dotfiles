@@ -31,6 +31,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+map <leader>cd :<C-u>CocList diagnostics<cr>
 
 map <silent> <leader>cr :CocRestart<cr>
 " Highlight symbol under cursor on CursorHold

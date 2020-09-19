@@ -42,7 +42,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 map <silent> <leader><cr> :noh<cr>
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " resize splits faster
 map <leader>> <C-w>10>
