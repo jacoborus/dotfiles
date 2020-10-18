@@ -40,6 +40,15 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 
+" Run jest for current project
+command! -nargs=0 Jest :call  CocAction('runCommand', 'jest.projectTest')
+
+" Run jest for current file
+command! -nargs=0 JestFile :call  CocAction('runCommand', 'jest.fileTest', ['%'])
+
+" Run jest for current test
+command! -nargs=0 JestTest :call CocAction('runCommand', 'jest.singleTest')<CR>
+
 
 " Vim-windowswap
 """"""""""""""""
@@ -76,19 +85,8 @@ let g:fzf_colors =
 let g:localvimrc_ask=0
 
 
-" vim-jsdoc
-"""""""""""""""""""""""""""""""
-let g:jsdoc_allow_input_prompt = 1
-let g:jsdoc_enable_es6 = 1
-" fast launch JsDoc
-nmap <leader>jj :JsDoc<cr>
-
-
 " vim-vue / fix syntax highlighting
 autocmd FileType vue syntax sync fromstart
-" disable checking for prepocessors to improve performance on vue files
-let g:vue_disable_pre_processors=1
-
 
 " emmet
 """""""

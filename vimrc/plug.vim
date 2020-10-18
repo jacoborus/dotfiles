@@ -49,12 +49,23 @@ Plug 'elzr/vim-json'
 
 " JS
 Plug 'moll/vim-node'
-Plug 'heavenshell/vim-jsdoc'
 Plug 'pangloss/vim-javascript'
 " Plug 'othree/yajs.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kevinoid/vim-jsonc'
 Plug 'vimwiki/vimwiki'
+
+" coc.nvim extensions
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-jest', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-vetur', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 " :CocInstall coc-json coc-tsserver coc-html coc-css coc-vetur coc-yaml coc-emmet coc-lists coc-git coc-eslint

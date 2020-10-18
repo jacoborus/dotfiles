@@ -1,5 +1,6 @@
-{"git.addedSign.hlGroup": "GitGutterAdd",
-"git.changedSign.hlGroup": "GitGutterChange",
-"git.removedSign.hlGroup": "GitGutterDelete",
-"git.topRemovedSign.hlGroup": "GitGutterDelete",
-"git.changeRemovedSign.hlGroup": "GitGutterChangeDelete"}
+{
+  "eslint.run": "onType",
+  "eslint.filetypes": ["vue", "javascript", "typescript"],
+  "eslint.autoFixOnSave": true,
+  "vetur.validation.template": false
+}
