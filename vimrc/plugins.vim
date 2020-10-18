@@ -42,13 +42,15 @@ nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 
 " Run jest for current project
 command! -nargs=0 Jest :call  CocAction('runCommand', 'jest.projectTest')
+map <leader>jj :<C-u>Jest<cr>
 
 " Run jest for current file
 command! -nargs=0 JestFile :call  CocAction('runCommand', 'jest.fileTest', ['%'])
+map <leader>jf :<C-u>JestFile<cr>
 
 " Run jest for current test
 command! -nargs=0 JestTest :call CocAction('runCommand', 'jest.singleTest')<CR>
-
+map <leader>jt :<C-u>JestTest<cr>
 
 " Vim-windowswap
 """"""""""""""""
