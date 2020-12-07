@@ -11,13 +11,7 @@ Development:
 
 ```sh
 sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux curl\
-      python3-pip neovim p7zip-full jq git-extras whois gpick
-```
-
-DBs:
-```sh
-sudo apt install redis mongodb
-sudo snap install redis-desktop-manager
+      python3-pip neovim p7zip-full jq git-extras whois gpick net-tools redis
 ```
 
 General:
@@ -64,6 +58,5 @@ sudo npm i -g npm-check trash-cli sloc
 - [Top Panel workspace scroll](https://extensions.gnome.org/extension/701/top-panel-workspace-scroll/)
 - [Impatience](https://extensions.gnome.org/extension/277/impatience/)
 - [Horizontal workspaces](https://extensions.gnome.org/extension/2141/horizontal-workspaces/)
-- [Arc menu](https://extensions.gnome.org/extension/1228/arc-menu/)
 - [Sound Input & Output Device Chooser](https://extensions.gnome.org/extension/906/sound-output-device-chooser/)
 - [Bluetooth quick connect](https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/)
