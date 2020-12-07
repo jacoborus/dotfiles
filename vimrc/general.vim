@@ -40,6 +40,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
+" close split with gq
+map <silent> gq :q<cr>
 
 " Switch CWD to the directory of the open buffer
 " map <leader>cd :cd %:p:h<cr>:pwd<cr>
