@@ -1,6 +1,11 @@
 {
   "eslint.run": "onType",
-  "eslint.filetypes": ["vue", "javascript", "typescript"],
   "eslint.autoFixOnSave": true,
-  "vetur.validation.template": false
+  "vetur.validation.template": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "vue"
+  ]
 }
