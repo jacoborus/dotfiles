@@ -123,6 +123,8 @@ if ! shopt -oq posix; then
 fi
 
 export EDITOR=/usr/bin/nvim
+export DENO_INSTALL="/home/jacobo/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
