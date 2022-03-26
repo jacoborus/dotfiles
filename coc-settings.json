@@ -1,7 +1,7 @@
 {
   "eslint.run": "onType",
   "eslint.autoFixOnSave": true,
-  "vetur.validation.template": false,
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "typescript", "vue", "graphql", "json", "javascript"],
   "eslint.validate": [
     "javascript",
     "javascriptreact",
