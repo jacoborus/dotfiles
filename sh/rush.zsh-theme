@@ -3,5 +3,5 @@
 
 
 PROMPT='
-%B%F{51}%S%c%s%f%b:~$'
+%B%F{45}%S%c%s%f%b:~$'
 RPROMPT='%~'

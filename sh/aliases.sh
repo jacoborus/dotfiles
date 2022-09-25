@@ -5,6 +5,7 @@ alias mk=mkcd
 alias rmrf='rm -rf'
 alias zshconfig="vim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
+alias l="ls -l"
 alias lk="ls -1"
 alias lka="ls -1 -A"
 alias vi='/usr/bin/nvim'
@@ -12,3 +13,8 @@ alias nvim='/usr/bin/nvim'
 alias dtf='nvim ~/.dotfiles'
 alias f='vim $(fzf)'
 alias open=open-cli
+# GIT
+alias g='git'
+alias gco='git checkout'
+alias gst='git status'
+alias glog='git log'

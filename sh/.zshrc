@@ -1,15 +1,46 @@
 dotdir=$(dirname "$0") # dotfiles directory
 
-source $HOME/dotfiles/sh/adesis.zsh-theme
+# source $HOME/dotfiles/sh/rush.zsh-theme
 # source $HOME/dotfiles/sh/rush.zsh-theme
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="dd/mm/yyyy"
+HISTSIZE=2000
 
+source $HOME/.zsh/antigen.zsh
 # plugins=(z vi-mode gitfast command-not-found common-aliases npm git fasd history-substring-search redis-cli)
 
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.zsh
+fpath=(~/.zsh $fpath)
+
+autoload -Uz compinit && compinit
+
+# # Load the oh-my-zsh's library.
+# antigen use oh-my-zsh
+# 
+# # Bundles from the default repo (robbyrussell's oh-my-zsh).
+# antigen bundle git
+# antigen bundle heroku
+# antigen bundle pip
+# antigen bundle lein
+# antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+# antigen bundle jreese802/git-completion.zsh
+antigen bundle jeffreytse/zsh-vi-mode
+antigen bundle lukechilds/zsh-better-npm-completion
+# antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search
+
+
+# Load the theme.
+# antigen theme robbyrussell
+
+# Tell Antigen that you're done.
+antigen apply
 
 # Vi mode
 # bindkey -v
