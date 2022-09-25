@@ -170,6 +170,8 @@ build_prompt() {
   prompt_end
 }
 
-PROMPT='
-%{%f%b%k%}$(build_prompt) '
-RPROMPT='$FG[242]%~%{$reset_color%} '
+precmd () { build_prompt }
+
+PROMPT="
+%{%f%b%k%}$(build_prompt) "
+RPROMPT="$FG[242]%~%{$reset_color%} "

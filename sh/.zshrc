@@ -1,30 +1,15 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
 dotdir=$(dirname "$0") # dotfiles directory
 
-# ZSH_THEME=adesis
-
-# autoload -U promptinit; promptinit
-# prompt pure
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+source $HOME/dotfiles/sh/adesis.zsh-theme
+# source $HOME/dotfiles/sh/rush.zsh-theme
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="dd/mm/yyyy"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 # plugins=(z vi-mode gitfast command-not-found common-aliases npm git fasd history-substring-search redis-cli)
 
-# source $ZSH/oh-my-zsh.sh
 
 # Vi mode
 # bindkey -v

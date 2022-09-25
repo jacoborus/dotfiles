@@ -126,6 +126,5 @@ export EDITOR=/usr/bin/nvim
 export DENO_INSTALL="/home/jacobo/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
