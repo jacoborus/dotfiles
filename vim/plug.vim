@@ -2,7 +2,7 @@
 """""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
 
-Plug '~/dev/tender.vim'
+Plug 'jacoborus/tender.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'

@@ -1,0 +1,14 @@
+alias '..'='cd ..'
+alias cls='clear'
+alias e='nvim'
+alias mk=mkcd
+alias rmrf='rm -rf'
+alias zshconfig="vim ~/.zshrc"
+alias vimrc="vim ~/.vimrc"
+alias lk="ls -1"
+alias lka="ls -1 -A"
+alias vi='/usr/bin/nvim'
+alias nvim='/usr/bin/nvim'
+alias dtf='nvim ~/.dotfiles'
+alias f='vim $(fzf)'
+alias open=open-cli

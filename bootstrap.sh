@@ -1,23 +1,59 @@
 #!/bin/bash
 
-# Variables
-
-dir=$(dirname "$0") # dotfiles directory
 files=".bashrc .tmux.conf .zshrc" # list of files/folders to symlink in homedir
+vimfiles="init.vim coc-settings.json general.vim plugin.vim plug.vim status.vim" # list of files/folders to symlink in homedir
+viminitfiles="plug.vim general.vim plugins.vim status.vim" # list of files/folders to symlink in homedir
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
-cd ~
-for file in $files; do
-  filename="${dir}/${file}"
-  rm -f "$file"
-  echo "Creating symlink to $file"
-  ln -s "$filename" .
-done
+dotdir=$(dirname "$1") # dotfiles directory
+today="`date +%Y-%m-%d_%H-%M-%S`"
+backupfolder="$HOME/dotfiles_old/$today"
+vimdir="$HOME/.config/nvim"
+dotdir=`readlink -f $dotdir`
 
-echo "Creating symlink for neovim rc file"
-cd ~/.config/nvim/
-vimrcorigin="${dir}/init.vim"
-rm -f init.vim
-ln -s "$vimrcorigin" .
-cd "$dir"
+function main() {
+  # Move old files to backup folder
+  echo -e "\e[34mMoving old files to backup folder...\e[0m"
+  for file in $files; do
+    createBackup $HOME $file
+  done
+  for file in $vimfiles; do
+    createBackup $vimdir $file
+  done
 
+  # Create sylinks
+  echo -e "\e[34mCreating symlinks...\e[0m"
+
+  createSymlink '.bashrc' $dotdir/sh $HOME
+  createSymlink '.zshrc' $dotdir/sh $HOME
+  createSymlink '.tmux.conf' $dotdir/tmux $HOME
+
+  mkdir -p $vimdir
+  createSymlink 'coc-settings.json' $dotdir/vim $vimdir
+
+  # Generate init.vim file
+  echo -e "\e[34mCreating init.vim file...\e[0m"
+  initvim=""
+  for file in $viminitfiles; do
+    initvim="$initvim\nso $dotdir/vim/$file"
+  done
+  echo -e "$initvim" > $vimdir/init.vim
+}
+
+function createBackup() {
+  origin="$1/$2"
+  if [ -e $origin -o -L $origin ]; then
+    destination="$backupfolder/$2"
+    echo "'$origin' => '$destination'"
+    mkdir -p $backupfolder
+    mv $origin $destination
+    [ -e $origin ] && rm -y $origin
+  fi
+}
+
+function createSymlink() {
+  origin="$2/$1"
+  destination="$3"
+  ln -s -v $origin $destination
+}
+
+main
