@@ -1,4 +1,3 @@
-echo $pwd
 so ./plug.vim
 so ./general.vim
 so ./plugins.vim

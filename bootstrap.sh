@@ -13,6 +13,40 @@ backupfolder="$HOME/dotfiles_old/$today"
 vimdir="$HOME/.config/nvim"
 ohmythemes=$HOME/.oh-my-zsh/themes
 
+command_exists() {
+  command -v "$@" >/dev/null 2>&1
+}
+
+function createBackup() {
+  origin="$1/$2"
+  if [ -e $origin -o -L $origin ]; then
+    destination="$backupfolder/$2"
+    echo "'$origin' => '$destination'"
+    mkdir -p $backupfolder
+    mv $origin $destination
+    [ -e $origin ] && rm -y $origin
+  fi
+}
+
+function createSymlink() {
+  origin="$2/$1"
+  destination="$3"
+  ln -s -v $origin $destination
+}
+
+function installVimplug() {
+  echo -e "\e[34mInstalling vim-plug\e[0m"
+  sh -c 'curl -fLo $HOME/.config/nvim/site/autoload/plug.vim --create-dirs \
+     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' \
+    && echo 'vim-plug ok'
+}
+
+function installOhMyZsh() {
+  echo -e "\e[34mInstalling ZSH plugin manager (OhMyZsh)...\e[0m"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+    && echo 'ok'
+}
+
 function installDotfiles() {
   # Move old files to backup folder
   echo -e "\e[34mMoving old files to backup folder...\e[0m"
@@ -46,46 +80,12 @@ function installDotfiles() {
   echo -e "$initvim" > $vimdir/init.vim
 }
 
-function createBackup() {
-  origin="$1/$2"
-  if [ -e $origin -o -L $origin ]; then
-    destination="$backupfolder/$2"
-    echo "'$origin' => '$destination'"
-    mkdir -p $backupfolder
-    mv $origin $destination
-    [ -e $origin ] && rm -y $origin
-  fi
-}
-
-function createSymlink() {
-  origin="$2/$1"
-  destination="$3"
-  ln -s -v $origin $destination
-}
-
-function installOhMyZsh() {
-  echo -e "\e[34mInstalling ZSH plugin manager (OhMyZsh)...\e[0m"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
-    && echo 'ok'
-}
-
-function installVimplug() {
-  echo -e "\e[34mInstalling vim-plug\e[0m"
-  sh -c 'curl -fLo $HOME/.config/nvim/site/autoload/plug.vim --create-dirs \
-     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' \
-    && echo 'vim-plug ok'
-}
-
-command_exists() {
-  command -v "$@" >/dev/null 2>&1
-}
-
 function installBasicSoftware() {
   echo -e "\e[34mInstalling basic software\e[0m"
-  if command -v apt &> /dev/null; then
+  if command_exists apt; then
     echo "apt found! installing basic software... not. TODO"
     exit
-  elif command -v dnf &> /dev/null; then
+  elif command_exists dnf; then
     echo "dnf found! installing basic software... not. TODO"
     exit
   else
