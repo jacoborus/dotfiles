@@ -11,6 +11,7 @@ dotdir=`readlink -f $(dirname "$0")` # dotfiles directory
 today="`date +%Y-%m-%d_%H-%M-%S`"
 backupfolder="$HOME/dotfiles_old/$today"
 vimdir="$HOME/.config/nvim"
+ohmythemes=$HOME/.oh-my-zsh/themes
 
 function installDotfiles() {
   # Move old files to backup folder
@@ -21,6 +22,8 @@ function installDotfiles() {
   for file in $vimfiles; do
     createBackup $vimdir $file
   done
+  createBackup $ohmythemes adesis.zsh-theme
+  createBackup $ohmythemes rush.zsh-theme
 
   # Create sylinks
   echo -e "\e[34mCreating symlinks...\e[0m"
@@ -28,6 +31,8 @@ function installDotfiles() {
   createSymlink '.bashrc' $dotdir/sh $HOME
   createSymlink '.zshrc' $dotdir/sh $HOME
   createSymlink '.tmux.conf' $dotdir/tmux $HOME
+  createSymlink 'adesis.zsh-theme' $dotdir/sh $ohmythemes
+  createSymlink 'rush.zsh-theme' $dotdir/sh $ohmythemes
 
   mkdir -p $vimdir
   createSymlink 'coc-settings.json' $dotdir/vim $vimdir
@@ -58,18 +63,9 @@ function createSymlink() {
   ln -s -v $origin $destination
 }
 
-function installGitZshCompletion() {
-  echo -e "\e[34mInstalling git zsh completion\e[0m"
-  mkdir -p $HOME/.zsh
-  curl -o $HOME/.zsh/git-completion.zsh \
-    https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh \
-    && echo 'ok'
-}
-
-function installAntigen() {
-  echo -e "\e[34mInstalling ZSH plugin manager (Antigen)...\e[0m"
-  mkdir -p $HOME/.zsh
-  curl -L git.io/antigen > $HOME/.zsh/antigen.zsh \
+function installOhMyZsh() {
+  echo -e "\e[34mInstalling ZSH plugin manager (OhMyZsh)...\e[0m"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
     && echo 'ok'
 }
 
@@ -78,6 +74,10 @@ function installVimplug() {
   sh -c 'curl -fLo $HOME/.config/nvim/site/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' \
     && echo 'vim-plug ok'
+}
+
+command_exists() {
+  command -v "$@" >/dev/null 2>&1
 }
 
 function installBasicSoftware() {
@@ -99,8 +99,7 @@ function main() {
 
   options=(
     "Install NeoVim plugin manager (vim-plug)"
-    "Install ZSH plugin manager (Antigen)"
-    "Install ZSH Git completion"
+    "Install ZSH plugin manager (OhMyZsh)"
     "Install Dotfiles"
     "Install basic software"
   )
@@ -126,10 +125,9 @@ function main() {
   echo ""
 
   [ -n "${choices[0]}" ] && installVimplug
-  [ -n "${choices[1]}" ] && installAntigen
-  [ -n "${choices[2]}" ] && installGitZshCompletion
-  [ -n "${choices[3]}" ] && installDotfiles
-  [ -n "${choices[4]}" ] && installBasicSoftware
+  [ -n "${choices[1]}" ] && installOhMyZsh
+  [ -n "${choices[2]}" ] && installDotfiles
+  [ -n "${choices[3]}" ] && installBasicSoftware
 }
 
 main
