@@ -1,3 +1,8 @@
+
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
 alias '..'='cd ..'
 alias cls='clear'
 alias e='nvim'
@@ -16,7 +21,6 @@ alias zshconfig="nvim ~/.zshrc"
 alias vimrc="nvim ~/.vimrc"
 alias f='nvim $(fzf)'
 alias open=open-cli
-alias tmux='tmux -2'
 # GIT
 alias g='git'
 alias gco='git checkout'

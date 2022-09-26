@@ -78,7 +78,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -87,16 +86,6 @@ fi
 source $HOME/dotfiles/sh/aliases.sh
 
 export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
-
-# http://superuser.com/questions/1073869/how-can-i-make-my-own-shell-commands-e-g-mkdir-cd-combo/1073874#1073874
-mkcd() {
-    if [ -d "$1" ]; then
-        printf "mkcd: warning, \"%s\" already exists\n" "$1"
-    else
-        mkdir -p "$1" 
-    fi && cd "$1"
-}
-alias mk=mkcd
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
