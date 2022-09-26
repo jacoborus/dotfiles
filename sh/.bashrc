@@ -84,20 +84,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias lk='ls -1'
-alias tmux='tmux -2'
-alias vi='/usr/bin/nvim'
-alias nvim='/usr/bin/nvim'
-alias rmrf='rm -rf'
-alias e='nvim'
-alias dtf='nvim ~/.dotfiles'
-alias f='vim $(fzf)'
-alias mk=mkcd
-alias redis=redis-cli
+source $HOME/dotfiles/sh/aliases.sh
 
 export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
 
@@ -126,5 +113,4 @@ export EDITOR=/usr/bin/nvim
 export DENO_INSTALL="/home/jacobo/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
