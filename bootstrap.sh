@@ -80,6 +80,19 @@ function installVimplug() {
     && echo 'vim-plug ok'
 }
 
+function installBasicSoftware() {
+  echo -e "\e[34mInstalling basic software\e[0m"
+  if command -v apt &> /dev/null; then
+    echo "apt found! installing basic software... not. TODO"
+    exit
+  elif command -v dnf &> /dev/null; then
+    echo "dnf found! installing basic software... not. TODO"
+    exit
+  else
+    echo 'no apt or dnf found. Aborting...'
+    exit
+  fi
+}
 
 function main() {
   clear -x
@@ -87,32 +100,36 @@ function main() {
   options=(
     "Install NeoVim plugin manager (vim-plug)"
     "Install ZSH plugin manager (Antigen)"
+    "Install ZSH Git completion"
     "Install Dotfiles"
-    "Install Git ZSH completion"
+    "Install basic software"
   )
 
   menu() {
     echo "What do you want to do?"
     for i in ${!options[@]}; do
-      printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${options[i]}"
+      label=" $((i+1))) ${options[i]}"
+      [ "${choices[i]}" ] && echo -e "\e[46m\e[30m+$label\e[0m" || echo -e " $label"
     done
     [[ "$msg" ]] && echo "$msg"; :
   }
 
   prompt="Check an option (again to uncheck, ENTER when done): "
-  while menu && read -rp "$prompt" num && [[ "$num" ]]; do
+  while menu && read -s -n 1 -rp "$prompt" num && [[ "$num" ]]; do
     [[ "$num" != *[![:digit:]]* ]] &&
     (( num > 0 && num <= ${#options[@]} )) ||
-    { msg="Invalid option: $num"; continue; }
+    { msg="Invalid option: $num"; clear -x; continue; }
     ((num--)); msg=""
     [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
     clear -x
   done
+  echo ""
 
   [ -n "${choices[0]}" ] && installVimplug
   [ -n "${choices[1]}" ] && installAntigen
-  [ -n "${choices[2]}" ] && installDotfiles
-  [ -n "${choices[3]}" ] && installGitZshCompletion
+  [ -n "${choices[2]}" ] && installGitZshCompletion
+  [ -n "${choices[3]}" ] && installDotfiles
+  [ -n "${choices[4]}" ] && installBasicSoftware
 }
 
 main
