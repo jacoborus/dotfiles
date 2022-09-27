@@ -54,7 +54,7 @@ endfunction
 function! MyFugitive()
   if winwidth(0) > 70
     if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
-      let _ = fugitive#head()
+      let _ = fugitiveHead()
       return strlen(_) ? '»'._ : ''
     endif
   endif
