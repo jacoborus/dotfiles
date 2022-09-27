@@ -94,6 +94,12 @@ function installBasicSoftware() {
   fi
 }
 
+function installFedoraDocker() {
+  echo -e "\e[34mInstalling docker\e[0m"
+  sh -c "$(curl -fsSL https://get.docker.com)" \
+    && sudo systemctl start docker
+}
+
 function main() {
   clear -x
 
@@ -102,6 +108,7 @@ function main() {
     "Install ZSH plugin manager (OhMyZsh)"
     "Install Dotfiles"
     "Install basic software"
+    "(Only Fedora) Install Docker"
   )
 
   menu() {
@@ -128,6 +135,7 @@ function main() {
   [ -n "${choices[1]}" ] && installOhMyZsh
   [ -n "${choices[2]}" ] && installDotfiles
   [ -n "${choices[3]}" ] && installBasicSoftware
+  [ -n "${choices[4]}" ] && installFedoraDocker
 }
 
 main
