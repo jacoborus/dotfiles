@@ -37,7 +37,16 @@ map <leader>cd :<C-u>CocList diagnostics<cr>
 map <silent> <leader>cr :CocRestart<cr>
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
-" Using CocList
+" Use leader K to show documentation in preview window.
+nnoremap <leader>k :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
 " Run jest for current project
 command! -nargs=0 Jest :call  CocAction('runCommand', 'jest.projectTest')
