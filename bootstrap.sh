@@ -95,9 +95,14 @@ function installBasicSoftware() {
 }
 
 function installFedoraDocker() {
-  echo -e "\e[34mInstalling docker\e[0m"
-  sh -c "$(curl -fsSL https://get.docker.com)" \
-    && sudo systemctl start docker
+  if command_exists docker; then
+    echo "Docker is already installed. Skipping..."
+    exit
+  else
+    echo -e "\e[34mInstalling docker\e[0m"
+    sh -c "$(curl -fsSL https://get.docker.com)" \
+      && sudo systemctl start docker
+  fi
 }
 
 function main() {
