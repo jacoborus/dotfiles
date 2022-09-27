@@ -28,3 +28,8 @@ export DENO_INSTALL="/home/jacobo/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+if [ -e $HOME/dotfiles/secrets.sh -o -L $HOME/dotfiles/secrets.sh ]; then
+  source $HOME/dotfiles/secrets.sh
+fi
