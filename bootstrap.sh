@@ -19,7 +19,7 @@ command_exists() {
 
 function createBackup() {
   origin="$1/$2"
-  if [ -e $origin -o -L $origin ]; then
+  if [ -e $origin ]; then
     destination="$backupfolder/$2"
     echo "'$origin' => '$destination'"
     mkdir -p $backupfolder
