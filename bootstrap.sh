@@ -1,37 +1,37 @@
 #!/bin/bash
 
 # list of files to symlink and backup in homedir
-files=".bashrc .tmux.conf .zshrc"
+FILES=".bashrc .tmux.conf .zshrc"
 # list of files to backup in vim directory
-vimfiles="init.vim coc-settings.json general.vim plugin.vim plug.vim status.vim"
+VIMFILES="init.vim coc-settings.json general.vim plugin.vim plug.vim status.vim"
 # list of files to symlink in vim directory
-viminitfiles="plug.vim general.vim plugins.vim status.vim"
+VIMINITFILES="plug.vim general.vim plugins.vim status.vim"
 
-dotdir=`readlink -f $(dirname "$0")` # dotfiles directory
-today="`date +%Y-%m-%d_%H-%M-%S`"
-backupfolder="$HOME/dotfiles_old/$today"
-vimdir="$HOME/.config/nvim"
-ohmythemes=$HOME/.oh-my-zsh/themes
+DOTDIR=`readlink -f $(dirname "$0")` # dotfiles directory
+TODAY="`date +%Y-%m-%d_%H-%M-%S`"
+BACKUPFOLDER="$HOME/dotfiles_old/$TODAY"
+VIMDIR="$HOME/.config/nvim"
+THEMESFOLDER=$HOME/.oh-my-zsh/themes
 
 command_exists() {
   command -v "$@" >/dev/null 2>&1
 }
 
 function createBackup() {
-  origin="$1/$2"
-  if [ -e $origin ]; then
-    destination="$backupfolder/$2"
-    echo "'$origin' => '$destination'"
-    mkdir -p $backupfolder
-    mv $origin $destination
-    [ -e $origin ] && rm -y $origin
+  local ORIGIN="$1/$2"
+  if [ -e $ORIGIN ]; then
+    local DESTINATION="$BACKUPFOLDER/$2"
+    echo "'$ORIGIN' => '$DESTINATION'"
+    mkdir -p $BACKUPFOLDER
+    mv $ORIGIN $DESTINATION
+    [ -e $ORIGIN ] && rm -y $ORIGIN
   fi
 }
 
 function createSymlink() {
-  origin="$2/$1"
-  destination="$3"
-  ln -s -v $origin $destination
+  local ORIGIN="$2/$1"
+  local DESTINATION="$3"
+  ln -s -v $ORIGIN $DESTINATION
 }
 
 function installVimplug() {
@@ -50,34 +50,34 @@ function installOhMyZsh() {
 function installDotfiles() {
   # Move old files to backup folder
   echo -e "\e[34mMoving old files to backup folder...\e[0m"
-  for file in $files; do
+  for file in $FILES; do
     createBackup $HOME $file
   done
-  for file in $vimfiles; do
-    createBackup $vimdir $file
+  for file in $VIMFILES; do
+    createBackup $VIMDIR $file
   done
-  createBackup $ohmythemes adesis.zsh-theme
-  createBackup $ohmythemes rush.zsh-theme
+  createBackup $THEMESFOLDER adesis.zsh-theme
+  createBackup $THEMESFOLDER rush.zsh-theme
 
   # Create sylinks
   echo -e "\e[34mCreating symlinks...\e[0m"
 
-  createSymlink '.bashrc' $dotdir/sh $HOME
-  createSymlink '.zshrc' $dotdir/sh $HOME
-  createSymlink '.tmux.conf' $dotdir/tmux $HOME
-  createSymlink 'adesis.zsh-theme' $dotdir/sh $ohmythemes
-  createSymlink 'rush.zsh-theme' $dotdir/sh $ohmythemes
+  createSymlink '.bashrc' $DOTDIR/sh $HOME
+  createSymlink '.zshrc' $DOTDIR/sh $HOME
+  createSymlink '.tmux.conf' $DOTDIR/tmux $HOME
+  createSymlink 'adesis.zsh-theme' $DOTDIR/sh $THEMESFOLDER
+  createSymlink 'rush.zsh-theme' $DOTDIR/sh $THEMESFOLDER
 
-  mkdir -p $vimdir
-  createSymlink 'coc-settings.json' $dotdir/vim $vimdir
+  mkdir -p $VIMDIR
+  createSymlink 'coc-settings.json' $DOTDIR/vim $VIMDIR
 
   # Generate init.vim file
   echo -e "\e[34mCreating init.vim file...\e[0m"
-  initvim=""
-  for file in $viminitfiles; do
-    initvim="$initvim\nso $dotdir/vim/$file"
+  local INITVIM=""
+  for file in $VIMINITFILES; do
+    INITVIM="$INITVIM\nso $DOTDIR/vim/$file"
   done
-  echo -e "$initvim" > $vimdir/init.vim
+  echo -e "$INITVIM" > $VIMDIR/init.vim
 }
 
 function installBasicSoftware() {
@@ -108,7 +108,7 @@ function installFedoraDocker() {
 function main() {
   clear -x
 
-  options=(
+  local options=(
     "Install NeoVim plugin manager (vim-plug)"
     "Install ZSH plugin manager (OhMyZsh)"
     "Install Dotfiles"
@@ -119,7 +119,7 @@ function main() {
   menu() {
     echo "What do you want to do?"
     for i in ${!options[@]}; do
-      label=" $((i+1))) ${options[i]}"
+      local label=" $((i+1))) ${options[i]}"
       [ "${choices[i]}" ] && echo -e "\e[46m\e[30m+$label\e[0m" || echo -e " $label"
     done
     [[ "$msg" ]] && echo "$msg"; :
