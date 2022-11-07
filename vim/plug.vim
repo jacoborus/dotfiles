@@ -30,7 +30,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'kana/vim-repeat'
 Plug 'dyng/ctrlsf.vim'
 Plug 'wesQ3/vim-windowswap'
-Plug 'embear/vim-localvimrc'
+" Plug 'embear/vim-localvimrc'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
