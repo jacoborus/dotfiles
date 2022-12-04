@@ -5,6 +5,7 @@ mkcd() {
 }
 
 alias '..'='cd ..'
+alias 'cd..'='cd ..'
 alias cls='clear'
 alias mk=mkcd
 alias rmrf='rm -rf'
