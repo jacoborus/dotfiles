@@ -181,7 +181,7 @@ augroup END
 " VimWiki
 " let g:vimwiki_conceallevel = 0
 let g:vimwiki_list = [{
-  \ 'path': '~/vimwiki',
+  \ 'path': '~/wiki',
   \ 'syntax': 'markdown',
   \ 'ext': '.md',
   \ 'auto_diary_index': 1

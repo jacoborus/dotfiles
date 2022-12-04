@@ -2,7 +2,7 @@
 """""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'jacoborus/tender.vim'
+Plug '~/dev/tender'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -10,9 +10,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 
 " Markdown
-Plug 'nelstrom/vim-markdown-folding'
+" Plug 'nelstrom/vim-markdown-folding'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'junegunn/goyo.vim'
 
 " Status
 Plug 'itchyny/lightline.vim'
@@ -21,6 +20,8 @@ Plug 'Shougo/context_filetype.vim'
 Plug 'mustache/vim-mustache-handlebars'
 
 " General utils
+
+Plug 'junegunn/goyo.vim' " fullscreen mode
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
@@ -39,12 +40,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'gerw/vim-HiLinkTrace'
 
 " Languages and syntaxes
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
 Plug 'AndrewRadev/tagalong.vim'
-" Plug 'ap/vim-css-color'
-Plug 'digitaltoad/vim-pug'
 Plug 'iloginow/vim-stylus'
 Plug 'elzr/vim-json'
 
@@ -52,25 +51,24 @@ Plug 'elzr/vim-json'
 Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
 " Plug 'othree/yajs.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kevinoid/vim-jsonc'
 Plug 'vimwiki/vimwiki'
 
-" coc.nvim extensions
+" coc.nvim and extensions
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-jest', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-eslint8', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-vetur', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/jsonc.vim'
+Plug 'rafcamlet/coc-nvim-lua'
 
 Plug 'leafgarland/typescript-vim'
-" Plug 'HerringtonDarkholme/yats.vim'
 Plug 'jparise/vim-graphql'
 Plug 'nikvdp/ejs-syntax'
 
