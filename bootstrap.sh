@@ -94,17 +94,6 @@ function installBasicSoftware() {
   fi
 }
 
-function installFedoraDocker() {
-  if command_exists docker; then
-    echo "Docker is already installed. Skipping..."
-    exit
-  else
-    echo -e "\e[34mInstalling docker\e[0m"
-    sh -c "$(curl -fsSL https://get.docker.com)" \
-      && sudo systemctl start docker
-  fi
-}
-
 function main() {
   clear -x
 
@@ -113,7 +102,6 @@ function main() {
     "Install ZSH plugin manager (OhMyZsh)"
     "Install Dotfiles"
     "Install basic software"
-    "(Only Fedora) Install Docker"
   )
 
   menu() {
@@ -140,7 +128,6 @@ function main() {
   [ -n "${choices[1]}" ] && installOhMyZsh
   [ -n "${choices[2]}" ] && installDotfiles
   [ -n "${choices[3]}" ] && installBasicSoftware
-  [ -n "${choices[4]}" ] && installFedoraDocker
 }
 
 main
