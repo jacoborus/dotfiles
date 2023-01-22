@@ -3,6 +3,10 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug '~/dev/tender'
+Plug '~/dev/wikimatic'
+" Plug 'jacoborus/wikimatic'
+
+Plug 'github/copilot.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -52,7 +56,6 @@ Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
 " Plug 'othree/yajs.vim'
 Plug 'kevinoid/vim-jsonc'
-Plug 'vimwiki/vimwiki'
 
 " coc.nvim and extensions
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

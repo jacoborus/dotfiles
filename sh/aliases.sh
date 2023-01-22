@@ -18,6 +18,8 @@ alias lk="ls -1"
 alias lka="ls -1 -A"
 alias ll='ls -alF'
 
+alias gq='exit'
+
 alias vi='/usr/bin/nvim'
 alias nvim='/usr/bin/nvim'
 alias e='nvim'

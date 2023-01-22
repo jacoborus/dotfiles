@@ -22,6 +22,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/var/lib/flatpak/exports/share:$PATH"
 export PATH="/home/jacobo/.local/share/flatpak/exports/share:$PATH"
+export PATH="/home/jacobo/.cargo/bin:$PATH"
 # Deno
 export DENO_INSTALL="/home/jacobo/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"

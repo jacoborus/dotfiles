@@ -54,7 +54,7 @@ sudo npm i -g npm-check trash-cli sloc
 
 ## Gnome Extensions
 
-- [Dash to panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
+- [Dash to panel](https://extensions.gnome.org/extension/1160/dash-to-panel)
 - [Top Panel workspace scroll](https://extensions.gnome.org/extension/701/top-panel-workspace-scroll/)
 - [Impatience](https://extensions.gnome.org/extension/277/impatience/)
 - [Horizontal workspaces](https://extensions.gnome.org/extension/2141/horizontal-workspaces/)

@@ -1,3 +1,9 @@
+" wikimatic
+let g:wikimatic_path = '~/wiki'
+
+nmap <leader>ww :Wiki<cr>
+nmap <leader>wt :WikiTab<cr>
+
 " coc.nvim
 """""""""""""""
 " Use tab for trigger completion with characters ahead and navigate.
@@ -168,24 +174,8 @@ let g:indentLine_color_gui = '#3A3A3A'
 let g:indentLine_faster = 0
 " let g:indentLine_concealcursor = ''
 
-" autocmd FileType vimwiki let b:indentLine_enabled=0
-" autocmd FileType vimwiki let b:indentLine_setConceal=0
 
 augroup FILETYPES
-  " autocmd FileType vimwiki let b:indentLine_enabled = 0
   autocmd FileType markdown let b:indentLine_enabled = 0
   autocmd FileType markdown let b:vimwiki_conceallevel = 0
-  " autocmd FileType markdown setlocal conceallevel=0
 augroup END
-
-" VimWiki
-" let g:vimwiki_conceallevel = 0
-let g:vimwiki_list = [{
-  \ 'path': '~/wiki',
-  \ 'syntax': 'markdown',
-  \ 'ext': '.md',
-  \ 'auto_diary_index': 1
-  \ }]
-
-nmap <Leader>wc <Plug>VimwikiSplitLink
-nmap <Leader>wv <Plug>VimwikiVSplitLink
