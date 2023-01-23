@@ -79,3 +79,5 @@ vim.opt.updatetime=300
 -- always show signcolumns
 vim.opt.signcolumn = 'yes'
 
+-- autosave
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
