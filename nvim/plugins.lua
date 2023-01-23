@@ -51,7 +51,6 @@ require('packer').startup(function(use)
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
-
   use 'christoomey/vim-tmux-navigator'
   use 'AndrewRadev/tagalong.vim'
   use 'tpope/vim-surround'
