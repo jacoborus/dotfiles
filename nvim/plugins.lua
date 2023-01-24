@@ -59,13 +59,15 @@ require('packer').startup(function(use)
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
+  use 'gerw/vim-HiLinkTrace'
   use 'christoomey/vim-tmux-navigator'
   use 'AndrewRadev/tagalong.vim'
   use 'tpope/vim-surround'
   use 'dyng/ctrlsf.vim'
   use 'jiangmiao/auto-pairs'
   use 'caenrique/swap-buffers.nvim'
-  use 'jacoborus/tender.vim'
+  use '~/dev/tender'
+  -- use 'jacoborus/tender.vim'
   use 'jacoborus/wikimatic'
   -- Git related plugins
   use 'tpope/vim-fugitive'
@@ -73,7 +75,8 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   -- use 'navarasu/onedark.nvim' -- Theme inspired by Atom
-  -- use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+  use 'arkav/lualine-lsp-progress'
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically

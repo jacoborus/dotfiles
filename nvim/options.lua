@@ -65,6 +65,7 @@ vim.opt.showmatch = true -- Highlight matching brackets under cursor
 vim.opt.cursorline = true -- Highlight current line
 vim.opt.scrolloff = 3 -- don't let the cursor touch the edge of the viewport
 
+vim.opt.clipboard = 'unnamedplus'
 
 -- Files, backups and undo
 -- ------------------------------------------------
@@ -80,4 +81,12 @@ vim.opt.updatetime = 300
 vim.opt.signcolumn = 'yes'
 
 -- autosave
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+-- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+vim.cmd [[
+  xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+  function! ExecuteMacroOverVisualRange()
+    echo "@".getcmdline()
+    execute ":'<,'>normal @".nr2char(getchar())
+  endfunction
+]]
