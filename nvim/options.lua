@@ -14,7 +14,7 @@ vim.o.mouse = 'a'
 vim.o.breakindent = true
 
 -- Save undo history
--- vim.o.undofile = true
+vim.o.undofile = true
 vim.o.history = 700
 
 -- Search options
@@ -70,10 +70,10 @@ vim.opt.clipboard = 'unnamedplus'
 -- Files, backups and undo
 -- ------------------------------------------------
 -- Turn backup off, since most stuff is in git
--- vim.opt.nobackup = true
--- vim.opt.nowritebackup = true
--- vim.opt.nowb = true
--- vim.opt.noswapfile = true
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.wb = false
+vim.opt.swapfile = false
 vim.opt.updatetime = 300
 -- don't give |ins-completion-menu| messages.
 -- vim.opt.shortmess = vim.opt.shortmess .. c
