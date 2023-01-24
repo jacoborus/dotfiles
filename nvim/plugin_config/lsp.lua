@@ -54,6 +54,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
+  vimls = {},
 
   sumneko_lua = {
     Lua = {
@@ -116,10 +117,13 @@ lspconfig.denols.setup {
 --   root_dir = lspconfig.util.root_pattern("package.json"),
 -- }
 
-lspconfig.volar.setup{
+lspconfig.volar.setup {
   capabilities = Capabilities,
-  filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
 }
+
+require 'lspconfig'.vimls.setup {}
+
 -- Turn on lsp status information
 require('fidget').setup()
 
@@ -165,4 +169,3 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-

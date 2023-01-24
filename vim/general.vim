@@ -36,7 +36,7 @@ nnoremap <leader>r @:<CR>
 nmap Y y$
 
 set wildmenu
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>

@@ -3,5 +3,10 @@
   "eslint.autoFixOnSave": true,
   "suggest.noselect": true,
   "coc.preferences.formatOnSave": true,
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"]
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "vue"
+  ]
 }

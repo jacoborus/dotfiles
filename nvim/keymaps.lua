@@ -4,34 +4,34 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 Nmap('gq', ':q<CR>', 'Quit file')
-Nmap('<leader><cr>', ':nohlsearch<CR>', 'Clear search higlights' )
-Nmap('<leader>s', ':w<CR>', 'Write file to disk' )
+Nmap('<leader><cr>', ':nohlsearch<CR>', 'Clear search higlights')
+Nmap('<leader>s', ':w<CR>', 'Write file to disk')
 -- vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- change buffer
-Nmap('<leader>bn', ':bn<CR>', '[B]uffer [N]ext' )
-Nmap('<leader>bp', ':bp<CR>', '[B]uffer [P]rev' )
+Nmap('<leader>bn', ':bn<CR>', '[B]uffer [N]ext')
+Nmap('<leader>bp', ':bp<CR>', '[B]uffer [P]rev')
 
 -- repeat last command line command
-Nmap('<leader>r', '@:<CR>', '[R]epeat last command' )
+Nmap('<leader>r', '@:<CR>', '[R]epeat last command')
 
 -- fast copy to the end of the line
-Nmap('Y', 'y$', '[Y]ank (copy) till end of line' )
+Nmap('Y', 'y$', '[Y]ank (copy) till end of line')
 
 
 -- resize splits faster
-Nmap('<leader>>', '<C-w>10>', 'Wider window' )
-Nmap('<leader><', '<C-w>10<', 'Narrower window' )
-Nmap('<leader>=', '<C-w>5+', 'Taller window' )
-Nmap('<leader>-', '<C-w>5-', 'Shorter window' )
+Nmap('<leader>>', '<C-w>10>', 'Wider window')
+Nmap('<leader><', '<C-w>10<', 'Narrower window')
+Nmap('<leader>=', '<C-w>5+', 'Taller window')
+Nmap('<leader>-', '<C-w>5-', 'Shorter window')
 
 -- copy/paste to/from system clipboard
-Nmap('<c-p>', '"0p', 'Paste from clipboard' )
-Nmap('<m-p>', '"0P', 'Paste from clipboard alt' )
+Nmap('<c-p>', '"0p', 'Paste from clipboard')
+Nmap('<m-p>', '"0P', 'Paste from clipboard alt')
 
 -- move to the exact position on marks
-Nmap("'", '`', 'Move to mark exact position' )
-Nmap("`", "'", 'Move to marked line' )
+Nmap("'", '`', 'Move to mark exact position')
+Nmap("`", "'", 'Move to marked line')
 
 -- Treat long lines as break lines
 Nmap("j", "gj")
@@ -55,9 +55,9 @@ Vmap('J', ":m '>+1<CR>gv=gv", "move line up (visual mode)")
 Vmap('K', ":m '<-2<CR>gv=gv", "move line down (visual mode)")
 
 -- Remap VIM 0 to first non-blank character
-Nmap('0', '^',  "go to the beginning of the line")
+Nmap('0', '^', "go to the beginning of the line")
 -- This prevents * from jumping to the next match.
-Nmap('*', ':keepjumps normal! mi*`i<CR>',"highlight occurences")
+Nmap('*', ':keepjumps normal! mi*`i<CR>', "highlight occurences")
 -- Preserve selection after indentation
 Vmap('>', '>gv', "indent")
 Vmap('<', '<gv', "un-indent")
@@ -74,4 +74,3 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
