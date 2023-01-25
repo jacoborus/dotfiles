@@ -34,8 +34,8 @@ Nmap("'", '`', 'Move to mark exact position')
 Nmap("`", "'", 'Move to marked line')
 
 -- Treat long lines as break lines
-Nmap("j", "gj")
-Nmap("k", "gk")
+Mmap("j", "gj")
+Mmap("k", "gk")
 
 -- Move between windows
 Nmap("<C-h>", "<C-W>h")

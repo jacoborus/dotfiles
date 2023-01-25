@@ -9,6 +9,10 @@ function Map(mode, lhs, rhs, desc, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+function Mmap(lhs, rhs, desc, opts)
+  Map('', lhs, rhs, desc, opts)
+end
+
 function Nmap(lhs, rhs, desc, opts)
   Map('n', lhs, rhs, desc, opts)
 end

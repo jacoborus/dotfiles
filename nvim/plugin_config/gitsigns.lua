@@ -1,6 +1,7 @@
 -- Gitsigns
 -- See `:help gitsigns.txt`
-require('gitsigns').setup {
+local gitsigns = require('gitsigns')
+gitsigns.setup {
   signs = {
     add = { text = '+' },
     change = { text = '~' },
@@ -9,3 +10,6 @@ require('gitsigns').setup {
     changedelete = { text = '÷' },
   },
 }
+Nmap('[g', ':Gitsigns prev_hunk<CR>', 'Navigate to previus git hunk' )
+Nmap(']g', ':Gitsigns next_hunk<CR>', 'Navigate to next git hunk' )
+-- " ⋍
