@@ -67,19 +67,19 @@ require('packer').startup(function(use)
   use 'jiangmiao/auto-pairs'
   use 'caenrique/swap-buffers.nvim'
   use '~/dev/tender'
-  -- use 'jacoborus/tender.vim'
-  use 'jacoborus/wikimatic'
-  -- Git related plugins
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
-  use 'lewis6991/gitsigns.nvim'
-
-  -- use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'arkav/lualine-lsp-progress'
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  -- use 'jacoborus/tender.vim'
+  use 'jacoborus/wikimatic'
+  --  use 'github/copilot.vim'
+  --
+  -- Git related plugins
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-rhubarb'
+  use 'lewis6991/gitsigns.nvim'
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
