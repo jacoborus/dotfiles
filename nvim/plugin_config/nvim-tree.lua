@@ -19,9 +19,9 @@ require("nvim-tree").setup({
       glyphs = {
         folder = {
           -- arrow_closed = "",
-          arrow_closed = "▶",
+          arrow_closed = "▸",
           -- arrow_open = "",
-          arrow_open = "▼",
+          arrow_open = "▾",
           default = "",
           open = "",
           empty = "",
@@ -30,20 +30,12 @@ require("nvim-tree").setup({
           symlink_open = "",
         },
         git = {
-          -- unstaged = "✖",
-          -- unstaged = "⋄",
-          -- unstaged = "≈",
-          -- unstaged = "✕",
-          unstaged = "᛭",
-          -- unstaged = "×",
-          staged = "•",
+          -- ⋄∘๐••✕✖✱⁕∗✦✶✧⚬⠶๑▪๏⌾⋄⬥⊚᛭•∘⋆˖⬢
+          unstaged = "≈",
+          staged = "๏",
           unmerged = "",
           renamed = "➜",
-          -- untracked = "⋆",
-          -- untracked = "✶",
-          -- untracked = "✱",
-          untracked = "⁕",
-          -- untracked = "∗",
+          untracked = "∗",
           deleted = "␡",
           ignored = "◌",
         }
