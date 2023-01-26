@@ -10,6 +10,7 @@ gitsigns.setup {
     changedelete = { text = '÷' },
   },
 }
-Nmap('[g', ':Gitsigns prev_hunk<CR>', 'Navigate to previus git hunk' )
-Nmap(']g', ':Gitsigns next_hunk<CR>', 'Navigate to next git hunk' )
+
+Nmap('[g', ':Gitsigns prev_hunk<CR>', 'Navigate to previus git hunk')
+Nmap(']g', ':Gitsigns next_hunk<CR>', 'Navigate to next git hunk')
 -- " ⋍
