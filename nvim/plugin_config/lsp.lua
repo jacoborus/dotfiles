@@ -36,13 +36,20 @@ local on_attach = function(_, bufnr)
   nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
-
+  -- if client.server_capabilities.documentFormattingProvider then
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
+  -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+  --   vim.lsp.buf.format()
+  -- end, { desc = 'Format current buffer with LSP' })
 end
 
+vim.api.nvim_create_user_command('Format', function(_)
+  vim.lsp.buf.format({
+    filter = function(client)
+      return client.name ~= "volar"
+    end,
+  })
+end, { desc = 'Format current buffer with LSP' })
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -118,6 +125,7 @@ lspconfig.denols.setup {
 -- }
 
 lspconfig.volar.setup {
+  on_attach = on_attach,
   capabilities = Capabilities,
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
 }

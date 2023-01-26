@@ -38,7 +38,6 @@ require('nvim-treesitter.configs').setup {
     'vim',
     'vue',
   },
-  sync_install = true,
   -- auto_install = true,
   highlight = { enable = true },
   indent = { enable = false, disable = { 'vue', 'typescript', 'javascript' } },

@@ -75,13 +75,11 @@ vim.opt.writebackup = false
 vim.opt.wb = false
 vim.opt.swapfile = false
 vim.opt.updatetime = 300
--- don't give |ins-completion-menu| messages.
--- vim.opt.shortmess = vim.opt.shortmess .. c
 -- always show signcolumns
 vim.opt.signcolumn = 'yes'
 
 -- autosave
--- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+vim.cmd [[autocmd BufWritePre * Format]]
 vim.cmd [[
   xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
