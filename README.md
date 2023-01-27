@@ -1,9 +1,6 @@
-jacobo's dotfiles
-=================
-
+# jacobo's dotfiles
 
 Dotfiles for Ubuntu with minimal installation
-
 
 ## Basic software:
 
@@ -20,7 +17,6 @@ General:
 sudo apt install vlc inkscape gimp ubuntu-restricted-extras qbittorrent gnome-sushi gnome-tweak-tool baobab peek gpick
 ```
 
-
 ## NeoVim
 
 Install NeoVim PPA:
@@ -35,7 +31,6 @@ Install vim-plug in neovim (linux)
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
-
 
 ## Node.js packages
 
