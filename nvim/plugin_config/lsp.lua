@@ -55,19 +55,19 @@ end, { desc = 'Format current buffer with LSP' })
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  tsserver = {},
+  eslint = {},
   vimls = {},
-
+  volar = {},
   sumneko_lua = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      diagnostics = {
+        globals = { 'vim' }
+      }
     },
   },
+  tsserver = {},
 }
 
 -- Setup neovim lua configuration
@@ -79,11 +79,11 @@ require('mason').setup()
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 
-mason_lspconfig.setup {
+mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
-}
+})
 
-mason_lspconfig.setup_handlers {
+mason_lspconfig.setup_handlers({
   function(server_name)
     require('lspconfig')[server_name].setup {
       capabilities = Capabilities,
@@ -91,21 +91,9 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
     }
   end,
-}
+})
 
 local lspconfig = require('lspconfig')
-
-lspconfig.sumneko_lua.setup {
-  on_attach = on_attach,
-  capabilities = Capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' }
-      }
-    }
-  }
-}
 
 lspconfig.denols.setup {
   on_attach = on_attach,
@@ -118,14 +106,6 @@ lspconfig.tsserver.setup {
   capabilities = Capabilities,
   root_dir = lspconfig.util.root_pattern("package.json"),
 }
-
-lspconfig.volar.setup {
-  on_attach = on_attach,
-  capabilities = Capabilities,
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
-}
-
-require 'lspconfig'.vimls.setup {}
 
 -- Turn on lsp status information
 require('fidget').setup()
