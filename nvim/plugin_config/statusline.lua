@@ -69,6 +69,12 @@ require('lualine').setup {
     component_separators = '|',
     section_separators = '',
   },
+  extensions = {
+    'nvim-tree',
+    'fugitive',
+    'fzf',
+    'quickfix',
+  },
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'filename' },
