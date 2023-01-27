@@ -18,10 +18,12 @@ require("nvim-tree").setup({
       },
       glyphs = {
         folder = {
+          arrow_closed = "",
+          arrow_open = "",
           -- arrow_closed = "",
-          arrow_closed = "▸",
+          -- arrow_closed = "▸",
           -- arrow_open = "",
-          arrow_open = "▾",
+          -- arrow_open = "▾",
           default = "",
           open = "",
           empty = "",
