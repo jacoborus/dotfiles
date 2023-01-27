@@ -50,9 +50,8 @@ vim.api.nvim_create_user_command('Format', function(_)
     end,
   })
 end, { desc = 'Format current buffer with LSP' })
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
+
+-- LSP servers in the following table  will automatically be installed.
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
@@ -60,7 +59,7 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
   vimls = {},
 
   sumneko_lua = {
@@ -73,10 +72,6 @@ local servers = {
 
 -- Setup neovim lua configuration
 require('neodev').setup()
---
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Setup mason so it can manage external tooling
 require('mason').setup()
@@ -91,14 +86,16 @@ mason_lspconfig.setup {
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
+      capabilities = Capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
     }
   end,
 }
 
-require("lspconfig").sumneko_lua.setup {
+local lspconfig = require('lspconfig')
+
+lspconfig.sumneko_lua.setup {
   on_attach = on_attach,
   capabilities = Capabilities,
   settings = {
@@ -110,19 +107,17 @@ require("lspconfig").sumneko_lua.setup {
   }
 }
 
-local lspconfig = require('lspconfig')
-
 lspconfig.denols.setup {
   on_attach = on_attach,
   capabilities = Capabilities,
   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 }
 
--- lspconfig.tsserver.setup {
---   on_attach = on_attach,
---   capabilities = Capabilities,
---   root_dir = lspconfig.util.root_pattern("package.json"),
--- }
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  capabilities = Capabilities,
+  root_dir = lspconfig.util.root_pattern("package.json"),
+}
 
 lspconfig.volar.setup {
   on_attach = on_attach,

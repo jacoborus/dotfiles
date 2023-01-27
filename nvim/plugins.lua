@@ -66,12 +66,11 @@ require('packer').startup(function(use)
   use 'dyng/ctrlsf.vim'
   use 'jiangmiao/auto-pairs'
   use 'caenrique/swap-buffers.nvim'
-  use '~/dev/tender'
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  use 'arkav/lualine-lsp-progress'
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use '~/dev/tender'
   -- use 'jacoborus/tender.vim'
   use 'jacoborus/wikimatic'
   --  use 'github/copilot.vim'
