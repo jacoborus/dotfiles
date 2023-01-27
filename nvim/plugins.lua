@@ -17,10 +17,8 @@ require('packer').startup(function(use)
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
       -- Useful status updates for LSP
       'j-hui/fidget.nvim',
-
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
     },
@@ -73,8 +71,9 @@ require('packer').startup(function(use)
   use '~/dev/tender'
   -- use 'jacoborus/tender.vim'
   use 'jacoborus/wikimatic'
+
   --  use 'github/copilot.vim'
-  --
+
   -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
