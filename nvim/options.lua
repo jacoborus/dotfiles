@@ -2,7 +2,6 @@
 -- See `:help vim.o`
 
 vim.opt.termguicolors = true
-vim.cmd [[ colorscheme tender ]]
 
 -- Make line numbers default
 vim.wo.number = true
