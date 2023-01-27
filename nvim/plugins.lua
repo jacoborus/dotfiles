@@ -25,10 +25,9 @@ require('packer').startup(function(use)
   }
 
   use { -- LSP Configuration & Plugins
-    'MunifTanjim/prettier.nvim',
+    'jose-elias-alvarez/null-ls.nvim',
     requires = {
-      'neovim/nvim-lspconfig',
-      'jose-elias-alvarez/null-ls.nvim',
+      'jay-babu/mason-null-ls.nvim',
     },
   }
 

@@ -45,6 +45,7 @@ end
 
 vim.api.nvim_create_user_command('Format', function(_)
   vim.lsp.buf.format({
+    -- use prettier instead of volar for formatting vue files
     filter = function(client)
       return client.name ~= "volar"
     end,
@@ -56,8 +57,7 @@ end, { desc = 'Format current buffer with LSP' })
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   eslint = {},
-  vimls = {},
-  volar = {},
+  gopls = {},
   sumneko_lua = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -68,6 +68,8 @@ local servers = {
     },
   },
   -- tsserver = {},
+  vimls = {},
+  volar = {},
 }
 
 -- Setup neovim lua configuration
@@ -98,6 +100,7 @@ mason_lspconfig.setup_handlers({
 -- volar
 lspconfig.volar.setup {
   on_attach = on_attach,
+  autostart = false,
   capabilities = Capabilities,
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
 }
@@ -109,13 +112,13 @@ lspconfig.denols.setup {
   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 }
 
--- tsserver
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  capabilities = Capabilities,
-  autostart = false,
-  root_dir = lspconfig.util.root_pattern("package.json"),
-}
+-- -- tsserver
+-- lspconfig.tsserver.setup {
+--   on_attach = on_attach,
+--   capabilities = Capabilities,
+--   autostart = false,
+--   root_dir = lspconfig.util.root_pattern("package.json"),
+-- }
 
 -- Turn on lsp status information
 require('fidget').setup()
