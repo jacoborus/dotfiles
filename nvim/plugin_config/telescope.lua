@@ -2,12 +2,21 @@
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
-    file_ignore_patterns = { ".git" },
+    file_ignore_patterns = { ".git/*" },
     mappings = {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
+    },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case"
     },
   },
 }
