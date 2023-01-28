@@ -56,8 +56,17 @@ end, { desc = 'Format current buffer with LSP' })
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
+  bashls = {},
+  cssls = {},
+  dockerls = {},
+  emmet_ls = {},
   eslint = {},
   gopls = {},
+  golangci_lint_ls = {},
+  html = {},
+  jsonls = {},
+  rust_analyzer = {},
+  sqlls = {},
   sumneko_lua = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -70,6 +79,7 @@ local servers = {
   -- tsserver = {},
   vimls = {},
   volar = {},
+  yamlls = {},
 }
 
 -- Setup neovim lua configuration
@@ -100,7 +110,7 @@ mason_lspconfig.setup_handlers({
 -- volar
 lspconfig.volar.setup {
   on_attach = on_attach,
-  autostart = false,
+  -- autostart = false,
   capabilities = Capabilities,
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
 }
