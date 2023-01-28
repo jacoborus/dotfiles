@@ -5,6 +5,7 @@ require("nvim-tree").setup({
     mappings = {
       list = {
         { key = "s", action = "vsplit" },
+        { key = "t", action = "tabnew" },
       },
     },
   },
