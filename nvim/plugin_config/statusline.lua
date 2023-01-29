@@ -37,23 +37,29 @@ local colors = {
 local theme = {
   normal = {
     a = { fg = colors.grey3, bg = colors.blue1 },
-    b = { fg = colors.shadow, bg = colors.blue2 },
+    b = { fg = colors.shadow, bg = colors.blue2, gui = 'bold' },
     c = { fg = colors.blue1, bg = colors.blue4 },
+    x = { fg = colors.blue1, bg = colors.blue4 },
+    y = { fg = colors.shadow, bg = colors.blue2 },
+    z = { fg = colors.grey3, bg = colors.blue1 },
   },
   insert = {
-    a = { fg = colors.green4, bg = colors.green1, gui = 'bold' },
+    a = { fg = colors.green4, bg = colors.green1 },
     b = { fg = colors.shadow, bg = colors.green2, gui = 'bold' },
-    c = { fg = colors.green1, bg = colors.green4, gui = 'bold' },
+    c = { fg = colors.green1, bg = colors.green4 },
+    x = { fg = colors.green1, bg = colors.green4 },
+    y = { fg = colors.shadow, bg = colors.green2 },
+    z = { fg = colors.green4, bg = colors.green1 },
   },
   visual = {
-    a = { fg = colors.yellow3, bg = colors.yellow1, gui = 'bold' },
+    a = { fg = colors.yellow3, bg = colors.yellow1 },
     b = { fg = colors.shadow, bg = colors.yellow2, gui = 'bold' },
-    c = { fg = colors.yellow1, bg = colors.yellow3, gui = 'bold' },
+    c = { fg = colors.yellow1, bg = colors.yellow3 },
   },
   replace = {
-    a = { fg = colors.red3, bg = colors.red1, gui = 'bold' },
+    a = { fg = colors.red3, bg = colors.red1 },
     b = { fg = colors.shadow, bg = colors.red2, gui = 'bold' },
-    c = { fg = colors.red1, bg = colors.red3, gui = 'bold' },
+    c = { fg = colors.red1, bg = colors.red3 },
   },
   inactive = {
     a = { fg = colors.gandalf, bg = colors.grey2, gui = 'bold' },
@@ -68,6 +74,7 @@ require('lualine').setup {
     theme = theme,
     component_separators = '|',
     section_separators = '',
+    globalstatus = true,
   },
   extensions = {
     'nvim-tree',
@@ -96,6 +103,27 @@ require('lualine').setup {
     lualine_z = {}
   },
 
+  winbar = {
+    lualine_a = {
+      {
+        function() return ' ' end,
+        color = { fg = colors.blue1, bg = colors.blue4 },
+      }
+    },
+    lualine_b = { 'filename' },
+    lualine_c = { function() return ' ' end },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  inactive_winbar = {
+    lualine_a = { 'filename' },
+    lualine_b = {},
+    lualine_c = { function() return ' ' end },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
   -- tabline = {
   --   lualine_a = {},
   --   lualine_b = {},
