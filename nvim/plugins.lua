@@ -56,6 +56,7 @@ require('packer').startup(function(use)
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
+  use 'wesQ3/vim-windowswap'
   use 'gerw/vim-HiLinkTrace'
   use 'christoomey/vim-tmux-navigator'
   use 'AndrewRadev/tagalong.vim'
