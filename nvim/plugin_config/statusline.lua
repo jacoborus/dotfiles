@@ -74,7 +74,7 @@ require('lualine').setup {
     theme = theme,
     component_separators = '|',
     section_separators = '',
-    globalstatus = true,
+    globalstatus = false,
   },
   extensions = {
     'nvim-tree',
@@ -103,27 +103,27 @@ require('lualine').setup {
     lualine_z = {}
   },
 
-  winbar = {
-    lualine_a = {
-      {
-        function() return ' ' end,
-        color = { fg = colors.blue1, bg = colors.blue4 },
-      }
-    },
-    lualine_b = { 'filename' },
-    lualine_c = { function() return ' ' end },
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
-  },
-  inactive_winbar = {
-    lualine_a = { 'filename' },
-    lualine_b = {},
-    lualine_c = { function() return ' ' end },
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
-  },
+  -- winbar = {
+  --   lualine_a = {
+  --     function() return ' ' end,
+  --   },
+  --   lualine_b = {
+  --     'filename',
+  --   },
+  --   lualine_c = { function() return ' ' end },
+  --   lualine_x = {},
+  --   lualine_y = {},
+  --   lualine_z = {},
+  -- },
+  -- inactive_winbar = {
+  --   lualine_a = { function() return ' ' end },
+  --   lualine_b = { 'filename' },
+  --   lualine_c = { function() return ' ' end },
+  --   lualine_x = {},
+  --   lualine_y = {},
+  --   lualine_z = {}
+  -- },
+
   -- tabline = {
   --   lualine_a = {},
   --   lualine_b = {},
