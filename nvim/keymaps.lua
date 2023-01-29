@@ -13,7 +13,7 @@ Nmap('<leader>bn', ':bn<CR>', '[B]uffer [N]ext')
 Nmap('<leader>bp', ':bp<CR>', '[B]uffer [P]rev')
 
 -- repeat last command line command
-Nmap('<leader>r', '@:<CR>', '[R]epeat last command')
+Nmap('<leader>rr', '@:<CR>', '[R]epeat last command')
 
 -- fast copy to the end of the line
 Nmap('Y', 'y$', '[Y]ank (copy) till end of line')
