@@ -99,3 +99,11 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
+
+-- Abbreviations
+vim.cmd [[:iabbrev fucntion function
+:iabbrev fucntino function
+:iabbrev functino function
+:iabbrev cosnt const
+:iabbrev exprot export
+]]
