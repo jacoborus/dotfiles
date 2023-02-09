@@ -75,6 +75,7 @@ require('lualine').setup {
     component_separators = '|',
     section_separators = '',
     globalstatus = false,
+    -- globalstatus = true,
   },
   extensions = {
     'nvim-tree',
@@ -84,12 +85,20 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = { 'mode' },
-    lualine_b = { 'filename' },
+    lualine_b = {
+      {
+        'filetype',
+        colored = false, -- Displays filetype icon in color if set to true
+        icon_only = true, -- Display only an icon for filetype
+        component_separators = '',
+        -- icon = { align = 'right' }, -- Display filetype icon on the right hand side
+      },
+      'filename'
+    },
     lualine_c = { 'branch', 'diff', 'diagnostics' },
     lualine_x = {
-      'encoding',
-      'fileformat',
-      'filetype',
+      -- 'encoding',
+      -- 'fileformat',
     },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
@@ -97,7 +106,16 @@ require('lualine').setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { 'filename' },
+    lualine_c = {
+      {
+        'filetype',
+        colored = false, -- Displays filetype icon in color if set to true
+        icon_only = true, -- Display only an icon for filetype
+        component_separators = '',
+        -- icon = { align = 'right' }, -- Display filetype icon on the right hand side
+      },
+      'filename'
+ },
     lualine_x = { 'progress' },
     lualine_y = { 'location' },
     lualine_z = {}
@@ -123,13 +141,13 @@ require('lualine').setup {
   --   lualine_y = {},
   --   lualine_z = {}
   -- },
-
+  --
   -- tabline = {
-  --   lualine_a = {},
+  --   lualine_a = { 'tabs' },
   --   lualine_b = {},
-  --   lualine_c = { 'filename' },
+  --   lualine_c = {},
   --   lualine_x = {},
   --   lualine_y = {},
-  --   lualine_z = { 'tabs' }
+  --   lualine_z = {}
   -- },
 }
