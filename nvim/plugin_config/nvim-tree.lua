@@ -33,9 +33,10 @@ require("nvim-tree").setup({
           symlink_open = "",
         },
         git = {
-          -- ⋄∘๐••✕✖✱⁕∗✦✶✧⚬⠶๑▪๏⌾⋄⬥⊚᛭•∘⋆˖⬢
+          -- ⋄∘๐••✕✖✱⁕∗✦✶✧⚬⠶๑▪๏⌾⋄⬥⊚᛭•∘⋆˖⬢ ✓≈➜≈✕➜✕
           unstaged = "≈",
-          staged = "๏",
+          -- staged = "๏", -- ✓๏
+          staged = "✓", -- ✓๏
           unmerged = "",
           renamed = "➜",
           untracked = "∗",

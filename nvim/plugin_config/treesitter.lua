@@ -23,6 +23,7 @@ require('nvim-treesitter.configs').setup {
     'json',
     'jsonc',
     'markdown',
+    'markdown_inline',
     'pug',
     'python',
     'prisma',

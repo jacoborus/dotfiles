@@ -9,8 +9,8 @@ Nmap('<leader>s', ':w<CR>', 'Write file to disk')
 -- vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- change buffer
-Nmap('<leader>bn', ':bn<CR>', '[B]uffer [N]ext')
-Nmap('<leader>bp', ':bp<CR>', '[B]uffer [P]rev')
+Nmap(']b', ':bn<CR>', 'Buffer next')
+Nmap('[b', ':bp<CR>', 'Buffer prev')
 
 -- repeat last command line command
 Nmap('<leader>rr', '@:<CR>', '[R]epeat last command')
