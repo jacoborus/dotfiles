@@ -67,7 +67,7 @@ local servers = {
   jsonls = {},
   rust_analyzer = {},
   sqlls = {},
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
