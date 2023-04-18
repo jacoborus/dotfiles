@@ -132,3 +132,6 @@ lspconfig.denols.setup {
 
 -- Turn on lsp status information
 require('fidget').setup()
+
+-- Enable LSP symbols tree
+require("symbols-outline").setup()

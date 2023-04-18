@@ -53,7 +53,7 @@ require('packer').startup(function(use)
     requires = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    -- tag = 'nightly'                  -- optional, updated every week. (see issue #1193)
   }
 
   use 'wesQ3/vim-windowswap'
@@ -64,14 +64,15 @@ require('packer').startup(function(use)
   use 'dyng/ctrlsf.vim'
   use 'jiangmiao/auto-pairs'
   use 'caenrique/swap-buffers.nvim'
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+  use 'nvim-lualine/lualine.nvim'           -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
+  use 'tpope/vim-sleuth'                    -- Detect tabstop and shiftwidth automatically
   use '~/dev/tender'
   -- use 'jacoborus/tender.vim'
   use 'jacoborus/wikimatic'
 
+  use 'simrat39/symbols-outline.nvim'
   --  use 'github/copilot.vim'
 
   -- Git related plugins

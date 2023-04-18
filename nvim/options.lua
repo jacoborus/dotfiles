@@ -1,6 +1,10 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
+--
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
+-- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
 -- Make line numbers default
