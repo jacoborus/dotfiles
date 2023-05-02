@@ -88,7 +88,7 @@ require('lualine').setup {
     lualine_b = {
       {
         'filetype',
-        colored = false, -- Displays filetype icon in color if set to true
+        colored = false,  -- Displays filetype icon in color if set to true
         icon_only = true, -- Display only an icon for filetype
         component_separators = '',
         -- icon = { align = 'right' }, -- Display filetype icon on the right hand side
@@ -109,13 +109,13 @@ require('lualine').setup {
     lualine_c = {
       {
         'filetype',
-        colored = false, -- Displays filetype icon in color if set to true
+        colored = false,  -- Displays filetype icon in color if set to true
         icon_only = true, -- Display only an icon for filetype
         component_separators = '',
         -- icon = { align = 'right' }, -- Display filetype icon on the right hand side
       },
       'filename'
- },
+    },
     lualine_x = { 'progress' },
     lualine_y = { 'location' },
     lualine_z = {}

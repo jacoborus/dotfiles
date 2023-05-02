@@ -28,6 +28,10 @@ export DENO_INSTALL="/home/jacobo/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 # FZF
 export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
+export PATH="$DENO_INSTALL/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export GOPATH="$HOME/go"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [ -e $HOME/dotfiles/secrets.sh -o -L $HOME/dotfiles/secrets.sh ]; then

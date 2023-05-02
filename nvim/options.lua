@@ -1,41 +1,41 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 --
-vim.g.loaded_netrw = 1
+vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
+vim.opt.termguicolors    = true
 
 -- Make line numbers default
-vim.wo.number = true
-vim.wo.relativenumber = true
+vim.wo.number            = true
+vim.wo.relativenumber    = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse              = 'a'
 
 -- Enable break indent
-vim.o.breakindent = true
+vim.o.breakindent        = true
 
 -- Save undo history
-vim.o.undofile = true
-vim.o.history = 700
+vim.o.undofile           = true
+vim.o.history            = 700
 
 -- Search options
-vim.o.ignorecase   = true -- Case insensitive searching
-vim.o.smartcase    = true -- UNLESS /C or capital in search
-vim.opt.hlsearch   = true -- Highlight search results
-vim.opt.incsearch  = true -- Find as you type
-vim.opt.lazyredraw = true -- Don't redraw while executing macros
-vim.opt.magic      = true -- For regular expressions turn magic on
+vim.o.ignorecase         = true -- Case insensitive searching
+vim.o.smartcase          = true -- UNLESS /C or capital in search
+vim.opt.hlsearch         = true -- Highlight search results
+vim.opt.incsearch        = true -- Find as you type
+vim.opt.lazyredraw       = true -- Don't redraw while executing macros
+vim.opt.magic            = true -- For regular expressions turn magic on
 
 -- Decrease update time
-vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
+vim.o.updatetime         = 250
+vim.wo.signcolumn        = 'yes'
 
 -- Wildmenu
-vim.o.wildmenu = true
-vim.o.wildignore = vim.o.wildignore .. '*/tmp/*,*.so,*.swp,*.zip'
+vim.o.wildmenu           = true
+vim.o.wildignore         = vim.o.wildignore .. '*/tmp/*,*.so,*.swp,*.zip'
 
 
 -- Set completeopt to have a better completion experience
@@ -54,7 +54,7 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true -- Use spaces instead of tabs
-vim.opt.smarttab = true -- Be smart when using tabs
+vim.opt.smarttab = true  -- Be smart when using tabs
 
 -- Open new split panes to right and bottom
 vim.opt.splitbelow = true
@@ -65,9 +65,9 @@ vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 99
 
 
-vim.opt.showmatch = true -- Highlight matching brackets under cursor
+vim.opt.showmatch = true  -- Highlight matching brackets under cursor
 vim.opt.cursorline = true -- Highlight current line
-vim.opt.scrolloff = 3 -- don't let the cursor touch the edge of the viewport
+vim.opt.scrolloff = 20    -- don't let the cursor touch the edge of the viewport
 
 vim.opt.clipboard = 'unnamedplus'
 
