@@ -5,8 +5,8 @@ require('telescope').setup {
     file_ignore_patterns = { ".git/*" },
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+        ['<C-j>'] = "move_selection_next",
+        ['<C-k>'] = "move_selection_previous",
       },
     },
     vimgrep_arguments = {
