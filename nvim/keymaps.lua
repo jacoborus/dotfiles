@@ -79,3 +79,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 Nmap('<leader>ot', ':SymbolsOutline<cr>', "toggle LSP symbols outline")
 Nmap('<leader>oo', ':SymbolsOutlineOpen<cr>', "toggle LSP symbols outline")
 Nmap('<leader>oc', ':SymbolsOutlineClose<cr>', "toggle LSP symbols outline")
+
+-- ZenMode
+
+Nmap('<leader>gz', ':ZenMode<cr>', 'Open ZenMode')
