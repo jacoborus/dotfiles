@@ -100,16 +100,16 @@ function installBasicSoftware() {
 			tree \
 			whois \
 			xclip \
-			xsel
-		zsh \
-			exit
+			xsel \
+			zsh 
+		exit
 	elif command_exists dnf; then
 		echo "dnf found! installing basic software"
 		sudo dnf install \
 			ag \
 			git-extras \
-			gpick
-		inkscape \
+			gpick \
+			inkscape \
 			jq \
 			luarocks meld \
 			neovim \
@@ -120,8 +120,8 @@ function installBasicSoftware() {
 			whois \
 			xclip \
 			xsel \
-			zsh \
-			exit
+			zsh
+		exit
 	else
 		echo -e "\e[34mno apt or dnf found. Aborting...\e[0m"
 		exit

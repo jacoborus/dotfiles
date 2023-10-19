@@ -11,6 +11,11 @@ require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
 
+  use {
+    'j-hui/fidget.nvim',
+    tag = 'legacy',
+  }
+
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -18,7 +23,11 @@ require('packer').startup(function(use)
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       -- Useful status updates for LSP
-      'j-hui/fidget.nvim',
+      {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+      },
+
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
     },
@@ -70,8 +79,8 @@ require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth'                    -- Detect tabstop and shiftwidth automatically
-  use '~/dev/tender'
-  -- use 'jacoborus/tender.vim'
+  -- use '~/dev/tender'
+  use 'jacoborus/tender.vim'
   use 'jacoborus/wikimatic'
 
   use 'simrat39/symbols-outline.nvim'

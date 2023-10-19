@@ -102,4 +102,7 @@ export DENO_INSTALL="/home/jacobo/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-. "$HOME/.cargo/env"
+
+NPM_PACKAGES=/home/jacobo/.npm-packages
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+PATH="$NPM_PACKAGES/bin:$PATH"

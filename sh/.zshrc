@@ -31,6 +31,10 @@ export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export GOPATH="$HOME/go"
+# Node
+export NPM_PACKAGES=/home/jacobo/.npm-packages
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+export PATH="$NPM_PACKAGES/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
