@@ -67,7 +67,7 @@ vim.opt.foldlevel = 99
 
 vim.opt.showmatch = true  -- Highlight matching brackets under cursor
 vim.opt.cursorline = true -- Highlight current line
-vim.opt.scrolloff = 20    -- don't let the cursor touch the edge of the viewport
+vim.opt.scrolloff = 10    -- don't let the cursor touch the edge of the viewport
 
 vim.opt.clipboard = 'unnamedplus'
 
