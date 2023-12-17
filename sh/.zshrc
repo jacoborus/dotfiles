@@ -31,6 +31,7 @@ export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export GOPATH="$HOME/go"
+export PATH="$HOME/.apps/zig:$PATH"
 # Node
 export NPM_PACKAGES=/home/jacobo/.npm-packages
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
@@ -41,3 +42,7 @@ export PATH="$NPM_PACKAGES/bin:$PATH"
 if [ -e $HOME/dotfiles/secrets.sh -o -L $HOME/dotfiles/secrets.sh ]; then
   source $HOME/dotfiles/secrets.sh
 fi
+
+# docker
+export PATH=/usr/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1000/docker.sock

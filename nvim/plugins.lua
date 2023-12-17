@@ -16,6 +16,11 @@ require('packer').startup(function(use)
     tag = 'legacy',
   }
 
+  use {
+    "cseickel/diagnostic-window.nvim",
+    requires = { "MunifTanjim/nui.nvim" }
+  }
+
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -85,6 +90,7 @@ require('packer').startup(function(use)
 
   use 'simrat39/symbols-outline.nvim'
   --  use 'github/copilot.vim'
+  use 'ziglang/zig.vim'
 
   -- Git related plugins
   use 'tpope/vim-fugitive'

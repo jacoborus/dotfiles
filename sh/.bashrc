@@ -100,9 +100,14 @@ fi
 export EDITOR=/usr/bin/nvim
 export DENO_INSTALL="/home/jacobo/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+export PATH="$PATH:~/.apps/zig"
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 NPM_PACKAGES=/home/jacobo/.npm-packages
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 PATH="$NPM_PACKAGES/bin:$PATH"
+
+# docker
+export PATH=/usr/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1000/docker.sock

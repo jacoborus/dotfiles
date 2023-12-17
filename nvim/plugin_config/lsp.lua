@@ -95,13 +95,17 @@ mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
 })
 
+servers['zls'] = {}
+
 local lspconfig = require('lspconfig')
+
+lspconfig.zls.setup {}
 
 mason_lspconfig.setup_handlers({
   function(server_name)
     lspconfig[server_name].setup {
-      capabilities = Capabilities,
       on_attach = on_attach,
+      capabilities = Capabilities,
       settings = servers[server_name],
     }
   end,
@@ -129,6 +133,8 @@ lspconfig.denols.setup {
 --   autostart = false,
 --   root_dir = lspconfig.util.root_pattern("package.json"),
 -- }
+
+vim.g.zig_fmt_autosave = 0
 
 -- Turn on lsp status information
 require('fidget').setup()

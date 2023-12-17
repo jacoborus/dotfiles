@@ -26,5 +26,6 @@ null_ls.setup({
     -- null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.formatting.shfmt,
     null_ls.builtins.formatting.sql_formatter,
+    null_ls.builtins.formatting.zigfmt
   },
 })
