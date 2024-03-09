@@ -9,7 +9,23 @@ HISTSIZE=2000
 export DEFAULT_USER="jacobo"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="adesis"
-plugins=(z vi-mode gitfast command-not-found common-aliases npm git fasd history-substring-search redis-cli)
+plugins=(
+  command-not-found
+  common-aliases
+  deno
+  docker
+  docker-compose
+  fasd
+  git
+  gitextras
+  gitfast
+  golang
+  history-substring-search
+  npm
+  redis-cli
+  vi-mode
+  z
+)
 # Vi mode
 # bindkey -v
 set -o vi
