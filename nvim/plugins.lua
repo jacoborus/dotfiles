@@ -12,29 +12,20 @@ vim.g.windowswap_map_keys = 0 -- prevent default bindings
 require('mapping')
 
 require('lazy').setup({
-  { "onsails/lspkind.nvim" },
-
-
-  { -- copilot
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
-    dependencies = {
-      {
-        "zbirenbaum/copilot-cmp",
-        -- after = { "copilot.lua" },
-        config = function()
-          require("copilot_cmp").setup()
-        end
-      },
-    }
-  },
+  "onsails/lspkind.nvim",
+  'gerw/vim-HiLinkTrace',
+  'christoomey/vim-tmux-navigator',
+  'AndrewRadev/tagalong.vim',
+  'tpope/vim-surround',
+  'dyng/ctrlsf.vim',
+  'jiangmiao/auto-pairs',
+  'caenrique/swap-buffers.nvim',
+  'nvim-lualine/lualine.nvim',           -- Fancier statusline,
+  'lukas-reineke/indent-blankline.nvim', -- Add indentation guides even on blank lines,
+  { 'numToStr/Comment.nvim', opts = {} },
+  'tpope/vim-sleuth',                    -- Detect tabstop and shiftwidth automatically,
+  { dir = '~/dev/tender' },
+  -- 'jacoborus/tender.vim',
 
 
   { -- LSP Configuration & Plugins
@@ -52,8 +43,7 @@ require('lazy').setup({
     },
   },
 
-  -- Highlight todo, notes, etc in comments
-  {
+  { -- Highlight todo, notes, etc in comments
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -69,7 +59,11 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip'
+    },
   },
 
   { -- Highlight, edit, and navigate code
@@ -92,26 +86,12 @@ require('lazy').setup({
     },
   },
 
-  {
+  { -- the file tree
     'nvim-tree/nvim-tree.lua',
     dependencies = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
   },
-
-  'gerw/vim-HiLinkTrace',
-  'christoomey/vim-tmux-navigator',
-  'AndrewRadev/tagalong.vim',
-  'tpope/vim-surround',
-  'dyng/ctrlsf.vim',
-  'jiangmiao/auto-pairs',
-  'caenrique/swap-buffers.nvim',
-  'nvim-lualine/lualine.nvim',           -- Fancier statusline,
-  'lukas-reineke/indent-blankline.nvim', -- Add indentation guides even on blank lines,
-  { 'numToStr/Comment.nvim', opts = {} },
-  'tpope/vim-sleuth',                    -- Detect tabstop and shiftwidth automatically,
-  { dir = '~/dev/tender' },
-  -- 'jacoborus/tender.vim',
 
   {
     'wesQ3/vim-windowswap',
@@ -130,7 +110,6 @@ require('lazy').setup({
   },
 
   'simrat39/symbols-outline.nvim',
-  --  use 'github/copilot.vim'
   'ziglang/zig.vim',
 
   -- Git related plugins
@@ -142,12 +121,12 @@ require('lazy').setup({
   { -- Useful plugin to show you pending keybinds.
     -- :checkhealth which-key
     'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    event = 'VimEnter',
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    config = function() -- This is the function that runs, AFTER loading
+    config = function()
       require('which-key').setup()
 
       -- Document existing key chains
@@ -161,8 +140,7 @@ require('lazy').setup({
     end,
   },
 
-  -- Fuzzy Finder (files, lsp, etc)
-  {
+  { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     -- event = 'VimEnter',
     branch = '0.1.x',
@@ -187,8 +165,7 @@ require('lazy').setup({
     },
   },
 
-  -- Lua
-  {
+  { -- Zen Mode
     "folke/zen-mode.nvim",
     config = function()
       require("zen-mode").setup {
@@ -198,6 +175,29 @@ require('lazy').setup({
       }
     end
   },
+
+  { -- copilot
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end,
+    dependencies = {
+      {
+        "zbirenbaum/copilot-cmp",
+        -- after = { "copilot.lua" },
+        config = function()
+          require("copilot_cmp").setup()
+        end
+      },
+    }
+  },
+
+
 
 }, {
   ui = {
