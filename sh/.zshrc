@@ -17,7 +17,7 @@ plugins=(
   docker-compose
   fasd
   git
-  gitextras
+  git-extras
   gitfast
   golang
   history-substring-search
