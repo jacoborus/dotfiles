@@ -14,8 +14,8 @@ require('mapping')
 require('lazy').setup({
   { "onsails/lspkind.nvim" },
 
-  -- copilot
-  {
+
+  { -- copilot
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
@@ -25,15 +25,17 @@ require('lazy').setup({
         panel = { enabled = false },
       })
     end,
+    dependencies = {
+      {
+        "zbirenbaum/copilot-cmp",
+        -- after = { "copilot.lua" },
+        config = function()
+          require("copilot_cmp").setup()
+        end
+      },
+    }
   },
 
-  {
-    "zbirenbaum/copilot-cmp",
-    -- after = { "copilot.lua" },
-    config = function()
-      require("copilot_cmp").setup()
-    end
-  },
 
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -50,6 +52,14 @@ require('lazy').setup({
     },
   },
 
+  -- Highlight todo, notes, etc in comments
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = { signs = false }
+  },
+
   { -- LSP Configuration & Plugins
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = {
@@ -64,24 +74,29 @@ require('lazy').setup({
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    build = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    build = ':TSUpdate',
+    config = function()
+      -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+      ---@diagnostic disable-next-line: missing-fields
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
+        -- Autoinstall languages that are not installed
+        auto_install = true,
+        highlight = { enable = true },
+        indent = { enable = true },
+      }
     end,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/nvim-treesitter-context',
+    },
   },
-
-  { -- Additional text objects via treesitter
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    -- after = 'nvim-treesitter',
-  },
-
-  'nvim-treesitter/nvim-treesitter-context',
 
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
-    -- version = 'nightly'                  -- optional, updated every week. (see issue #1193)
   },
 
   'gerw/vim-HiLinkTrace',

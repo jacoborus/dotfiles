@@ -19,6 +19,11 @@ require('telescope').setup {
       "--smart-case"
     },
   },
+  extensions = {
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown(),
+    },
+  },
 }
 
 -- Enable telescope fzf native, if installed
