@@ -6,7 +6,7 @@ vim.g.loaded_netrwPlugin = 1
 require("keymaps")
 require("options")
 require("plugins")
-require("plugin_config.wikimatic")
+-- require("plugin_config.wikimatic")
 require("plugin_config.nvim-tree")
 require("plugin_config.colors")
 require("plugin_config.gitsigns")

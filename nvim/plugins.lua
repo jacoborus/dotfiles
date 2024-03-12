@@ -50,11 +50,19 @@ require('lazy').setup({
     opts = { signs = false }
   },
 
+
   { -- LSP Configuration & Plugins
+    -- TODO: use 'stevearc/conform.nvim'
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = {
       'jay-babu/mason-null-ls.nvim',
     },
+    opts = {
+      highlight = {
+        multiline = false, -- enable multine todo comments
+        after = ''
+      },
+    }
   },
 
   { -- Autocompletion
@@ -104,8 +112,8 @@ require('lazy').setup({
     'jacoborus/wikimatic',
     opts = {},
     config = function()
-      Nmap('<leader>ww', ':Wiki<cr>', 'Open wiki')
-      Nmap('<leader>wt', ':WikiTab<cr>', 'Open wiki in new tab')
+      Nmap('<leader>ww', ':Wiki<cr>', 'Open [ww]iki')
+      Nmap('<leader>wt', ':WikiTab<cr>', 'Open [w]iki in new [t]ab')
     end
   },
 
