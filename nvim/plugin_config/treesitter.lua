@@ -43,9 +43,12 @@ require('nvim-treesitter.configs').setup {
     'zig',
     -- 'rust',
   },
-  -- auto_install = true,
+  auto_install = true,
   highlight = { enable = true },
-  indent = { enable = false, disable = { 'vue', 'typescript', 'javascript' } },
+  indent = {
+    enable = true,
+    disable = { 'vue', 'typescript', 'javascript' }
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
