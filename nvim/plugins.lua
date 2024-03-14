@@ -15,11 +15,10 @@ require('lazy').setup({
   "onsails/lspkind.nvim",
   'gerw/vim-HiLinkTrace',
   'christoomey/vim-tmux-navigator',
-  'AndrewRadev/tagalong.vim',
+  'AndrewRadev/tagalong.vim', -- Change an HTML opening tag and take the closing one along as well
   'tpope/vim-surround',
   'dyng/ctrlsf.vim',
   'jiangmiao/auto-pairs',
-  'caenrique/swap-buffers.nvim',
   'nvim-lualine/lualine.nvim',           -- Fancier statusline,
   'lukas-reineke/indent-blankline.nvim', -- Add indentation guides even on blank lines,
   { 'numToStr/Comment.nvim', opts = {} },
@@ -107,7 +106,10 @@ require('lazy').setup({
   { -- the file tree
     'nvim-tree/nvim-tree.lua',
     dependencies = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+      {
+        'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        enabled = vim.g.have_nerd_font
+      }
     },
   },
 

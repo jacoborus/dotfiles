@@ -107,6 +107,7 @@ function installBasicSoftware() {
 		echo "dnf found! installing basic software"
 		sudo dnf install \
 			ag \
+			fd-find \
 			git-extras \
 			gpick \
 			inkscape \
