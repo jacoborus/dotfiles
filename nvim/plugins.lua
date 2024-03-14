@@ -37,7 +37,6 @@ require('lazy').setup({
       'folke/neodev.nvim',
 
       -- Useful status updates for LSP.
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
     },
   },
@@ -49,19 +48,21 @@ require('lazy').setup({
     opts = { signs = false }
   },
 
-
-  { -- LSP Configuration & Plugins
-    -- TODO: use 'stevearc/conform.nvim'
-    'jose-elias-alvarez/null-ls.nvim',
-    dependencies = {
-      'jay-babu/mason-null-ls.nvim',
-    },
+  { -- Autoformat
+    'stevearc/conform.nvim',
     opts = {
-      highlight = {
-        multiline = false, -- enable multine todo comments
-        after = ''
+      notify_on_error = false,
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_fallback = true,
       },
-    }
+      formatters_by_ft = {
+        lua = { 'stylua' },
+        go = { "goimports", "gofmt" },
+        -- json = { { "prettierd", "prettier" } },
+        -- javascript = { { "prettierd", "prettier" } },
+      },
+    },
   },
 
   { -- Autocompletion
