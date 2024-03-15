@@ -90,6 +90,8 @@ require("lazy").setup({
 
 	{ -- Autoformat
 		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
 		opts = {
 			notify_on_error = false,
 			format_on_save = {
@@ -97,8 +99,9 @@ require("lazy").setup({
 				lsp_fallback = true,
 			},
 			formatters_by_ft = {
-				lua = { "stylua" },
 				go = { "goimports", "gofmt" },
+				lua = { "stylua" },
+				python = { "isort", "black" },
 				sh = { "shfmt" },
 				-- json = { { "prettierd", "prettier" } },
 				-- javascript = { { "prettierd", "prettier" } },

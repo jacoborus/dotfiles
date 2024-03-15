@@ -38,9 +38,9 @@ function createSymlink() {
 function installBasicSoftware() {
 	echo -e "\e[34mInstalling basic software\e[0m"
 	if command_exists dnf; then
-		echo "installing basic software"
 		sudo dnf install \
 			ag \
+			cheat \
 			fd-find \
 			git-extras \
 			golang \
@@ -57,10 +57,8 @@ function installBasicSoftware() {
 			xclip \
 			xsel \
 			zsh
-		exit
 	else
 		echo -e "\e[34m dnf not found. Aborting...\e[0m"
-		exit
 	fi
 }
 
