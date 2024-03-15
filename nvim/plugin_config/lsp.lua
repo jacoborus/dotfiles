@@ -66,7 +66,6 @@ local servers = {
   html = {},
   jsonls = {},
   -- rust_analyzer = {},
-  sqlls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -76,6 +75,8 @@ local servers = {
       }
     },
   },
+  sqlls = {},
+  shfmt = {},
   -- tsserver = {},
   vimls = {},
   volar = {},

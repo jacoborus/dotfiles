@@ -59,6 +59,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         go = { "goimports", "gofmt" },
+        sh = { "shfmt" },
         -- json = { { "prettierd", "prettier" } },
         -- javascript = { { "prettierd", "prettier" } },
       },
