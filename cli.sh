@@ -53,6 +53,7 @@ function installBasicSoftware() {
 			ripgrep \
 			saidar \
 			tmux \
+			trash-cli \
 			tree \
 			whois \
 			xclip \
