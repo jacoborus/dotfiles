@@ -2,43 +2,88 @@
 
 # list of files to symlink and backup in homedir
 FILES=".bashrc .tmux.conf .zshrc"
+DOTFILES="bash.bashrc tmux.conf zsh.zshrc"
 # list of files to backup in vim directory
-VIMFILES="init.vim coc-settings.json general.vim plugin.vim plug.vim status.vim"
+VIMFILES="init.lua"
 # list of files to symlink in vim directory
 VIMINITFILES="plug.vim general.vim plugins.vim status.vim"
 
-DOTDIR=$(readlink -f $(dirname "$0")) # dotfiles directory
+DOTDIR="$HOME/dotfiles"
 TODAY="$(date +%Y-%m-%d_%H-%M-%S)"
 BACKUPFOLDER="$HOME/dotfiles_old/$TODAY"
 VIMDIR="$HOME/.config/nvim"
 THEMESFOLDER=$HOME/.oh-my-zsh/themes
 
+# Checks if the command $1 exists
 command_exists() {
 	command -v "$@" >/dev/null 2>&1
 }
 
+# Move a file to the backup folder
+#   $1: Directory path of the file
+#   $2: File name
 function createBackup() {
 	local ORIGIN="$1/$2"
-	if [ -e $ORIGIN ]; then
+	if [ -e "$ORIGIN" ]; then
 		local DESTINATION="$BACKUPFOLDER/$2"
 		echo "'$ORIGIN' => '$DESTINATION'"
-		mkdir -p $BACKUPFOLDER
-		mv $ORIGIN $DESTINATION
-		[ -e $ORIGIN ] && rm -y $ORIGIN
+		mkdir -p "$BACKUPFOLDER"
+		mv "$ORIGIN" "$DESTINATION"
 	fi
 }
 
+# Create a symbolic link
+#   $1: Directory path of the origin
+#   $2: Origin file name
+#   $3: Destination (path + file name)
 function createSymlink() {
 	local ORIGIN="$2/$1"
 	local DESTINATION="$3"
-	ln -s -v $ORIGIN $DESTINATION
+	ln -s -v "$ORIGIN" "$DESTINATION"
 }
 
-function installVimplug() {
-	echo -e "\e[34mInstalling vim-plug\e[0m"
-	sh -c 'curl -fLo $HOME/.config/nvim/site/autoload/plug.vim --create-dirs \
-     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' &&
-		echo 'vim-plug ok'
+function installBasicSoftware() {
+	echo -e "\e[34mInstalling basic software\e[0m"
+	if command_exists dnf; then
+		echo "installing basic software"
+		sudo dnf install \
+			ag \
+			fd-find \
+			git-extras \
+			golang \
+			gpick \
+			jq \
+			luarocks \
+			meld \
+			neovim \
+			ripgrep \
+			saidar \
+			tmux \
+			tree \
+			whois \
+			xclip \
+			xsel \
+			zsh
+		exit
+	else
+		echo -e "\e[34m dnf not found. Aborting...\e[0m"
+		exit
+	fi
+}
+
+function installRPMFusion() {
+	if ! dnf repolist | grep -q rpmfusion; then
+		echo -e "\e[34mInstalling REPM Fusion Free\e[0m"
+		sh -c 'sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm' &&
+			echo 'RPM Fusion Free ok'
+
+		echo -e "\e[34mInstalling REPM Fusion Non-Free\e[0m"
+		sh -c 'sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm' &&
+			echo 'RPM Fusion Free ok'
+	else
+		echo 'RPM Fusion already installed. Skipping...'
+
+	fi
 }
 
 function installOhMyZsh() {
@@ -51,25 +96,24 @@ function installDotfiles() {
 	# Move old files to backup folder
 	echo -e "\e[34mMoving old files to backup folder...\e[0m"
 	for file in $FILES; do
-		createBackup $HOME $file
+		createBackup "$HOME" "$file"
 	done
 	for file in $VIMFILES; do
-		createBackup $VIMDIR $file
+		createBackup "$VIMDIR" "$file"
 	done
-	createBackup $THEMESFOLDER adesis.zsh-theme
-	createBackup $THEMESFOLDER rush.zsh-theme
+	createBackup "$THEMESFOLDER" adesis.zsh-theme
 
 	# Create sylinks
 	echo -e "\e[34mCreating symlinks...\e[0m"
 
-	createSymlink '.bashrc' $DOTDIR/sh $HOME
-	createSymlink '.zshrc' $DOTDIR/sh $HOME
-	createSymlink '.tmux.conf' $DOTDIR/tmux $HOME
-	createSymlink 'adesis.zsh-theme' $DOTDIR/sh $THEMESFOLDER
-	createSymlink 'rush.zsh-theme' $DOTDIR/sh $THEMESFOLDER
+	createSymlink '.bashrc' "$DOTDIR/sh" "$HOME"
+	createSymlink '.zshrc' "$DOTDIR/sh" "$HOME"
+	createSymlink '.tmux.conf' "$DOTDIR/tmux" "$HOME"
+	createSymlink 'adesis.zsh-theme' "$DOTDIR/sh" "$THEMESFOLDER"
+	createSymlink 'rush.zsh-theme' "$DOTDIR/sh" "$THEMESFOLDER"
 
-	mkdir -p $VIMDIR
-	createSymlink 'coc-settings.json' $DOTDIR/vim $VIMDIR
+	mkdir -p "$VIMDIR"
+	createSymlink 'coc-settings.json' "$DOTDIR/vim" "$VIMDIR"
 
 	# Generate init.vim file
 	echo -e "\e[34mCreating init.vim file...\e[0m"
@@ -77,71 +121,22 @@ function installDotfiles() {
 	for file in $VIMINITFILES; do
 		INITVIM="$INITVIM\nso $DOTDIR/vim/$file"
 	done
-	echo -e "$INITVIM" >$VIMDIR/init.vim
-}
-
-function installBasicSoftware() {
-	echo -e "\e[34mInstalling basic software\e[0m"
-	if command_exists apt; then
-		echo "apt found! installing basic software"
-		sudo apt install \
-			git-extras \
-			gpick \
-			inkscape \
-			jq \
-			luarocks \
-			meld \
-			neovim \
-			p7zip-full \
-			ripgrep \
-			saidar \
-			silversearcher-ag \
-			tmux \
-			tree \
-			whois \
-			xclip \
-			xsel \
-			zsh 
-		exit
-	elif command_exists dnf; then
-		echo "dnf found! installing basic software"
-		sudo dnf install \
-			ag \
-			fd-find \
-			git-extras \
-			gpick \
-			inkscape \
-			jq \
-			luarocks meld \
-			neovim \
-			ripgrep \
-			saidar \
-			tmux \
-			tree \
-			whois \
-			xclip \
-			xsel \
-			zsh
-		exit
-	else
-		echo -e "\e[34mno apt or dnf found. Aborting...\e[0m"
-		exit
-	fi
+	echo -e "$INITVIM" >"$VIMDIR/init.vim"
 }
 
 function main() {
 	clear -x
 
 	local options=(
-		"Install NeoVim plugin manager (vim-plug)"
+		"Install basic software"
 		"Install ZSH plugin manager (OhMyZsh)"
 		"Install Dotfiles"
-		"Install basic software"
+		"Install RPM Fusion and RPM Fusion Free"
 	)
 
 	menu() {
 		echo "What do you want to do?"
-		for i in ${!options[@]}; do
+		for i in "${!options[@]}"; do
 			local label=" $((i + 1))) ${options[i]}"
 			[ "${choices[i]}" ] && echo -e "\e[46m\e[30m+$label\e[0m" || echo -e " $label"
 		done
@@ -151,8 +146,8 @@ function main() {
 
 	prompt="Check an option (again to uncheck, ENTER when done): "
 	while menu && read -s -n 1 -rp "$prompt" num && [[ "$num" ]]; do
-		[[ "$num" != *[![:digit:]]* ]] &&
-			((num > 0 && num <= ${#options[@]})) ||
+		([[ "$num" != *[![:digit:]]* ]] &&
+			((num > 0 && num <= ${#options[@]}))) ||
 			{
 				msg="Invalid option: $num"
 				clear -x
@@ -165,10 +160,10 @@ function main() {
 	done
 	echo ""
 
-	[ -n "${choices[0]}" ] && installVimplug
+	[ -n "${choices[0]}" ] && installBasicSoftware
 	[ -n "${choices[1]}" ] && installOhMyZsh
 	[ -n "${choices[2]}" ] && installDotfiles
-	[ -n "${choices[3]}" ] && installBasicSoftware
+	[ -n "${choices[3]}" ] && installRPMFusion
 }
 
 main
