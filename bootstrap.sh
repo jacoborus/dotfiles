@@ -72,8 +72,8 @@ function installBasicSoftware() {
 }
 
 function installRPMFusion() {
+	echo -e "\e[34mInstalling RPM Fusion Free\e[0m"
 	if ! dnf repolist | grep -q rpmfusion; then
-		echo -e "\e[34mInstalling REPM Fusion Free\e[0m"
 		sh -c 'sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm' &&
 			echo 'RPM Fusion Free ok'
 
@@ -90,6 +90,28 @@ function installOhMyZsh() {
 	echo -e "\e[34mInstalling ZSH plugin manager (OhMyZsh)...\e[0m"
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &&
 		echo 'ok'
+}
+
+function installDeno() {
+	echo -e "\e[34mInstalling Deno...\e[0m"
+	if command_exists deno; then
+		echo "Deno already installed. Skipping..."
+	else
+		sh -c "curl -fsSL https://deno.land/install.sh | sh"
+	fi
+}
+
+function installNode() {
+	echo -e "\e[34mInstalling Node.js...\e[0m"
+	if command_exists node; then
+		echo "Node.js already installed. Skipping..."
+	else
+		sh -c "curl -fsSL https://rpm.nodesource.com/setup_current.x | sudo bash -"
+		sh -c 'sudo dnf install -y nodejs'
+		mkdir "${HOME}/.npm-packages" -p
+		sh -c "npm config set prefix '$HOME/.npm-packages/'"
+		sh -c "npm i -g trash sloc"
+	fi
 }
 
 function installDotfiles() {
@@ -132,6 +154,8 @@ function main() {
 		"Install ZSH plugin manager (OhMyZsh)"
 		"Install Dotfiles"
 		"Install RPM Fusion and RPM Fusion Free"
+		"Install Deno"
+		"Install Node.js"
 	)
 
 	menu() {
@@ -164,6 +188,8 @@ function main() {
 	[ -n "${choices[1]}" ] && installOhMyZsh
 	[ -n "${choices[2]}" ] && installDotfiles
 	[ -n "${choices[3]}" ] && installRPMFusion
+	[ -n "${choices[4]}" ] && installDeno
+	[ -n "${choices[5]}" ] && installNode
 }
 
 main
