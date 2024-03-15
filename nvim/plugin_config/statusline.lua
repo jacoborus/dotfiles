@@ -1,8 +1,3 @@
--- Set lualine as statusline
--- See `:help lualine.txt`
-
--- Copyright (c) 2023 jacoborus
--- MIT license, see LICENSE for more details.
 local colors = {
 	red1 = "#f43753",
 	red2 = "#c5152f",

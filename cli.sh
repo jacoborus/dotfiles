@@ -41,14 +41,15 @@ function installBasicSoftware() {
 		sudo dnf install \
 			ag \
 			cheat \
+			curl \
 			fd-find \
 			git-extras \
 			golang \
-			gpick \
 			jq \
 			luarocks \
 			meld \
 			neovim \
+			p7zip \
 			ripgrep \
 			saidar \
 			tmux \
@@ -130,7 +131,7 @@ function main() {
 	clear -x
 
 	local options=(
-		"Install basic software"
+		"Install basic software (cli tools, go, and lua)"
 		"Install ZSH plugin manager (OhMyZsh)"
 		"Install Dotfiles"
 		"Install RPM Fusion and RPM Fusion Free"

@@ -1,57 +1,26 @@
-# jacobo's dotfiles
+# Jacobo's dotfiles
 
-Dotfiles for Ubuntu with minimal installation
+This dotfiles are meant to be used in a computer using Fedora Linux
 
-## Basic software:
+## Instructions
 
-Development:
-
-```sh
-sudo apt install git ssh meld xclip xsel saidar tree silversearcher-ag zsh tmux curl\
-      python3-pip neovim p7zip-full jq git-extras whois gpick net-tools redis
-```
-
-General:
+Clone this repo in `~/dotfiles`
 
 ```sh
-sudo apt install vlc inkscape gimp ubuntu-restricted-extras qbittorrent gnome-sushi gnome-tweak-tool baobab peek gpick
+git clone git@github.com:jacoborus/dotfiles "$HOME/dotfiles"
 ```
 
-## NeoVim
-
-Install NeoVim PPA:
-
-```
-sudo apt-add-repository ppa:neovim-ppa/stable
-```
-
-Install vim-plug in neovim (linux)
-
-```
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-
-## Node.js packages
-
-Install nodejs
+Navigate to dotfiles directory and make the cli tool executable:
 
 ```sh
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt-get install -y nodejs
+cd ~/dotfiles
+chmod +x cli.sh
 ```
 
-Install global node.js packages:
+Run the cli tool and follow the instructions:
 
 ```sh
-sudo npm i -g npm-check trash-cli sloc
+./cli.sh
 ```
 
-## Gnome Extensions
-
-- [Dash to panel](https://extensions.gnome.org/extension/1160/dash-to-panel)
-- [Top Panel workspace scroll](https://extensions.gnome.org/extension/701/top-panel-workspace-scroll/)
-- [Impatience](https://extensions.gnome.org/extension/277/impatience/)
-- [Horizontal workspaces](https://extensions.gnome.org/extension/2141/horizontal-workspaces/)
-- [Sound Input & Output Device Chooser](https://extensions.gnome.org/extension/906/sound-output-device-chooser/)
-- [Bluetooth quick connect](https://extensions.gnome.org/extension/1401/bluetooth-quick-connect/)
+![cli](https://github.com/jacoborus/dotfiles/assets/829859/24cf9e0d-df9f-47c1-aa6a-8e466d75a13a)
