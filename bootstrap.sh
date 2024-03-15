@@ -1,18 +1,12 @@
 #!/bin/bash
 
-# list of files to symlink and backup in homedir
+# list of files to backup in home dir
 FILES=".bashrc .tmux.conf .zshrc"
-DOTFILES="bash.bashrc tmux.conf zsh.zshrc"
-# list of files to backup in vim directory
-VIMFILES="init.lua"
-# list of files to symlink in vim directory
-VIMINITFILES="plug.vim general.vim plugins.vim status.vim"
-
-DOTDIR="$HOME/dotfiles"
 TODAY="$(date +%Y-%m-%d_%H-%M-%S)"
-BACKUPFOLDER="$HOME/dotfiles_old/$TODAY"
+BACKUPDIR="$HOME/dotfiles_old/$TODAY"
+DOTDIR="$HOME/dotfiles"
 VIMDIR="$HOME/.config/nvim"
-THEMESFOLDER=$HOME/.oh-my-zsh/themes
+ZSHTHEMESDIR=$HOME/.oh-my-zsh/themes
 
 # Checks if the command $1 exists
 command_exists() {
@@ -25,21 +19,20 @@ command_exists() {
 function createBackup() {
 	local ORIGIN="$1/$2"
 	if [ -e "$ORIGIN" ]; then
-		local DESTINATION="$BACKUPFOLDER/$2"
+		local DESTINATION="$BACKUPDIR/$2"
 		echo "'$ORIGIN' => '$DESTINATION'"
-		mkdir -p "$BACKUPFOLDER"
+		mkdir -p "$BACKUPDIR"
 		mv "$ORIGIN" "$DESTINATION"
 	fi
 }
 
 # Create a symbolic link
-#   $1: Directory path of the origin
-#   $2: Origin file name
-#   $3: Destination (path + file name)
+#   $1: Origin (path + file name)
+#   $2: Destination (path + file name)
 function createSymlink() {
-	local ORIGIN="$2/$1"
-	local DESTINATION="$3"
-	ln -s -v "$ORIGIN" "$DESTINATION"
+	local ORIGIN="$1"
+	local LINK="$2"
+	ln -s -v "$LINK" "$ORIGIN"
 }
 
 function installBasicSoftware() {
@@ -120,30 +113,19 @@ function installDotfiles() {
 	for file in $FILES; do
 		createBackup "$HOME" "$file"
 	done
-	for file in $VIMFILES; do
-		createBackup "$VIMDIR" "$file"
-	done
-	createBackup "$THEMESFOLDER" adesis.zsh-theme
+	createBackup "$VIMDIR" "init.lua"
+	createBackup "$ZSHTHEMESDIR" "adesis.zsh-theme"
 
 	# Create sylinks
 	echo -e "\e[34mCreating symlinks...\e[0m"
 
-	createSymlink '.bashrc' "$DOTDIR/sh" "$HOME"
-	createSymlink '.zshrc' "$DOTDIR/sh" "$HOME"
-	createSymlink '.tmux.conf' "$DOTDIR/tmux" "$HOME"
-	createSymlink 'adesis.zsh-theme' "$DOTDIR/sh" "$THEMESFOLDER"
-	createSymlink 'rush.zsh-theme' "$DOTDIR/sh" "$THEMESFOLDER"
+	createSymlink "$DOTDIR/sh/bash.bashrc" "$HOME/.bashrc"
+	createSymlink "$DOTDIR/sh/zsh.zshrc" "$HOME/.zshrc"
+	createSymlink "$DOTDIR/tmux/tmux.conf" "$HOME/.tmux.conf"
+	createSymlink "$DOTDIR/sh/adesis.zsh-theme" "$ZSHTHEMESDIR/adesis.zsh-theme"
 
 	mkdir -p "$VIMDIR"
-	createSymlink 'coc-settings.json' "$DOTDIR/vim" "$VIMDIR"
-
-	# Generate init.vim file
-	echo -e "\e[34mCreating init.vim file...\e[0m"
-	local INITVIM=""
-	for file in $VIMINITFILES; do
-		INITVIM="$INITVIM\nso $DOTDIR/vim/$file"
-	done
-	echo -e "$INITVIM" >"$VIMDIR/init.vim"
+	createSymlink "$DOTDIR/nvim/init.lua" "$VIMDIR/init.lua"
 }
 
 function main() {
