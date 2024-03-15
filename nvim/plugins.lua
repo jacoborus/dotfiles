@@ -93,7 +93,7 @@ require("lazy").setup({
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		opts = {
-			notify_on_error = false,
+			-- notify_on_error = false,
 			format_on_save = {
 				timeout_ms = 500,
 				lsp_fallback = true,
@@ -101,6 +101,7 @@ require("lazy").setup({
 			formatters_by_ft = {
 				go = { "goimports", "gofmt" },
 				lua = { "stylua" },
+				markdown = { "deno_fmt" },
 				python = { "isort", "black" },
 				sh = { "shfmt" },
 				-- json = { { "prettierd", "prettier" } },

@@ -79,8 +79,6 @@ vim.opt.updatetime = 300
 -- always show signcolumns
 vim.opt.signcolumn = "yes"
 
--- autosave
-vim.cmd([[autocmd BufWritePre * Format]])
 vim.cmd([[
   xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
