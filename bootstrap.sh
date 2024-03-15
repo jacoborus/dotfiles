@@ -103,7 +103,7 @@ function installNode() {
 		sh -c 'sudo dnf install -y nodejs'
 		mkdir "${HOME}/.npm-packages" -p
 		sh -c "npm config set prefix '$HOME/.npm-packages/'"
-		sh -c "npm i -g trash sloc"
+		sh -c "npm i -g sloc"
 	fi
 }
 
