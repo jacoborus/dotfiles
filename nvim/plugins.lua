@@ -88,6 +88,16 @@ require("lazy").setup({
 		opts = { signs = false },
 	},
 
+	{ -- Inline annotation and documentation generator
+		"danymat/neogen",
+		config = function()
+			require("neogen").setup({})
+			Nmap("<leader>gd", ":Neogen<cr>", "[G]enerate [D]ocs")
+		end,
+		-- Uncomment next line if you want to follow only stable versions
+		-- version = "*"
+	},
+
 	{ -- Autoformat
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
@@ -104,6 +114,7 @@ require("lazy").setup({
 				markdown = { "deno_fmt" },
 				python = { "isort", "black" },
 				sh = { "shfmt" },
+				yaml = { "yamlfix" },
 				-- json = { { "prettierd", "prettier" } },
 				-- javascript = { { "prettierd", "prettier" } },
 			},
