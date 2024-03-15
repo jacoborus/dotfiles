@@ -26,7 +26,7 @@ vim.o.ignorecase         = true -- Case insensitive searching
 vim.o.smartcase          = true -- UNLESS /C or capital in search
 vim.opt.hlsearch         = true -- Highlight search results
 vim.opt.incsearch        = true -- Find as you type
-vim.opt.lazyredraw       = true -- Don't redraw while executing macros
+-- vim.opt.lazyredraw       = true -- Don't redraw while executing macros
 vim.opt.magic            = true -- For regular expressions turn magic on
 
 -- Decrease update time

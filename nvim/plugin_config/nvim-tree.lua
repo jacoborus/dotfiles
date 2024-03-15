@@ -59,4 +59,4 @@ require("nvim-tree").setup({
   on_attach = nvimtree_on_attatch,
 })
 
-vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<cr>')
+vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<cr>', { silent = true })
