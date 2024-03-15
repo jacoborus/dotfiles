@@ -1,4 +1,4 @@
-package.path = package.path .. ';' .. os.getenv("HOME") .. '/dotfiles/nvim/?.lua'
+package.path = package.path .. ";" .. os.getenv("HOME") .. "/dotfiles/nvim/?.lua"
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
