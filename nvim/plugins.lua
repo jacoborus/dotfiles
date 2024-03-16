@@ -113,7 +113,7 @@ require("lazy").setup({
 				lua = { "stylua" },
 				markdown = { "deno_fmt" },
 				python = { "isort", "black" },
-				sh = { "shfmt" },
+				bash = { "shfmt" },
 				yaml = { "yamlfix" },
 				-- json = { { "prettierd", "prettier" } },
 				-- javascript = { { "prettierd", "prettier" } },

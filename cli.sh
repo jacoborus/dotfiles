@@ -48,10 +48,12 @@ function installBasicSoftware() {
 			jq \
 			luarocks \
 			meld \
+			neofetch \
 			neovim \
 			p7zip \
 			ripgrep \
 			saidar \
+			shfmt \
 			tmux \
 			trash-cli \
 			tree \

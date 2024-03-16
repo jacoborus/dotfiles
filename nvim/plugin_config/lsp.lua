@@ -70,13 +70,14 @@ local servers = {
 		},
 	},
 	sqlls = {},
-	shfmt = {},
-	stylua = {},
 	-- tsserver = {},
 	vimls = {},
 	volar = {},
 	yamlls = {},
-	yamlfix = {},
+	-- why do these not work?
+	-- shfmt = {},
+	-- stylua = {},
+	-- yamlfix = {},
 }
 
 -- Setup neovim lua configuration
