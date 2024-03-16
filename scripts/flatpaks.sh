@@ -79,7 +79,11 @@ function main() {
 		clear -x
 	}
 
-	prompt="Check an option (again to uncheck, ENTER when done): "
+	prompt="
+Use arrows and h,j,k,l to move and check/uncheck options.
+Space to toggle option.
+ENTER when done
+"
 	while menu && read -s -n 1 -rp "$prompt" key && [[ "$key" ]]; do
 		case "$key" in
 			" ") toggleChoice && continue;;

@@ -95,6 +95,10 @@ function installDeno() {
 	fi
 }
 
+function installFlatpaks() {
+	sh "./scripts/flatpaks.sh"
+}
+
 function installNode() {
 	echo -e "\e[33mInstalling Node.js...\e[0m"
 	if command_exists node; then
@@ -135,11 +139,12 @@ function main() {
 
 	local options=(
 		"Install basic software (cli tools, go, and lua)"
-		"Install ZSH plugin manager (OhMyZsh)"
+		"Install OhMyZsh"
 		"Install Dotfiles"
 		"Install RPM Fusion and RPM Fusion Free"
 		"Install Deno"
 		"Install Node.js"
+		"Install Flatpaks"
 	)
 
 	menu() {
@@ -174,6 +179,7 @@ function main() {
 	[ -n "${choices[3]}" ] && installRPMFusion
 	[ -n "${choices[4]}" ] && installDeno
 	[ -n "${choices[5]}" ] && installNode
+	[ -n "${choices[6]}" ] && installFlatpaks
 }
 
 main
