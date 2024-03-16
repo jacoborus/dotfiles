@@ -20,9 +20,8 @@ function createBackup() {
 	local ORIGIN="$1/$2"
 	if [ -e "$ORIGIN" ]; then
 		local DESTINATION="$BACKUPDIR/$2"
-		echo "'$ORIGIN' => '$DESTINATION'"
 		mkdir -p "$BACKUPDIR"
-		mv "$ORIGIN" "$DESTINATION"
+		mv -f "$ORIGIN" "$DESTINATION"
 	fi
 }
 
@@ -32,11 +31,11 @@ function createBackup() {
 function createSymlink() {
 	local ORIGIN="$1"
 	local LINK="$2"
-	ln -s -v "$LINK" "$ORIGIN"
+	ln -s "$ORIGIN" "$LINK" 
 }
 
 function installBasicSoftware() {
-	echo -e "\e[34mInstalling basic software\e[0m"
+	echo -e "\e[33mInstalling basic software\e[0m"
 	if command_exists dnf; then
 		sudo dnf install \
 			ag \
@@ -62,17 +61,17 @@ function installBasicSoftware() {
 			xsel \
 			zsh
 	else
-		echo -e "\e[34m dnf not found. Aborting...\e[0m"
+		echo -e "\e[35m dnf not found. Aborting...\e[0m"
 	fi
 }
 
 function installRPMFusion() {
-	echo -e "\e[34mInstalling RPM Fusion Free\e[0m"
+	echo -e "\e[33mInstalling RPM Fusion Free\e[0m"
 	if ! dnf repolist | grep -q rpmfusion; then
 		sh -c 'sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm' &&
 			echo 'RPM Fusion Free ok'
 
-		echo -e "\e[34mInstalling REPM Fusion Non-Free\e[0m"
+		echo -e "\e[33mInstalling REPM Fusion Non-Free\e[0m"
 		sh -c 'sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm' &&
 			echo 'RPM Fusion Free ok'
 	else
@@ -82,13 +81,13 @@ function installRPMFusion() {
 }
 
 function installOhMyZsh() {
-	echo -e "\e[34mInstalling ZSH plugin manager (OhMyZsh)...\e[0m"
+	echo -e "\e[33mInstalling ZSH plugin manager (OhMyZsh)...\e[0m"
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &&
 		echo 'ok'
 }
 
 function installDeno() {
-	echo -e "\e[34mInstalling Deno...\e[0m"
+	echo -e "\e[33mInstalling Deno...\e[0m"
 	if command_exists deno; then
 		echo "Deno already installed. Skipping..."
 	else
@@ -97,7 +96,7 @@ function installDeno() {
 }
 
 function installNode() {
-	echo -e "\e[34mInstalling Node.js...\e[0m"
+	echo -e "\e[33mInstalling Node.js...\e[0m"
 	if command_exists node; then
 		echo "Node.js already installed. Skipping..."
 	else
@@ -111,7 +110,8 @@ function installNode() {
 
 function installDotfiles() {
 	# Move old files to backup folder
-	echo -e "\e[34mMoving old files to backup folder...\e[0m"
+	echo -e "\e[33mInstalling dotfiles...\e[0m"
+	echo "Moving old files to backup folder..."
 	for file in $FILES; do
 		createBackup "$HOME" "$file"
 	done
@@ -119,15 +119,15 @@ function installDotfiles() {
 	createBackup "$ZSHTHEMESDIR" "adesis.zsh-theme"
 
 	# Create sylinks
-	echo -e "\e[34mCreating symlinks...\e[0m"
+	echo -e "Creating symlinks..."
 
+	mkdir -p "$VIMDIR"
+	createSymlink "$DOTDIR/nvim/init.lua" "$VIMDIR/init.lua"
 	createSymlink "$DOTDIR/sh/bash.bashrc" "$HOME/.bashrc"
 	createSymlink "$DOTDIR/sh/zsh.zshrc" "$HOME/.zshrc"
 	createSymlink "$DOTDIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 	createSymlink "$DOTDIR/sh/adesis.zsh-theme" "$ZSHTHEMESDIR/adesis.zsh-theme"
-
-	mkdir -p "$VIMDIR"
-	createSymlink "$DOTDIR/nvim/init.lua" "$VIMDIR/init.lua"
+	echo -e "\e[32mDotfiles ok!\e[0m"
 }
 
 function main() {
