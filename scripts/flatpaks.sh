@@ -4,12 +4,17 @@ IFS="#"
 APPS=(
 	"BitWarden - Password manager#com.bitwarden.desktop"
 	"Contrast - Checks contrast between two colors#org.gnome.design.Contrast"
+	"Escambo - HTTP API testing#io.github.cleomenezesjr.Escambo"
 	"EyeDropper - Color picker#com.github.finefindus.eyedropper"
 	"FlatSeal - Flatpak apps permissions GUI#com.github.tchx84.Flatseal"
 	"Gimp - Image editor#org.gimp.GIMP"
 	"Inkscape - Vector graphics#org.inkscape.Inkscape"
 	"Krita - Digital painting#org.kde.krita"
+	"MongoDBCompass - MongoDB GUI#com.mongodb.Compass"
 	"PinUp - Customize your app list#io.github.fabrialberio.pinapp"
+	"Postman - API testing#com.getpostman.Postman"
+	"Psequel - PostgreSQL GUI#me.ppvan.psequel"
+	"RedisInsight - Redis GUI#com.redis.RedisInsight"
 	"Stimulator - Keeps your computer awake#io.github.sigmasd.stimulator"
 	"Upscayl - AI Image Upscaler#org.upscayl.Upscayl"
 	"Whaler - Docker GUI#com.github.sdv43.whaler"
@@ -42,8 +47,8 @@ function main() {
 		echo "Select the apps you want to install"
 		for i in "${!APPS[@]}"; do
 			name=$(getName "${APPS[i]}")
-			[ $pointer -eq "$i" ] && marker=">" || marker=" "
-			[ "${choices[i]}" ]  && bullet="+)" || bullet=" )"
+			[ $pointer -eq "$i" ] && marker="»" || marker=" "
+			[ "${choices[i]}" ]  && bullet="✚" || bullet="·"
 			echo "$marker $bullet $name"
 		done
 		[[ "$msg" ]] && echo "$msg"
@@ -80,9 +85,10 @@ function main() {
 	}
 
 	prompt="
-Use arrows and h,j,k,l to move and check/uncheck options.
-Space to toggle option.
-ENTER when done
+⬆ ⬇ 🅹 🅺 : move selector
+⬅ ⮕ 🅷 🅻 : uncheck and check option
+ ❪SPACE❫: toggle option
+ ❪ENTER❫: install selected apps
 "
 	while menu && read -s -n 1 -rp "$prompt" key && [[ "$key" ]]; do
 		case "$key" in
