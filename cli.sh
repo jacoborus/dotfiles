@@ -20,9 +20,8 @@ function createBackup() {
 	local ORIGIN="$1/$2"
 	if [ -e "$ORIGIN" ]; then
 		local DESTINATION="$BACKUPDIR/$2"
-		echo "'$ORIGIN' => '$DESTINATION'"
 		mkdir -p "$BACKUPDIR"
-		mv "$ORIGIN" "$DESTINATION"
+		mv -f "$ORIGIN" "$DESTINATION"
 	fi
 }
 
@@ -32,7 +31,7 @@ function createBackup() {
 function createSymlink() {
 	local ORIGIN="$1"
 	local LINK="$2"
-	ln -s -v "$LINK" "$ORIGIN"
+	ln -s "$ORIGIN" "$LINK" 
 }
 
 function installBasicSoftware() {
@@ -121,13 +120,12 @@ function installDotfiles() {
 	# Create sylinks
 	echo -e "\e[34mCreating symlinks...\e[0m"
 
+	mkdir -p "$VIMDIR"
+	createSymlink "$DOTDIR/nvim/init.lua" "$VIMDIR/init.lua"
 	createSymlink "$DOTDIR/sh/bash.bashrc" "$HOME/.bashrc"
 	createSymlink "$DOTDIR/sh/zsh.zshrc" "$HOME/.zshrc"
 	createSymlink "$DOTDIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 	createSymlink "$DOTDIR/sh/adesis.zsh-theme" "$ZSHTHEMESDIR/adesis.zsh-theme"
-
-	mkdir -p "$VIMDIR"
-	createSymlink "$DOTDIR/nvim/init.lua" "$VIMDIR/init.lua"
 }
 
 function main() {
