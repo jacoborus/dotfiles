@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 Nmap("gq", ":q<CR>", "Quit file")
-Nmap("<leader><cr>", ":nohlsearch<CR>", "Clear search higlights")
+-- Nmap("<leader><cr>", ":nohlsearch<CR>", "Clear search higlights")-- moved to plugins.lua/noice
 Nmap("<leader>s", ":w<CR>", "Write file to disk")
 -- vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 

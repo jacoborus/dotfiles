@@ -135,6 +135,15 @@ require("lazy").setup({
 			--   If not available, we use `mini` as the fallback
 			"rcarriga/nvim-notify",
 		},
+		config = function()
+			require("noice").setup({})
+			local notify = require("notify")
+			local clearclutter = function()
+				notify.dismiss()
+				vim.cmd.noh()
+			end
+			Nmap("<leader><CR>", clearclutter, "Clear search higlights and notifications")
+		end,
 	},
 
 	{ -- Autocompletion
