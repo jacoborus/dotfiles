@@ -79,13 +79,18 @@ vim.opt.updatetime = 300
 -- always show signcolumns
 vim.opt.signcolumn = "yes"
 
-vim.cmd([[
-  xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+Nmap("<leader><CR>", function()
+	require("notify").dismiss()
+	vim.cmd.noh()
+end, "Clear search higlights and notifications")
 
-  function! ExecuteMacroOverVisualRange()
-    echo "@".getcmdline()
-    execute ":'<,'>normal @".nr2char(getchar())
-  endfunction
+vim.cmd([[
+	xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+	function! ExecuteMacroOverVisualRange()
+		echo "@".getcmdline()
+		execute ":'<,'>normal @".nr2char(getchar())
+	endfunction
 ]])
 
 -- Automatically jump to the last place you’ve visited in a file

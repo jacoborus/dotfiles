@@ -14,6 +14,12 @@ require("mapping")
 require("lazy").setup({
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically,
 	"onsails/lspkind.nvim",
+	"christoomey/vim-tmux-navigator",
+	"AndrewRadev/tagalong.vim", -- Change an HTML opening tag and take the closing one along as well
+	"tpope/vim-surround",
+	"jiangmiao/auto-pairs",
+	"nvim-lualine/lualine.nvim", -- Fancier statusline,
+
 	{
 		"gerw/vim-HiLinkTrace",
 		config = function()
@@ -22,23 +28,18 @@ require("lazy").setup({
 			Nmap("<leader>hi", ":Inspect<CR>", "Inspect treesitter highlight_group")
 		end,
 	},
-	"christoomey/vim-tmux-navigator",
-	"AndrewRadev/tagalong.vim", -- Change an HTML opening tag and take the closing one along as well
-	"tpope/vim-surround",
+
 	{
 		"dyng/ctrlsf.vim",
 		config = function()
 			vim.g.ctrlsf_auto_focus = { at = "start" }
-			Nmap("<leader>ff", ":CtrlSF<space>")
-			Nmap("<leader>fo", ":CtrlSFOpen<cr>")
-			Nmap("<leader>ft", ":CtrlSFToggle<cr>")
+			Nmap("<leader>ff", ":CtrlSF<space>", "CtrlSF")
+			Nmap("<leader>fo", ":CtrlSFOpen<cr>", "CtrlSF [O]pen")
+			Nmap("<leader>ft", ":CtrlSFToggle<cr>", "CtrlSF [T]oggle")
 		end,
 	},
-	"jiangmiao/auto-pairs",
-	"nvim-lualine/lualine.nvim", -- Fancier statusline,
 
-	{
-		-- Add indentation guides even on blank lines,
+	{ -- Add indentation guides even on blank lines,
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		opts = {
@@ -52,8 +53,7 @@ require("lazy").setup({
 
 	{ "numToStr/Comment.nvim", opts = {} },
 
-	{
-		-- 'jacoborus/tender.vim',
+	{ -- 'jacoborus/tender.vim',
 		dir = "~/dev/tender",
 
 		config = function()
@@ -70,13 +70,10 @@ require("lazy").setup({
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			-- Automatically install LSPs and related tools to stdpath for neovim
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"folke/neodev.nvim",
-
-			-- Useful status updates for LSP.
 			{ "j-hui/fidget.nvim", opts = {} },
 		},
 	},
@@ -124,26 +121,11 @@ require("lazy").setup({
 	{ -- notifications, messages, cmdline and the popupmenu
 		"folke/noice.nvim",
 		event = "VeryLazy",
-		opts = {
-			-- add any options here
-		},
+		opts = {},
 		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
 			"rcarriga/nvim-notify",
 		},
-		config = function()
-			require("noice").setup({})
-			local notify = require("notify")
-			local clearclutter = function()
-				notify.dismiss()
-				vim.cmd.noh()
-			end
-			Nmap("<leader><CR>", clearclutter, "Clear search higlights and notifications")
-		end,
 	},
 
 	{ -- Autocompletion
@@ -168,6 +150,10 @@ require("lazy").setup({
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context",
+		},
 		config = function()
 			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 			---@diagnostic disable-next-line: missing-fields
@@ -179,10 +165,6 @@ require("lazy").setup({
 				indent = { enable = true },
 			})
 		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"nvim-treesitter/nvim-treesitter-context",
-		},
 	},
 
 	{ -- the file tree
@@ -217,7 +199,6 @@ require("lazy").setup({
 	-- Git related plugins
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
-
 	{ "lewis6991/gitsigns.nvim" },
 
 	{ -- Useful plugin to show you pending keybinds.
@@ -250,17 +231,12 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
-
 				build = "make",
-
 				-- `cond` determines whether this plugin should be installed and loaded.
 				cond = vim.fn.executable("make") == 1,
 			},
-
 			{ "nvim-telescope/telescope-ui-select.nvim" },
-
-			-- Useful for getting pretty icons, but requires a Nerd Font.
-			{
+			{ -- Pretty icons, requires a Nerd Font.
 				"nvim-tree/nvim-web-devicons",
 				enabled = vim.g.have_nerd_font,
 			},
@@ -270,11 +246,7 @@ require("lazy").setup({
 	{ -- Zen Mode
 		"folke/zen-mode.nvim",
 		config = function()
-			require("zen-mode").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			require("zen-mode").setup({})
 		end,
 	},
 
@@ -291,7 +263,6 @@ require("lazy").setup({
 		dependencies = {
 			{
 				"zbirenbaum/copilot-cmp",
-				-- after = { "copilot.lua" },
 				config = function()
 					require("copilot_cmp").setup()
 				end,
@@ -300,8 +271,6 @@ require("lazy").setup({
 	},
 }, {
 	ui = {
-		-- If you have a Nerd Font, set icons to an empty table which will use the
-		-- default lazy.nvim defined Nerd Font icons otherwise define a unicode icons table
 		icons = vim.g.have_nerd_font and {} or {
 			cmd = "⌘",
 			config = "🛠",
