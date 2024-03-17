@@ -4,6 +4,7 @@ IFS="#"
 APPS=(
 	"BitWarden - Password manager#com.bitwarden.desktop"
 	"Contrast - Checks contrast between two colors#org.gnome.design.Contrast"
+	"Drawing - Simple drawing app#com.github.maoschanz.drawing"
 	"Escambo - HTTP API testing#io.github.cleomenezesjr.Escambo"
 	"EyeDropper - Color picker#com.github.finefindus.eyedropper"
 	"FlatSeal - Flatpak apps permissions GUI#com.github.tchx84.Flatseal"
@@ -20,13 +21,6 @@ APPS=(
 	"Whaler - Docker GUI#com.github.sdv43.whaler"
 )
 
-function installFlatpak() {
-	name=$(getName "$1")
-	pak=$(getPak "$1")
-	# echo -e "\e[34mInstalling $name from $pak...\e[0m"
-	flatpak install flathub "$pak"
-}
-
 function getName(){
 	read -ra parts <<< "$1"
 	echo "${parts[0]}"
@@ -35,6 +29,11 @@ function getName(){
 function getPak(){
 	read -ra parts <<< "$1"
 	echo "${parts[1]}"
+}
+
+function installFlatpak() {
+	pak=$(getPak "$1")
+	flatpak install flathub "$pak"
 }
 
 
@@ -64,7 +63,7 @@ function main() {
 	}
 
 	function moveDown() {
-    len=${#APPS[@]}-1
+		len=${#APPS[@]}-1
 		[[ $pointer -lt len ]] && ((pointer++))
 		clear -x
 	}
@@ -96,11 +95,11 @@ function main() {
 			"l") selectChoice && continue;;
 			"h") unselectChoice && continue;;
 			"j") moveDown && continue;;
-			"k") moveUp &&	continue;;
+			"k") moveUp && continue;;
 			$'\x1B') # Check for escape sequence (arrow keys)
 				read -r -s -n 2 -t 0.001 key # Read next two characters
 				case "$key" in
-					"[A")	moveUp &&	continue;; # Up arrow pressed
+					"[A") moveUp && continue;; # Up arrow pressed
 					"[B") moveDown && continue;; # Down arrow pressed
 				esac
 			;;
@@ -115,10 +114,9 @@ function main() {
 	done
 	echo ""
 
-  for ((num=0; num <= ${#APPS[@]} -1; num++))
-  do
-	  [ -n "${choices[$num]}" ] && installFlatpak "${APPS[$num]}"
-  done
+	for ((num=0; num <= ${#APPS[@]} -1; num++)); do
+		[ -n "${choices[$num]}" ] && installFlatpak "${APPS[$num]}"
+	done
 }
 
 main
