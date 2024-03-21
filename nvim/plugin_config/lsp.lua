@@ -54,7 +54,6 @@ local servers = {
 	cssls = {},
 	dockerls = {},
 	emmet_ls = {},
-	eslint = {},
 	gopls = {},
 	golangci_lint_ls = {},
 	html = {},
@@ -70,7 +69,6 @@ local servers = {
 		},
 	},
 	sqlls = {},
-	-- tsserver = {},
 	vimls = {},
 	volar = {},
 	yamlls = {},
@@ -84,7 +82,15 @@ local servers = {
 require("neodev").setup()
 
 -- Setup mason so it can manage external tooling
-require("mason").setup()
+require("mason").setup({
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
+		},
+	},
+})
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require("mason-lspconfig")
@@ -115,6 +121,7 @@ lspconfig.volar.setup({
 	-- autostart = false,
 	capabilities = Capabilities,
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+	root_dir = lspconfig.util.root_pattern("vite.config.ts"),
 })
 
 -- denols
@@ -125,12 +132,25 @@ lspconfig.denols.setup({
 })
 
 -- -- tsserver
--- lspconfig.tsserver.setup {
---   on_attach = on_attach,
---   capabilities = Capabilities,
---   autostart = false,
---   root_dir = lspconfig.util.root_pattern("package.json"),
--- }
+-- lspconfig.tsserver.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = Capabilities,
+-- 	autostart = false,
+-- 	root_dir = lspconfig.util.root_pattern("tsconfig.json"),
+-- })
+
+-- eslint
+lspconfig.eslint.setup({
+	on_attach = on_attach,
+	capabilities = Capabilities,
+	root_dir = lspconfig.util.root_pattern(
+		".eslintrc",
+		".eslintrc.js",
+		".eslintrc.yaml",
+		".eslintrc.yml",
+		".eslintrc.json"
+	),
+})
 
 vim.g.zig_fmt_autosave = 0
 
