@@ -49,16 +49,19 @@ end, { desc = "Format current buffer with LSP" })
 -- LSP servers in the following table  will automatically be installed.
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
+-- only servers from this list are available for autoinstall
+-- https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
 local servers = {
+	autotools_ls = {}, -- Make
 	bashls = {},
 	cssls = {},
 	dockerls = {},
 	emmet_ls = {},
+	eslint = {},
 	gopls = {},
 	golangci_lint_ls = {},
 	html = {},
 	jsonls = {},
-	-- rust_analyzer = {},
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false },
@@ -68,9 +71,11 @@ local servers = {
 			},
 		},
 	},
+	marksman = {},
 	sqlls = {},
+	-- tsserver = {},
 	vimls = {},
-	volar = {},
+	volar = {}, -- Vue
 	yamlls = {},
 	-- why do these not work?
 	-- shfmt = {},
@@ -82,15 +87,7 @@ local servers = {
 require("neodev").setup()
 
 -- Setup mason so it can manage external tooling
-require("mason").setup({
-	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗",
-		},
-	},
-})
+require("mason").setup()
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require("mason-lspconfig")
@@ -117,11 +114,10 @@ mason_lspconfig.setup_handlers({
 
 -- volar
 lspconfig.volar.setup({
-	on_attach = on_attach,
+	-- on_attach = on_attach,
 	-- autostart = false,
 	capabilities = Capabilities,
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-	root_dir = lspconfig.util.root_pattern("vite.config.ts"),
 })
 
 -- denols
@@ -132,25 +128,12 @@ lspconfig.denols.setup({
 })
 
 -- -- tsserver
--- lspconfig.tsserver.setup({
--- 	on_attach = on_attach,
--- 	capabilities = Capabilities,
--- 	autostart = false,
--- 	root_dir = lspconfig.util.root_pattern("tsconfig.json"),
--- })
-
--- eslint
-lspconfig.eslint.setup({
-	on_attach = on_attach,
-	capabilities = Capabilities,
-	root_dir = lspconfig.util.root_pattern(
-		".eslintrc",
-		".eslintrc.js",
-		".eslintrc.yaml",
-		".eslintrc.yml",
-		".eslintrc.json"
-	),
-})
+-- lspconfig.tsserver.setup {
+--   on_attach = on_attach,
+--   capabilities = Capabilities,
+--   autostart = false,
+--   root_dir = lspconfig.util.root_pattern("package.json"),
+-- }
 
 vim.g.zig_fmt_autosave = 0
 
