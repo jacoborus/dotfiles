@@ -64,7 +64,22 @@ require("lazy").setup({
 				vim.notify("colorscheme " .. colorscheme .. " not found!")
 				return
 			end
+			-- vim.cmd([[highlight Headline guibg=#464632]])
 		end,
+	},
+
+	{ -- headlines for markdown files
+		"lukas-reineke/headlines.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			vim.cmd([[highlight Headline guibg=#464632]])
+			require("headlines").setup({
+				markdown = {
+					headline_highlights = { "Headline" },
+					bullets = { "⬤", "✚", "🞁", "⯁", "⬟", "⬢" },
+				},
+			})
+		end, -- or `opts = {}`
 	},
 
 	{ -- LSP Configuration & Plugins

@@ -112,13 +112,13 @@ mason_lspconfig.setup_handlers({
 	end,
 })
 
--- volar
-lspconfig.volar.setup({
-	-- on_attach = on_attach,
-	-- autostart = false,
-	capabilities = Capabilities,
-	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-})
+-- -- volar
+-- lspconfig.volar.setup({
+-- 	on_attach = on_attach,
+-- 	-- autostart = false,
+-- 	capabilities = Capabilities,
+-- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+-- })
 
 -- denols
 lspconfig.denols.setup({
