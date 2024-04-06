@@ -42,10 +42,12 @@ function installBasicSoftware() {
 			cheat \
 			curl \
 			fd-find \
+			gcc \
 			git-extras \
 			golang \
 			jq \
 			luarocks \
+			make \
 			meld \
 			neofetch \
 			neovim \
@@ -56,6 +58,7 @@ function installBasicSoftware() {
 			tmux \
 			trash-cli \
 			tree \
+			wget \
 			whois \
 			xclip \
 			xsel \
@@ -106,7 +109,7 @@ function installNode() {
 	else
 		sh -c "curl -fsSL https://rpm.nodesource.com/setup_current.x | sudo bash -"
 		sh -c 'sudo dnf install -y nodejs'
-		mkdir "${HOME}/.npm-packages" -p
+		mkdir "${HOME}/.npm-packages/bin" -p
 		sh -c "npm config set prefix '$HOME/.npm-packages/'"
 		sh -c "npm i -g sloc neovim"
 	fi
