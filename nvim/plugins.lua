@@ -76,7 +76,7 @@ require("lazy").setup({
 			require("headlines").setup({
 				markdown = {
 					headline_highlights = { "Headline" },
-					bullets = { "⬤", "✚", "🞁", "⯁", "⬟", "⬢" },
+					bullets = { "✿", "❱", "⫼", "⫵", "⩨", "⩩" },
 				},
 			})
 		end, -- or `opts = {}`
