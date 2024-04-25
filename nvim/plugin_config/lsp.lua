@@ -73,7 +73,7 @@ local servers = {
 	},
 	marksman = {},
 	sqlls = {},
-	-- tsserver = {},
+	tsserver = {},
 	vimls = {},
 	volar = {}, -- Vue
 	yamlls = {},
@@ -112,13 +112,13 @@ mason_lspconfig.setup_handlers({
 	end,
 })
 
--- -- volar
--- lspconfig.volar.setup({
--- 	on_attach = on_attach,
--- 	-- autostart = false,
--- 	capabilities = Capabilities,
--- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
--- })
+-- volar
+lspconfig.volar.setup({
+	on_attach = on_attach,
+	-- autostart = false,
+	capabilities = Capabilities,
+	filetypes = { "typescript", "javascript", "vue" },
+})
 
 -- denols
 lspconfig.denols.setup({
@@ -127,13 +127,25 @@ lspconfig.denols.setup({
 	root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 })
 
--- -- tsserver
--- lspconfig.tsserver.setup {
---   on_attach = on_attach,
---   capabilities = Capabilities,
---   autostart = false,
---   root_dir = lspconfig.util.root_pattern("package.json"),
--- }
+local mason_registry = require("mason-registry")
+local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+	.. "/node_modules/@vue/language-server"
+-- tsserver
+lspconfig.tsserver.setup({
+	-- on_attach = on_attach,
+	-- capabilities = Capabilities,
+	root_dir = lspconfig.util.root_pattern("tsconfig.json"),
+	init_options = {
+		plugins = {
+			{
+				name = "@vue/typescript-plugin",
+				location = vue_language_server_path,
+				languages = { "vue" },
+			},
+		},
+	},
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+})
 
 vim.g.zig_fmt_autosave = 0
 
