@@ -155,6 +155,13 @@ require("lazy").setup({
 		},
 	},
 
+	{
+		"dmmulroy/ts-error-translator.nvim",
+		config = function()
+			require("ts-error-translator").setup()
+		end,
+	},
+
 	{ -- notifications, messages, cmdline and the popupmenu
 		"folke/noice.nvim",
 		event = "VeryLazy",
