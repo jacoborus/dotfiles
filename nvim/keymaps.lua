@@ -43,8 +43,8 @@ Nmap("<C-k>", "<C-W>k")
 Nmap("<C-l>", "<C-W>l")
 
 -- tab navigation with alt+l / alt+h
-Nmap("<m-h>", ":tabprev<CR>")
-Nmap("<m-l>", ":tabnext<CR>")
+Nmap("<m-h>", ":tabprev<CR>", "previous tab")
+Nmap("<m-l>", ":tabnext<CR>", "next tab")
 
 -- " move up/down single lines or selected ones
 Nmap("J", ":m .+1<CR>==", "move line down")
