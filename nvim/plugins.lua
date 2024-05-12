@@ -23,6 +23,8 @@ require("lazy").setup({
 
 	{
 		"folke/neoconf.nvim",
+		cmd = "Neoconf",
+		dependencies = { "nvim-lspconfig" },
 		config = function()
 			require("neoconf").setup({
 				-- override any of the default settings here
@@ -159,7 +161,7 @@ require("lazy").setup({
 				dockerls = {},
 				emmet_ls = {},
 				denols = {
-					root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+					-- root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
 				},
 				eslint = {},
 				gopls = {},
@@ -183,8 +185,8 @@ require("lazy").setup({
 				marksman = {},
 				sqlls = {},
 				tsserver = {
-					root_dir = require("lspconfig").util.root_pattern("tsconfig.json"),
-					single_file_support = false,
+					-- root_dir = require("lspconfig").util.root_pattern("tsconfig.json"),
+					-- single_file_support = false,
 				},
 				vimls = {},
 				-- volar = {}, -- Vue
