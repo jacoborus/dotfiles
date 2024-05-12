@@ -72,15 +72,9 @@ require("lazy").setup({
 
 	{ -- 'jacoborus/tender.vim',
 		dir = "~/dev/tender",
-
 		config = function()
 			vim.o.background = "dark"
-			local colorscheme = "tender"
-			local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-			if not ok then
-				vim.notify("colorscheme " .. colorscheme .. " not found!")
-				return
-			end
+			vim.cmd("colorscheme tender")
 			vim.cmd([[highlight Headline guibg=#464632]])
 		end,
 	},
