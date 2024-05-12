@@ -24,7 +24,7 @@ require("lazy").setup({
 	{
 		"folke/neoconf.nvim",
 		cmd = "Neoconf",
-		dependencies = { "nvim-lspconfig" },
+		dependencies = { "nvim-lspconfig", "williamboman/mason.nvim" },
 		config = function()
 			require("neoconf").setup({
 				-- override any of the default settings here
@@ -155,6 +155,7 @@ require("lazy").setup({
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 			local servers = {
+				astro = {},
 				autotools_ls = {}, -- Make
 				bashls = {},
 				cssls = {},
@@ -185,11 +186,23 @@ require("lazy").setup({
 				marksman = {},
 				sqlls = {},
 				tsserver = {
-					-- root_dir = require("lspconfig").util.root_pattern("tsconfig.json"),
-					-- single_file_support = false,
+					init_options = {
+						plugins = {
+							{
+								name = "@vue/typescript-plugin",
+								location = require("mason-registry")
+									.get_package("vue-language-server")
+									:get_install_path() .. "/node_modules/@vue/language-server",
+								languages = { "vue" },
+							},
+						},
+					},
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+					root_dir = require("lspconfig").util.root_pattern("tsconfig.json"),
+					single_file_support = false,
 				},
 				vimls = {},
-				-- volar = {}, -- Vue
+				volar = {}, -- Vue
 				yamlls = {},
 			}
 
