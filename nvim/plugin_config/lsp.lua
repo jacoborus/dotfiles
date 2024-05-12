@@ -63,11 +63,13 @@ local servers = {
 	html = {},
 	jsonls = {},
 	lua_ls = {
-		Lua = {
-			workspace = { checkThirdParty = false },
-			telemetry = { enable = false },
-			diagnostics = {
-				globals = { "vim" },
+		settings = {
+			Lua = {
+				workspace = { checkThirdParty = false },
+				telemetry = { enable = false },
+				diagnostics = {
+					globals = { "vim" },
+				},
 			},
 		},
 	},

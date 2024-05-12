@@ -3,3 +3,4 @@
 .tern-port
 secrets.*
 secret.*
+nvim/lazy-lock.json
