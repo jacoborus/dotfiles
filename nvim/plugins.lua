@@ -158,7 +158,9 @@ require("lazy").setup({
 				cssls = {},
 				dockerls = {},
 				emmet_ls = {},
-				denols = {},
+				denols = {
+					root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+				},
 				eslint = {},
 				gopls = {},
 				golangci_lint_ls = {},
@@ -180,7 +182,10 @@ require("lazy").setup({
 				},
 				marksman = {},
 				sqlls = {},
-				-- tsserver = {},
+				tsserver = {
+					root_dir = require("lspconfig").util.root_pattern("tsconfig.json"),
+					single_file_support = false,
+				},
 				vimls = {},
 				-- volar = {}, -- Vue
 				yamlls = {},
