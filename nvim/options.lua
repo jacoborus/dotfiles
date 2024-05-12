@@ -6,10 +6,11 @@ vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
+vim.g.have_nerd_font = true
 
 -- Make line numbers default
-vim.wo.number = true
-vim.wo.relativenumber = true
+vim.o.number = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = "a"
@@ -26,22 +27,31 @@ vim.o.ignorecase = true -- Case insensitive searching
 vim.o.smartcase = true -- UNLESS /C or capital in search
 vim.opt.hlsearch = true -- Highlight search results
 vim.opt.incsearch = true -- Find as you type
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = "split"
 -- vim.opt.lazyredraw       = true -- Don't redraw while executing macros
 vim.opt.magic = true -- For regular expressions turn magic on
 
 -- Decrease update time
 vim.o.updatetime = 250
+-- Keep signcolumn on by default
 vim.wo.signcolumn = "yes"
 
--- Wildmenu
-vim.o.wildmenu = true
-vim.o.wildignore = vim.o.wildignore .. "*/tmp/*,*.so,*.swp,*.zip"
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
+
+-- -- Wildmenu
+-- vim.o.wildmenu = true
+-- vim.o.wildignore = vim.o.wildignore .. "*/tmp/*,*.so,*.swp,*.zip"
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
 vim.opt.backspace = "2"
 vim.opt.showcmd = true
+
+vim.opt.showmode = false -- Don't show the mode, since it's already in the status line
 vim.opt.laststatus = 2
 vim.opt.autowrite = true
 vim.opt.autoread = true

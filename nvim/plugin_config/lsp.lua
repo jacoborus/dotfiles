@@ -73,9 +73,9 @@ local servers = {
 	},
 	marksman = {},
 	sqlls = {},
-	tsserver = {},
+	-- tsserver = {},
 	vimls = {},
-	volar = {}, -- Vue
+	-- volar = {}, -- Vue
 	yamlls = {},
 	-- why do these not work?
 	-- shfmt = {},
@@ -102,6 +102,10 @@ local lspconfig = require("lspconfig")
 
 lspconfig.zls.setup({})
 
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+local Capabilities = vim.lsp.protocol.make_client_capabilities()
+Capabilities = vim.tbl_deep_extend("force", Capabilities, require("cmp_nvim_lsp").default_capabilities())
+
 mason_lspconfig.setup_handlers({
 	function(server_name)
 		lspconfig[server_name].setup({
@@ -112,13 +116,13 @@ mason_lspconfig.setup_handlers({
 	end,
 })
 
--- volar
-lspconfig.volar.setup({
-	on_attach = on_attach,
-	-- autostart = false,
-	capabilities = Capabilities,
-	filetypes = { "typescript", "javascript", "vue" },
-})
+-- -- volar
+-- lspconfig.volar.setup({
+-- 	on_attach = on_attach,
+-- 	-- autostart = false,
+-- 	capabilities = Capabilities,
+-- 	filetypes = { "typescript", "javascript", "vue" },
+-- })
 
 -- denols
 lspconfig.denols.setup({
@@ -127,25 +131,25 @@ lspconfig.denols.setup({
 	root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 })
 
-local mason_registry = require("mason-registry")
-local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
-	.. "/node_modules/@vue/language-server"
--- tsserver
-lspconfig.tsserver.setup({
-	-- on_attach = on_attach,
-	-- capabilities = Capabilities,
-	root_dir = lspconfig.util.root_pattern("tsconfig.json"),
-	init_options = {
-		plugins = {
-			{
-				name = "@vue/typescript-plugin",
-				location = vue_language_server_path,
-				languages = { "vue" },
-			},
-		},
-	},
-	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-})
+-- local mason_registry = require("mason-registry")
+-- local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+-- 	.. "/node_modules/@vue/language-server"
+-- -- tsserver
+-- lspconfig.tsserver.setup({
+-- 	-- on_attach = on_attach,
+-- 	-- capabilities = Capabilities,
+-- 	root_dir = lspconfig.util.root_pattern("tsconfig.json"),
+-- 	init_options = {
+-- 		plugins = {
+-- 			{
+-- 				name = "@vue/typescript-plugin",
+-- 				location = vue_language_server_path,
+-- 				languages = { "vue" },
+-- 			},
+-- 		},
+-- 	},
+-- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+-- })
 
 vim.g.zig_fmt_autosave = 0
 

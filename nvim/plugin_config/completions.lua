@@ -2,12 +2,8 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 
-cmp.setup({})
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-Capabilities = vim.lsp.protocol.make_client_capabilities()
-Capabilities = require("cmp_nvim_lsp").default_capabilities(Capabilities)
-
 local luasnip = require("luasnip")
+luasnip.config.setup({})
 
 local has_words_before = function()
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -24,6 +20,7 @@ cmp.setup({
 			luasnip.lsp_expand(args.body)
 		end,
 	},
+	completion = { completeopt = "menu,menuone,noinsert" },
 	mapping = cmp.mapping.preset.insert({
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
