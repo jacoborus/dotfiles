@@ -291,7 +291,7 @@ require("lazy").setup({
 				yaml = { "yamlfix" },
 				-- json = { { "prettierd", "prettier" } },
 				-- javascript = { { "prettierd", "prettier" } },
-				-- typescript = { { "prettier", "prettierd" } },
+				typescript = { { "prettier", "prettierd" } },
 			},
 		},
 	},
