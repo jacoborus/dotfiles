@@ -53,6 +53,7 @@ require("lazy").setup({
 
 	{ -- Add indentation guides even on blank lines,
 		"lukas-reineke/indent-blankline.nvim",
+		version = "3.5.6",
 		main = "ibl",
 		config = function()
 			local highlight = {
@@ -278,7 +279,7 @@ require("lazy").setup({
 		opts = {
 			notify_on_error = false,
 			format_on_save = {
-				timeout_ms = 500,
+				timeout_ms = 1000,
 				lsp_fallback = true,
 			},
 			formatters_by_ft = {
@@ -287,11 +288,12 @@ require("lazy").setup({
 				markdown = { "deno_fmt" },
 				python = { "isort", "black" },
 				bash = { "shfmt" },
-				vue = { { "prettierd", "prettier" } },
+				vue = { "eslint_d", "prettier" },
 				yaml = { "yamlfix" },
 				-- json = { { "prettierd", "prettier" } },
-				-- javascript = { { "prettierd", "prettier" } },
-				typescript = { { "prettier", "prettierd" } },
+				javascript = { "eslint_d", "prettier" },
+				typescript = { "eslint_d", "prettier" },
+				tsx = { "eslint_d", "prettier" },
 			},
 		},
 	},
@@ -464,7 +466,16 @@ require("lazy").setup({
 			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "bash", "c", "html", "lua", "markdown", "vim", "vimdoc" },
+				ensure_installed = {
+					"bash",
+					"c",
+					"html",
+					"lua",
+					"markdown",
+					"vim",
+					"vimdoc",
+					"tsx",
+				},
 				-- Autoinstall languages that are not installed
 				auto_install = true,
 				highlight = { enable = true },
@@ -510,23 +521,19 @@ require("lazy").setup({
 	{ -- Useful plugin to show you pending keybinds.
 		-- :checkhealth which-key
 		"folke/which-key.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
+		opts = {},
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
 		end,
-		config = function()
-			require("which-key").setup()
-
-			-- Document existing key chains
-			require("which-key").register({
-				["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-				["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-				["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-				["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-				["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
-			})
-		end,
+		keys = {
+			{ "<leader>c", group = "[C]ode", hidden = true },
+			{ "<leader>d", group = "[D]ocument", hidden = true },
+			{ "<leader>r", group = "[R]ename", hidden = true },
+			{ "<leader>s", group = "[S]earch", hidden = true },
+			{ "<leader>w", group = "[W]orkspace", hidden = true },
+		},
 	},
 
 	{ -- Fuzzy Finder (files, lsp, etc)
