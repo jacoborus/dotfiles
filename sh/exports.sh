@@ -25,3 +25,5 @@ fi
 # docker
 export PATH=/usr/bin:$PATH
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
+
+export PATH="/opt/nvim-linux64/bin:$PATH"

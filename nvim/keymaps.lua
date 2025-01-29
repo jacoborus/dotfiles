@@ -41,6 +41,10 @@ Nmap("<C-h>", "<C-W>h")
 Nmap("<C-j>", "<C-W>j")
 Nmap("<C-k>", "<C-W>k")
 Nmap("<C-l>", "<C-W>l")
+Vmap("<C-h>", "<C-W>h")
+Vmap("<C-j>", "<C-W>j")
+Vmap("<C-k>", "<C-W>k")
+Vmap("<C-l>", "<C-W>l")
 
 -- tab navigation with alt+l / alt+h
 Nmap("<m-h>", ":tabprev<CR>", "previous tab")

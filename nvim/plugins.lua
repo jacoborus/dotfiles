@@ -13,14 +13,6 @@ vim.g.windowswap_map_keys = 0 -- prevent default bindings
 require("mapping")
 
 require("lazy").setup({
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically,
-	"onsails/lspkind.nvim",
-	"christoomey/vim-tmux-navigator",
-	"AndrewRadev/tagalong.vim", -- Change an HTML opening tag and take the closing one along as well
-	"tpope/vim-surround",
-	"jiangmiao/auto-pairs",
-	"nvim-lualine/lualine.nvim", -- Fancier statusline,
-
 	{
 		"folke/neoconf.nvim",
 		cmd = "Neoconf",
@@ -31,6 +23,14 @@ require("lazy").setup({
 			})
 		end,
 	},
+
+	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically,
+	"onsails/lspkind.nvim",
+	"christoomey/vim-tmux-navigator",
+	"AndrewRadev/tagalong.vim", -- Change an HTML opening tag and take the closing one along as well
+	"tpope/vim-surround",
+	"jiangmiao/auto-pairs",
+	"nvim-lualine/lualine.nvim", -- Fancier statusline,
 
 	{
 		"gerw/vim-HiLinkTrace",
@@ -159,13 +159,13 @@ require("lazy").setup({
 				astro = {},
 				autotools_ls = {}, -- Make
 				bashls = {},
-				cssls = {},
+				-- cssls = {},
 				dockerls = {},
 				emmet_ls = {},
 				denols = {
 					root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
 				},
-				eslint = {},
+				-- eslint = {},
 				gopls = {},
 				golangci_lint_ls = {},
 				html = {},
@@ -186,7 +186,7 @@ require("lazy").setup({
 				},
 				marksman = {},
 				sqlls = {},
-				tsserver = {
+				ts_ls = {
 					init_options = {
 						plugins = {
 							{
@@ -225,7 +225,7 @@ require("lazy").setup({
 						local server = servers[server_name] or {}
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for tsserver)
+						-- certain features of an LSP (for example, turning off formatting for ts_ls)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 						require("lspconfig")[server_name].setup(server)
 					end,
@@ -255,19 +255,19 @@ require("lazy").setup({
 		"kristijanhusak/vim-dadbod-ui",
 		dependencies = {
 			{ "tpope/vim-dadbod", lazy = true },
-			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql", "sqlite" }, lazy = true },
 		},
-		-- cmd = {
-		-- 	"DBUI",
-		-- 	"DBUIToggle",
-		-- 	"DBUIAddConnection",
-		-- 	"DBUIFindBuffer",
-		-- },
+		cmd = {
+			"DBUI",
+			"DBUIToggle",
+			"DBUIAddConnection",
+			"DBUIFindBuffer",
+		},
 		init = function()
 			-- Your DBUI configuration
 			vim.g.db_ui_use_nerd_fonts = 1
 			vim.cmd([[
-				autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+				autocmd FileType sql,mysql,plsql,sqlite lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
 			]])
 		end,
 	},
@@ -528,11 +528,11 @@ require("lazy").setup({
 			vim.o.timeoutlen = 300
 		end,
 		keys = {
-			{ "<leader>c", group = "[C]ode", hidden = true },
-			{ "<leader>d", group = "[D]ocument", hidden = true },
-			{ "<leader>r", group = "[R]ename", hidden = true },
-			{ "<leader>s", group = "[S]earch", hidden = true },
-			{ "<leader>w", group = "[W]orkspace", hidden = true },
+			-- { "<leader>c", group = "[C]ode", hidden = true },
+			-- { "<leader>d", group = "[D]ocument", hidden = true },
+			-- { "<leader>r", group = "[R]ename", hidden = true },
+			-- { "<leader>s", group = "[S]earch", hidden = true },
+			-- { "<leader>w", group = "[W]orkspace", hidden = true },
 		},
 	},
 
@@ -581,5 +581,47 @@ require("lazy").setup({
 				end,
 			},
 		},
+	},
+
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		dependencies = {
+			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+		},
+		build = "make tiktoken", -- Only on MacOS or Linux
+		opts = {
+			-- See Configuration section for options
+			model = "claude-3.5-sonnet",
+		},
+		config = function(_, opts)
+			require("CopilotChat").setup(opts)
+		end,
+		mappings = {
+			complete = {
+				insert = "<C-i>",
+			},
+		},
+		keys = {
+			{
+				"<leader>cc",
+				function()
+					local actions = require("CopilotChat.actions")
+					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+				end,
+				desc = "CopilotChat - Prompt actions",
+				mode = "n", -- Normal mode
+			},
+			{
+				"<leader>cc",
+				function()
+					local actions = require("CopilotChat.actions")
+					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+				end,
+				desc = "CopilotChat - Prompt actions",
+				mode = "v", -- Visual mode
+			},
+		},
+		-- See Commands section for default commands if you want to lazy load on them
 	},
 })

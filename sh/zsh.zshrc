@@ -35,3 +35,12 @@ set -o vi
 source $ZSH/oh-my-zsh.sh
 
 source "$HOME/dotfiles/sh/exports.sh"
+
+# pnpm
+export PNPM_HOME="/home/jacobo/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="/opt/nvim-linux64/bin:$PATH"
