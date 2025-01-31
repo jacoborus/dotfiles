@@ -41,3 +41,5 @@ if ! shopt -oq posix; then
 fi
 
 source "$HOME/dotfiles/sh/exports.sh"
+. "/home/jacobo/.deno/env"
+source /home/jacobo/.local/share/bash-completion/completions/deno.bash

@@ -82,8 +82,9 @@ require("lazy").setup({
 
 	{ "numToStr/Comment.nvim", opts = {} },
 
-	{ -- 'jacoborus/tender.vim',
-		dir = "~/dev/tender",
+	{
+		"jacoborus/tender.vim",
+		-- dir = "~/dev/tender",
 		config = function()
 			vim.o.background = "dark"
 			vim.cmd("colorscheme tender")
