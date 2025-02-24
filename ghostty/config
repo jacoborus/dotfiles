@@ -1,0 +1,12 @@
+# Ghostty Docs https://ghostty.org/docs/config.
+#
+command=tmux new-session -A -s main
+
+font-family = CodeNewRoman Nerd Font Mono
+font-size = 16
+background = "#2a2a2a"
+
+gtk-titlebar = false
+window-padding-x = 4
+window-padding-y = 4
+window-padding-balance = true
