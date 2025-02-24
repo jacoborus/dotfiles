@@ -7,6 +7,7 @@ BACKUPDIR="$HOME/dotfiles_old/$TODAY"
 DOTDIR="$HOME/dotfiles"
 VIMDIR="$HOME/.config/nvim"
 ZSHTHEMESDIR=$HOME/.oh-my-zsh/themes
+GHOSTTYDIR=$HOME/.config/ghostty
 
 # Checks if the command $1 exists
 command_exists() {
@@ -31,7 +32,7 @@ function createBackup() {
 function createSymlink() {
 	local ORIGIN="$1"
 	local LINK="$2"
-	ln -s "$ORIGIN" "$LINK" 
+	ln -s "$ORIGIN" "$LINK"
 }
 
 function installBasicSoftware() {
@@ -134,6 +135,8 @@ function installDotfiles() {
 	createSymlink "$DOTDIR/sh/zsh.zshrc" "$HOME/.zshrc"
 	createSymlink "$DOTDIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 	createSymlink "$DOTDIR/sh/adesis.zsh-theme" "$ZSHTHEMESDIR/adesis.zsh-theme"
+	mkdir -p "$GHOSTTYDIR"
+	createSymlink "$DOTDIR/ghostty/config" "$GHOSTTYDIR/config"
 	echo -e "\e[32mDotfiles ok!\e[0m"
 }
 
