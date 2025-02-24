@@ -294,6 +294,7 @@ require("lazy").setup({
 				-- json = { { "prettierd", "prettier" } },
 				javascript = { "eslint_d", "prettier" },
 				typescript = { "eslint_d", "prettier" },
+				html = { "eslint_d", "prettier" },
 				tsx = { "eslint_d", "prettier" },
 			},
 		},
@@ -511,7 +512,18 @@ require("lazy").setup({
 		end,
 	},
 
-	"simrat39/symbols-outline.nvim",
+	{
+		"hedyhli/outline.nvim",
+		lazy = true,
+		cmd = { "Outline", "OutlineOpen" },
+		keys = {
+			{ "<leader>ot", "<cmd>Outline<CR>", desc = "Toggle outline" },
+		},
+		opts = {
+			-- Your setup opts here
+		},
+	},
+
 	"ziglang/zig.vim",
 
 	-- Git related plugins
@@ -584,45 +596,114 @@ require("lazy").setup({
 		},
 	},
 
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		dependencies = {
-			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-		},
-		build = "make tiktoken", -- Only on MacOS or Linux
-		opts = {
-			-- See Configuration section for options
-			model = "claude-3.5-sonnet",
-		},
-		config = function(_, opts)
-			require("CopilotChat").setup(opts)
-		end,
-		mappings = {
-			complete = {
-				insert = "<C-i>",
-			},
-		},
-		keys = {
-			{
-				"<leader>cc",
-				function()
-					local actions = require("CopilotChat.actions")
-					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-				end,
-				desc = "CopilotChat - Prompt actions",
-				mode = "n", -- Normal mode
-			},
-			{
-				"<leader>cc",
-				function()
-					local actions = require("CopilotChat.actions")
-					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-				end,
-				desc = "CopilotChat - Prompt actions",
-				mode = "v", -- Visual mode
-			},
-		},
-		-- See Commands section for default commands if you want to lazy load on them
-	},
+	-- {
+	-- 	"b0o/incline.nvim",
+	-- 	config = function()
+	-- 		require("incline").setup({
+	-- 			window = {
+	-- 				-- margin = {
+	-- 				-- 	vertical = 3,
+	-- 				-- 	horizontal = 4,
+	-- 				-- },
+	-- 				padding = 4,
+	-- 				placement = {
+	-- 					horizontal = "left",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- 	-- Optional: Lazy load Incline
+	-- 	event = "VeryLazy",
+	-- },
+
+	-- {
+	-- 	"CopilotC-Nvim/CopilotChat.nvim",
+	-- 	dependencies = {
+	-- 		{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+	-- 		{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+	-- 	},
+	-- 	build = "make tiktoken", -- Only on MacOS or Linux
+	-- 	opts = {
+	-- 		-- See Configuration section for options
+	-- 		model = "claude-3.5-sonnet",
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		require("CopilotChat").setup(opts)
+	-- 	end,
+	-- 	mappings = {
+	-- 		complete = {
+	-- 			insert = "<C-i>",
+	-- 		},
+	-- 	},
+	-- 	keys = {
+	-- 		{
+	-- 			"<leader>cc",
+	-- 			function()
+	-- 				local actions = require("CopilotChat.actions")
+	-- 				require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+	-- 			end,
+	-- 			desc = "CopilotChat - Prompt actions",
+	-- 			mode = "n", -- Normal mode
+	-- 		},
+	-- 		{
+	-- 			"<leader>cc",
+	-- 			function()
+	-- 				local actions = require("CopilotChat.actions")
+	-- 				require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+	-- 			end,
+	-- 			desc = "CopilotChat - Prompt actions",
+	-- 			mode = "v", -- Visual mode
+	-- 		},
+	-- 	},
+	-- 	-- See Commands section for default commands if you want to lazy load on them
+	-- },
+	-- {
+	-- 	"yetone/avante.nvim",
+	-- 	event = "VeryLazy",
+	-- 	lazy = false,
+	-- 	version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+	-- 	opts = {
+	-- 		-- add any opts here
+	-- 	},
+	-- 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+	-- 	build = "make",
+	-- 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+	-- 	dependencies = {
+	-- 		"stevearc/dressing.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		--- The below dependencies are optional,
+	-- 		"echasnovski/mini.pick", -- for file_selector provider mini.pick
+	-- 		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+	-- 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+	-- 		"ibhagwan/fzf-lua", -- for file_selector provider fzf
+	-- 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+	-- 		"zbirenbaum/copilot.lua", -- for providers='copilot'
+	-- 		{
+	-- 			-- support for image pasting
+	-- 			"HakonHarnes/img-clip.nvim",
+	-- 			event = "VeryLazy",
+	-- 			opts = {
+	-- 				-- recommended settings
+	-- 				default = {
+	-- 					embed_image_as_base64 = false,
+	-- 					prompt_for_file_name = false,
+	-- 					drag_and_drop = {
+	-- 						insert_mode = true,
+	-- 					},
+	-- 					-- required for Windows users
+	-- 					use_absolute_path = true,
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 		{
+	-- 			-- Make sure to set this up properly if you have lazy=true
+	-- 			"MeanderingProgrammer/render-markdown.nvim",
+	-- 			opts = {
+	-- 				file_types = { "markdown", "Avante" },
+	-- 			},
+	-- 			ft = { "markdown", "Avante" },
+	-- 		},
+	-- 	},
+	-- },
 })

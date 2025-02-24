@@ -52,7 +52,7 @@ vim.opt.backspace = "2"
 vim.opt.showcmd = true
 
 vim.opt.showmode = false -- Don't show the mode, since it's already in the status line
-vim.opt.laststatus = 2
+vim.opt.laststatus = 3
 vim.opt.autowrite = true
 vim.opt.autoread = true
 
