@@ -92,19 +92,19 @@ require("lazy").setup({
 		end,
 	},
 
-	{ -- headlines for markdown files
-		"lukas-reineke/headlines.nvim",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = function()
-			vim.cmd([[highlight Headline guibg=#464632]])
-			require("headlines").setup({
-				markdown = {
-					headline_highlights = { "Headline" },
-					bullets = { "✿", "❱", "⫼", "⫵", "⩨", "⩩" },
-				},
-			})
-		end, -- or `opts = {}`
-	},
+	-- { -- headlines for markdown files
+	-- 	"lukas-reineke/headlines.nvim",
+	-- 	dependencies = "nvim-treesitter/nvim-treesitter",
+	-- 	config = function()
+	-- 		vim.cmd([[highlight Headline guibg=#464632]])
+	-- 		require("headlines").setup({
+	-- 			markdown = {
+	-- 				headline_highlights = { "Headline" },
+	-- 				bullets = { "✿", "❱", "⫼", "⫵", "⩨", "⩩" },
+	-- 			},
+	-- 		})
+	-- 	end, -- or `opts = {}`
+	-- },
 
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
@@ -115,13 +115,9 @@ require("lazy").setup({
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			-- Useful status updates for LSP.
 			{ "j-hui/fidget.nvim", opts = {} },
-			-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-			-- used for completion, annotations and signatures of Neovim apis
-			{ "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
 			-- Setup neovim lua configuration
-			require("neodev").setup()
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
@@ -191,11 +187,9 @@ require("lazy").setup({
 					init_options = {
 						plugins = {
 							{
-								{
-									name = "@vue/typescript-plugin",
-									location = "/usr/local/lib/node_modules/@vue/language-server",
-									languages = { "vue" },
-								},
+								name = "@vue/typescript-plugin",
+								location = vim.fn.expand("$MASON/node_modules/@vue/language-server"),
+								languages = { "vue" },
 							},
 						},
 					},
@@ -221,6 +215,8 @@ require("lazy").setup({
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
+				automatic_enable = true,
+				ensure_installed = ensure_installed,
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
@@ -321,16 +317,57 @@ require("lazy").setup({
 	{ -- notifications, messages, cmdline and the popupmenu
 		"folke/noice.nvim",
 		event = "VeryLazy",
-		opts = {},
+		opts = {
+			lsp = {
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true,
+				},
+			},
+			routes = {
+				{
+					filter = {
+						event = "msg_show",
+						any = {
+							{ find = "%d+L, %d+B" },
+							{ find = "; after #%d+" },
+							{ find = "; before #%d+" },
+						},
+					},
+					view = "mini",
+				},
+			},
+			presets = {
+				bottom_search = true,
+				command_palette = true,
+				long_message_to_split = true,
+				inc_rename = true,
+			},
+		},
+
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			{
 				"rcarriga/nvim-notify",
 				config = function()
 					require("notify").setup({
+						merge_duplicates = true,
 						render = "compact",
 					})
 				end,
+			},
+		},
+	},
+
+	{ -- configures LuaLs for Neovim
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			},
 		},
 	},
@@ -371,6 +408,15 @@ require("lazy").setup({
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
 		},
+
+		opts = function(_, opts)
+			opts.sources = opts.sources or {}
+			table.insert(opts.sources, {
+				name = "lazydev",
+				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+			})
+		end,
+
 		config = function()
 			-- See `:help cmp`
 			local cmp = require("cmp")
@@ -657,6 +703,7 @@ require("lazy").setup({
 	-- 	},
 	-- 	-- See Commands section for default commands if you want to lazy load on them
 	-- },
+	--
 	-- {
 	-- 	"yetone/avante.nvim",
 	-- 	event = "VeryLazy",
