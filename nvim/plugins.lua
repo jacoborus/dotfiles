@@ -16,11 +16,9 @@ require("lazy").setup({
 	{
 		"folke/neoconf.nvim",
 		cmd = "Neoconf",
-		dependencies = { "nvim-lspconfig", "williamboman/mason.nvim" },
+		dependencies = { "nvim-lspconfig", "mason-org/mason.nvim" },
 		config = function()
-			require("neoconf").setup({
-				-- override any of the default settings here
-			})
+			require("neoconf").setup({})
 		end,
 	},
 
@@ -110,8 +108,8 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
-			{ "williamboman/mason.nvim", config = true }, -- Must be loaded before dependants
-			"williamboman/mason-lspconfig.nvim",
+			{ "mason-org/mason.nvim", config = true }, -- Must be loaded before dependants
+			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			-- Useful status updates for LSP.
 			{ "j-hui/fidget.nvim", opts = {} },
@@ -156,13 +154,13 @@ require("lazy").setup({
 				astro = {},
 				autotools_ls = {}, -- Make
 				bashls = {},
-				-- cssls = {},
+				cssls = {},
 				dockerls = {},
 				emmet_ls = {},
-				denols = {
-					root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
-				},
-				-- eslint = {},
+				-- denols = {
+				-- 	root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+				-- },
+				eslint = {},
 				gopls = {},
 				golangci_lint_ls = {},
 				html = {},
@@ -181,6 +179,7 @@ require("lazy").setup({
 						},
 					},
 				},
+
 				marksman = {},
 				sqlls = {},
 				ts_ls = {
@@ -188,29 +187,46 @@ require("lazy").setup({
 						plugins = {
 							{
 								name = "@vue/typescript-plugin",
-								location = vim.fn.expand("$MASON/node_modules/@vue/language-server"),
+								location = vim.fn.expand("$MASON/packages")
+									.. "/vue-language-server"
+									.. "/node_modules/@vue/language-server",
 								languages = { "vue" },
 							},
 						},
 					},
 					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-					root_dir = require("lspconfig").util.root_pattern("tsconfig.json"),
-					single_file_support = false,
 				},
 				vimls = {},
-				volar = {}, -- Vue
+				vue_ls = {}, -- Vue
 				yamlls = {},
 			}
 
 			require("mason").setup()
 
+			require("lspconfig").ts_ls.setup({
+				init_options = {
+					plugins = {
+						{
+							name = "@vue/typescript-plugin",
+							location = vim.fn.expand("$MASON/packages")
+								.. "/vue-language-server"
+								.. "/node_modules/@vue/language-server",
+							languages = { "vue" },
+						},
+					},
+				},
+				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+			})
+
+			require("lspconfig").volar.setup({})
+
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
-				"shfmt",
-				"yamlfix",
+				-- "stylua", -- Used to format Lua code
+				-- "shfmt",
+				-- "yamlfix",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -237,6 +253,19 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
 	},
+
+	-- {
+	-- 	"youyoumu/pretty-ts-errors.nvim",
+	-- 	opts = {
+	-- 		executable = "pretty-ts-errors-markdown",
+	-- 		float_opts = {
+	-- 			border = "rounded", -- Border style for floating windows
+	-- 			max_width = 80, -- Maximum width of floating windows
+	-- 			max_height = 30, -- Maximum height of floating windows
+	-- 		},
+	-- 		auto_open = false,
+	-- 	},
+	-- },
 
 	{ -- Inline annotation and documentation generator
 		"danymat/neogen",
@@ -280,33 +309,34 @@ require("lazy").setup({
 				lsp_fallback = true,
 			},
 			formatters_by_ft = {
-				go = { "goimports", "gofmt" },
-				lua = { "stylua" },
-				markdown = { "deno_fmt" },
-				python = { "isort", "black" },
 				bash = { "shfmt" },
-				vue = { "eslint_d", "prettier" },
-				yaml = { "yamlfix" },
+				go = { "goimports", "gofmt" },
+				html = { "eslint", "prettierd" },
+				javascript = { "eslint", "prettierd" },
 				-- json = { { "prettierd", "prettier" } },
-				javascript = { "eslint_d", "prettier" },
-				typescript = { "eslint_d", "prettier" },
-				html = { "eslint_d", "prettier" },
-				tsx = { "eslint_d", "prettier" },
+				lua = { "stylua" },
+				-- markdown = { "deno_fmt" },
+				python = { "isort", "black" },
+				tsx = { "eslint", "prettierd" },
+				typescript = { "eslint", "prettierd" },
+				vue = { "eslint", "prettier" },
+				yaml = { "yamlfix" },
+				sql = { "sql_formatter" },
 			},
 		},
 	},
 
-	{
-		"dmmulroy/ts-error-translator.nvim",
-		config = function()
-			require("ts-error-translator").setup()
-		end,
-	},
+	-- {
+	-- 	"dmmulroy/ts-error-translator.nvim",
+	-- 	config = function()
+	-- 		require("ts-error-translator").setup()
+	-- 	end,
+	-- },
 
 	{
 		"OlegGulevskyy/better-ts-errors.nvim",
 		dependencies = { "MunifTanjim/nui.nvim" },
-		opts = {
+		config = {
 			keymaps = {
 				toggle = "<leader>dd", -- default '<leader>dd'
 				go_to_definition = "<leader>dx", -- default '<leader>dx'
@@ -642,115 +672,51 @@ require("lazy").setup({
 		},
 	},
 
-	-- {
-	-- 	"b0o/incline.nvim",
-	-- 	config = function()
-	-- 		require("incline").setup({
-	-- 			window = {
-	-- 				-- margin = {
-	-- 				-- 	vertical = 3,
-	-- 				-- 	horizontal = 4,
-	-- 				-- },
-	-- 				padding = 4,
-	-- 				placement = {
-	-- 					horizontal = "left",
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- 	-- Optional: Lazy load Incline
-	-- 	event = "VeryLazy",
-	-- },
-
-	-- {
-	-- 	"CopilotC-Nvim/CopilotChat.nvim",
-	-- 	dependencies = {
-	-- 		{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-	-- 		{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-	-- 	},
-	-- 	build = "make tiktoken", -- Only on MacOS or Linux
-	-- 	opts = {
-	-- 		-- See Configuration section for options
-	-- 		model = "claude-3.5-sonnet",
-	-- 	},
-	-- 	config = function(_, opts)
-	-- 		require("CopilotChat").setup(opts)
-	-- 	end,
-	-- 	mappings = {
-	-- 		complete = {
-	-- 			insert = "<C-i>",
-	-- 		},
-	-- 	},
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>cc",
-	-- 			function()
-	-- 				local actions = require("CopilotChat.actions")
-	-- 				require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-	-- 			end,
-	-- 			desc = "CopilotChat - Prompt actions",
-	-- 			mode = "n", -- Normal mode
-	-- 		},
-	-- 		{
-	-- 			"<leader>cc",
-	-- 			function()
-	-- 				local actions = require("CopilotChat.actions")
-	-- 				require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-	-- 			end,
-	-- 			desc = "CopilotChat - Prompt actions",
-	-- 			mode = "v", -- Visual mode
-	-- 		},
-	-- 	},
-	-- 	-- See Commands section for default commands if you want to lazy load on them
-	-- },
-	--
-	-- {
-	-- 	"yetone/avante.nvim",
-	-- 	event = "VeryLazy",
-	-- 	lazy = false,
-	-- 	version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-	-- 	opts = {
-	-- 		-- add any opts here
-	-- 	},
-	-- 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-	-- 	build = "make",
-	-- 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-	-- 	dependencies = {
-	-- 		"stevearc/dressing.nvim",
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		--- The below dependencies are optional,
-	-- 		"echasnovski/mini.pick", -- for file_selector provider mini.pick
-	-- 		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-	-- 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-	-- 		"ibhagwan/fzf-lua", -- for file_selector provider fzf
-	-- 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-	-- 		"zbirenbaum/copilot.lua", -- for providers='copilot'
-	-- 		{
-	-- 			-- support for image pasting
-	-- 			"HakonHarnes/img-clip.nvim",
-	-- 			event = "VeryLazy",
-	-- 			opts = {
-	-- 				-- recommended settings
-	-- 				default = {
-	-- 					embed_image_as_base64 = false,
-	-- 					prompt_for_file_name = false,
-	-- 					drag_and_drop = {
-	-- 						insert_mode = true,
-	-- 					},
-	-- 					-- required for Windows users
-	-- 					use_absolute_path = true,
-	-- 				},
-	-- 			},
-	-- 		},
-	-- 		{
-	-- 			-- Make sure to set this up properly if you have lazy=true
-	-- 			"MeanderingProgrammer/render-markdown.nvim",
-	-- 			opts = {
-	-- 				file_types = { "markdown", "Avante" },
-	-- 			},
-	-- 			ft = { "markdown", "Avante" },
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		lazy = false,
+		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+		opts = {
+			-- add any opts here
+		},
+		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+		build = "make",
+		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+		dependencies = {
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			--- The below dependencies are optional,
+			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+			"zbirenbaum/copilot.lua", -- for providers='copilot'
+			{
+				-- support for image pasting
+				"HakonHarnes/img-clip.nvim",
+				event = "VeryLazy",
+				opts = {
+					-- recommended settings
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+						-- required for Windows users
+						use_absolute_path = true,
+					},
+				},
+			},
+			{
+				-- Make sure to set this up properly if you have lazy=true
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
+		},
+	},
 })
