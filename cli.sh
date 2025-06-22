@@ -45,7 +45,9 @@ function installBasicSoftware() {
 			fd-find \
 			gcc \
 			git-extras \
+			ghostty \
 			golang \
+			fd-find \
 			jq \
 			luarocks \
 			make \
@@ -53,7 +55,10 @@ function installBasicSoftware() {
 			neofetch \
 			neovim \
 			p7zip \
+			python-pip \
 			ripgrep \
+			rust \
+			cargo \
 			saidar \
 			shfmt \
 			tmux \
