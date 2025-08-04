@@ -90,7 +90,7 @@ vim.opt.updatetime = 300
 vim.opt.signcolumn = "yes"
 
 Nmap("<leader><CR>", function()
-	require("notify").dismiss()
+	require("notify").dismiss({ silent = true, pending = false })
 	vim.cmd.noh()
 end, "Clear search higlights and notifications")
 
@@ -124,10 +124,30 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Abbreviations
-vim.cmd([[:iabbrev fucntion function
-:iabbrev fucntino function
-:iabbrev functino function
-:iabbrev cosnt const
-:iabbrev ocnst const
-:iabbrev exprot export
+vim.cmd([[
+	:iabbrev fucntion function
+	:iabbrev fucntino function
+	:iabbrev functino function
+	:iabbrev cosnt const
+	:iabbrev ocnst const
+	:iabbrev exprot export
 ]])
+
+-- Launch notification when starting and ending macro recording
+vim.api.nvim_create_autocmd("RecordingEnter", {
+	callback = function()
+		-- Little delay because reg_recording() can be empty right after entering
+		vim.defer_fn(function()
+			local reg = vim.fn.reg_recording()
+			if reg ~= "" then
+				vim.notify("📹 Recording macro: '" .. reg .. "'", vim.log.levels.INFO)
+			end
+		end, 50) -- 50ms should be a good delay to ensure the recording is captured
+	end,
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+	callback = function()
+		vim.notify("✅ Macro recording ended", vim.log.levels.INFO)
+	end,
+})
