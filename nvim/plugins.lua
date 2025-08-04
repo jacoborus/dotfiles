@@ -81,8 +81,8 @@ require("lazy").setup({
 	{ "numToStr/Comment.nvim", opts = {} },
 
 	{
-		"jacoborus/tender.vim",
-		-- dir = "~/dev/tender",
+		-- "jacoborus/tender.vim",
+		dir = "~/dev/tender",
 		config = function()
 			vim.o.background = "dark"
 			vim.cmd("colorscheme tender")
@@ -182,43 +182,71 @@ require("lazy").setup({
 
 				marksman = {},
 				sqlls = {},
-				ts_ls = {
-					init_options = {
-						plugins = {
-							{
-								name = "@vue/typescript-plugin",
-								location = vim.fn.expand("$MASON/packages")
-									.. "/vue-language-server"
-									.. "/node_modules/@vue/language-server",
-								languages = { "vue" },
-							},
-						},
-					},
-					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-				},
+				-- ts_ls = {},
 				vimls = {},
 				vue_ls = {}, -- Vue
 				yamlls = {},
 			}
 
 			require("mason").setup()
+			-- require("lspconfig").vtsls.setup({})
+			-- require("lspconfig").volar.setup({})
 
-			require("lspconfig").ts_ls.setup({
-				init_options = {
-					plugins = {
-						{
-							name = "@vue/typescript-plugin",
-							location = vim.fn.expand("$MASON/packages")
-								.. "/vue-language-server"
-								.. "/node_modules/@vue/language-server",
-							languages = { "vue" },
+			local vue_language_server_path = vim.fn.expand("$MASON/packages")
+				.. "/vue-language-server"
+				.. "/node_modules/@vue/language-server"
+			local vue_plugin = {
+				name = "@vue/typescript-plugin",
+				location = vue_language_server_path,
+				languages = { "vue" },
+				configNamespace = "typescript",
+			}
+			local vtsls_config = {
+				settings = {
+					vtsls = {
+						tsserver = {
+							globalPlugins = {
+								vue_plugin,
+							},
 						},
 					},
 				},
 				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-			})
+			}
 
-			require("lspconfig").volar.setup({})
+			local vue_ls_config = {
+				on_init = function(client)
+					client.handlers["tsserver/request"] = function(_, result, context)
+						local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+						if #clients == 0 then
+							vim.notify(
+								"Could not find `vtsls` lsp client, `vue_ls` would not work without it.",
+								vim.log.levels.ERROR
+							)
+							return
+						end
+						local ts_client = clients[1]
+
+						local param = unpack(result)
+						local id, command, payload = unpack(param)
+						ts_client:exec_cmd({
+							title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+							command = "typescript.tsserverRequest",
+							arguments = {
+								command,
+								payload,
+							},
+						}, { bufnr = context.bufnr }, function(_, r)
+							local response_data = { { id, r.body } }
+							---@diagnostic disable-next-line: param-type-mismatch
+							client:notify("tsserver/response", response_data)
+						end)
+					end
+				end,
+			}
+			vim.lsp.config("vtsls", vtsls_config)
+			vim.lsp.config("vue_ls", vue_ls_config)
+			vim.lsp.enable({ "vtsls", "vue_ls" })
 
 			-- You can add other tools here that you want Mason to install
 			-- for you, so that they are available from within Neovim.
@@ -311,14 +339,15 @@ require("lazy").setup({
 			formatters_by_ft = {
 				bash = { "shfmt" },
 				go = { "goimports", "gofmt" },
-				html = { "eslint", "prettierd" },
-				javascript = { "eslint", "prettierd" },
+				html = { "eslint", "prettier" },
+				javascript = { "eslint", "prettier" },
 				-- json = { { "prettierd", "prettier" } },
 				lua = { "stylua" },
 				-- markdown = { "deno_fmt" },
 				python = { "isort", "black" },
-				tsx = { "eslint", "prettierd" },
-				typescript = { "eslint", "prettierd" },
+				jsx = { "eslint", "prettier" },
+				tsx = { "eslint", "prettier" },
+				typescript = { "eslint", "prettier" },
 				vue = { "eslint", "prettier" },
 				yaml = { "yamlfix" },
 				sql = { "sql_formatter" },
@@ -678,7 +707,13 @@ require("lazy").setup({
 		lazy = false,
 		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
 		opts = {
+			---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot"
+			---@type Provider
+			provider = "copilot",
 			-- add any opts here
+			behaviour = {
+				enable_token_counting = false,
+			},
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 		build = "make",
