@@ -148,9 +148,24 @@ vim.api.nvim_create_autocmd("RecordingEnter", {
 		end, 50) -- 50ms should be a good delay to ensure the recording is captured
 	end,
 })
-
 vim.api.nvim_create_autocmd("RecordingLeave", {
 	callback = function()
-		vim.notify("✅ Macro recording ended", vim.log.levels.INFO)
+		vim.notify("🛑 Macro recording ended", vim.log.levels.INFO)
 	end,
 })
+
+-- notificaton for markers
+vim.keymap.set("n", "m", function()
+	local ok, char = pcall(vim.fn.getchar)
+	if not ok then
+		return
+	end
+
+	char = type(char) == "number" and vim.fn.nr2char(char) or char
+
+	if char:match("[a-zA-Z]") then
+		vim.notify('📌 "' .. char .. '"', vim.log.levels.INFO)
+	end
+
+	vim.api.nvim_feedkeys("m" .. char, "n", false)
+end, { noremap = true })
