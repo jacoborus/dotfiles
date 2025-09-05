@@ -128,8 +128,11 @@ vim.cmd([[
 	:iabbrev fucntion function
 	:iabbrev fucntino function
 	:iabbrev functino function
+	:iabbrev funciton function
+	:iabbrev funcitno function
 	:iabbrev cosnt const
 	:iabbrev ocnst const
+	:iabbrev cosnt const
 	:iabbrev exprot export
 ]])
 
