@@ -78,7 +78,7 @@ require("lazy").setup({
 		end,
 	},
 
-	{ "numToStr/Comment.nvim", opts = {} },
+	{ "numToStr/Comment.nvim",  opts = {} },
 
 	{
 		-- "jacoborus/tender.vim",
@@ -112,7 +112,7 @@ require("lazy").setup({
 			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			-- Useful status updates for LSP.
-			{ "j-hui/fidget.nvim", opts = {} },
+			{ "j-hui/fidget.nvim",    opts = {} },
 		},
 		config = function()
 			-- Setup neovim lua configuration
@@ -193,8 +193,8 @@ require("lazy").setup({
 			-- require("lspconfig").volar.setup({})
 
 			local vue_language_server_path = vim.fn.expand("$MASON/packages")
-				.. "/vue-language-server"
-				.. "/node_modules/@vue/language-server"
+					.. "/vue-language-server"
+					.. "/node_modules/@vue/language-server"
 			local vue_plugin = {
 				name = "@vue/typescript-plugin",
 				location = vue_language_server_path,
@@ -308,7 +308,7 @@ require("lazy").setup({
 	{ -- SQL UI
 		"kristijanhusak/vim-dadbod-ui",
 		dependencies = {
-			{ "tpope/vim-dadbod", lazy = true },
+			{ "tpope/vim-dadbod",                     lazy = true },
 			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql", "sqlite" }, lazy = true },
 		},
 		cmd = {
@@ -367,7 +367,7 @@ require("lazy").setup({
 		dependencies = { "MunifTanjim/nui.nvim" },
 		config = {
 			keymaps = {
-				toggle = "<leader>dd", -- default '<leader>dd'
+				toggle = "<leader>dd",       -- default '<leader>dd'
 				go_to_definition = "<leader>dx", -- default '<leader>dx'
 			},
 		},
@@ -419,7 +419,7 @@ require("lazy").setup({
 		},
 	},
 
-	{ -- configures LuaLs for Neovim
+	{           -- configures LuaLs for Neovim
 		"folke/lazydev.nvim",
 		ft = "lua", -- only load on lua files
 		opts = {
@@ -681,77 +681,23 @@ require("lazy").setup({
 		end,
 	},
 
-	{ -- copilot
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-				suggestion = { enabled = false },
-				panel = { enabled = false },
-			})
-		end,
-		dependencies = {
-			{
-				"zbirenbaum/copilot-cmp",
-				config = function()
-					require("copilot_cmp").setup()
-				end,
-			},
-		},
-	},
-
-	{
-		"yetone/avante.nvim",
-		event = "VeryLazy",
-		lazy = false,
-		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-		opts = {
-			---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot"
-			---@type Provider
-			provider = "copilot",
-			-- add any opts here
-			behaviour = {
-				enable_token_counting = false,
-			},
-		},
-		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		build = "make",
-		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-		dependencies = {
-			"stevearc/dressing.nvim",
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			--- The below dependencies are optional,
-			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			"zbirenbaum/copilot.lua", -- for providers='copilot'
-			{
-				-- support for image pasting
-				"HakonHarnes/img-clip.nvim",
-				event = "VeryLazy",
-				opts = {
-					-- recommended settings
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = {
-							insert_mode = true,
-						},
-						-- required for Windows users
-						use_absolute_path = true,
-					},
-				},
-			},
-			{
-				-- Make sure to set this up properly if you have lazy=true
-				"MeanderingProgrammer/render-markdown.nvim",
-				opts = {
-					file_types = { "markdown", "Avante" },
-				},
-				ft = { "markdown", "Avante" },
-			},
-		},
-	},
+	-- { -- copilot
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	cmd = "Copilot",
+	-- 	event = "InsertEnter",
+	-- 	config = function()
+	-- 		require("copilot").setup({
+	-- 			suggestion = { enabled = false },
+	-- 			panel = { enabled = false },
+	-- 		})
+	-- 	end,
+	-- 	dependencies = {
+	-- 		{
+	-- 			"zbirenbaum/copilot-cmp",
+	-- 			config = function()
+	-- 				require("copilot_cmp").setup()
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- },
 })
