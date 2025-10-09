@@ -52,7 +52,6 @@ function installBasicSoftware() {
 			luarocks \
 			make \
 			meld \
-			neofetch \
 			neovim \
 			p7zip \
 			python-pip \
