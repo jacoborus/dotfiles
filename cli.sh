@@ -114,7 +114,7 @@ function installNode() {
 	else
 		sh -c "curl -fsSL https://rpm.nodesource.com/setup_current.x | sudo bash -"
 		sh -c 'sudo dnf install -y nodejs'
-		mkdir "${HOME}/.npm-packages/bin" -p
+		mkdir -p "${HOME}/.npm-packages/bin"
 		sh -c "npm config set prefix '$HOME/.npm-packages/'"
 		sh -c "npm i -g sloc neovim"
 	fi
