@@ -80,6 +80,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 -- ZenMode
 
 Nmap("<leader>gz", ":ZenMode<cr>", "Open ZenMode")
+-- Nmap("<leader>gz", ":NoNeckPain<cr>", "Toggle ZenMode")
 
 -- DB UI
 

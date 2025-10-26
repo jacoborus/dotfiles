@@ -3,11 +3,13 @@
 command=tmux new-session -A -s main
 
 gtk-titlebar = false
-window-padding-x = 4
-window-padding-y = 4
+window-width = 120
+window-height = 40
+window-padding-x = 12
+window-padding-y = 10
 window-padding-balance = true
 
 font-family = CodeNewRoman Nerd Font Mono
-font-size = 16
+font-size = 15
 background = "#2a2a2a"
 
