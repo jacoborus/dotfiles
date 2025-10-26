@@ -634,7 +634,14 @@ require("lazy").setup({
 	-- Git related plugins
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
-	{ "lewis6991/gitsigns.nvim" },
+
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+			require("scrollbar.handlers.gitsigns").setup()
+		end,
+	},
 
 	{ -- Useful plugin to show you pending keybinds.
 		-- :checkhealth which-key
@@ -676,28 +683,82 @@ require("lazy").setup({
 
 	{ -- Zen Mode
 		"folke/zen-mode.nvim",
+	{
+		"petertriho/nvim-scrollbar",
+
 		config = function()
-			require("zen-mode").setup({})
+			require("scrollbar").setup()
 		end,
 	},
 
-	-- { -- copilot
-	-- 	"zbirenbaum/copilot.lua",
-	-- 	cmd = "Copilot",
-	-- 	event = "InsertEnter",
-	-- 	config = function()
-	-- 		require("copilot").setup({
-	-- 			suggestion = { enabled = false },
-	-- 			panel = { enabled = false },
-	-- 		})
-	-- 	end,
-	-- 	dependencies = {
-	-- 		{
-	-- 			"zbirenbaum/copilot-cmp",
-	-- 			config = function()
-	-- 				require("copilot_cmp").setup()
-	-- 			end,
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"karb94/neoscroll.nvim",
+		opts = {},
+		config = function()
+			require("neoscroll").setup({
+				duration_multiplier = 0.5,
+			})
+
+			vim.keymap.set("n", "<ScrollWheelUp>", "<C-y>", { silent = true })
+			vim.keymap.set("n", "<ScrollWheelDown>", "<C-e>", { silent = true })
+			vim.keymap.set("i", "<ScrollWheelUp>", "<C-y>", { silent = true })
+			vim.keymap.set("i", "<ScrollWheelDown>", "<C-e>", { silent = true })
+			vim.keymap.set("v", "<ScrollWheelUp>", "<C-y>", { silent = true })
+			vim.keymap.set("v", "<ScrollWheelDown>", "<C-e>", { silent = true })
+		end,
+	},
+
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		lazy = false,
+		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+		opts = {
+			---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot"
+			---@type Provider
+			provider = "copilot",
+			-- add any opts here
+			behaviour = {
+				enable_token_counting = false,
+			},
+		},
+		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+		build = "make",
+		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+		dependencies = {
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			--- The below dependencies are optional,
+			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+			"zbirenbaum/copilot.lua", -- for providers='copilot'
+			{
+				-- support for image pasting
+				"HakonHarnes/img-clip.nvim",
+				event = "VeryLazy",
+				opts = {
+					-- recommended settings
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+						-- required for Windows users
+						use_absolute_path = true,
+					},
+				},
+			},
+			{
+				-- Make sure to set this up properly if you have lazy=true
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
+		},
+	},
 })
