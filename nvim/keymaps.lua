@@ -3,14 +3,14 @@ require("mapping")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-Nmap("gq", ":q<CR>", "Quit file")
--- Nmap("<leader><cr>", ":nohlsearch<CR>", "Clear search higlights")-- moved to plugins.lua/noice
-Nmap("<leader>s", ":w<CR>", "Write file to disk")
+Nmap("gq", ":q<CR>", "Quit file", { silent = true })
+-- Nmap("<leader><cr>", ":nohlsearch<CR>", "Clear search higlights")-- moved to options.lua
+Nmap("<leader>s", ":w<CR>", "Write file to disk", { silent = true })
 -- vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- change buffer
-Nmap("]b", ":bn<CR>", "Buffer next")
-Nmap("[b", ":bp<CR>", "Buffer prev")
+Nmap("]b", ":bn<CR>", "Buffer next", { silent = true })
+Nmap("[b", ":bp<CR>", "Buffer prev", { silent = true })
 
 -- repeat last command line command
 Nmap("<leader>rr", "@:<CR>", "[R]epeat last command")
@@ -26,6 +26,7 @@ Nmap("<leader>-", "<C-w>5-", "Shorter window")
 
 -- copy/paste to/from system clipboard
 Nmap("<c-p>", '"0p', "Paste from clipboard")
+Vmap("<c-p>", '"0p', "Paste from clipboard")
 Nmap("<m-p>", '"0P', "Paste from clipboard alt")
 
 -- move to the exact position on marks
@@ -47,14 +48,14 @@ Vmap("<C-k>", "<C-W>k")
 Vmap("<C-l>", "<C-W>l")
 
 -- tab navigation with alt+l / alt+h
-Nmap("<m-h>", ":tabprev<CR>", "previous tab")
-Nmap("<m-l>", ":tabnext<CR>", "next tab")
+Nmap("<m-h>", ":tabprev<CR>", "previous tab", { silent = true })
+Nmap("<m-l>", ":tabnext<CR>", "next tab", { silent = true })
 
 -- " move up/down single lines or selected ones
-Nmap("J", ":m .+1<CR>==", "move line down")
-Nmap("K", ":m .-2<CR>==", "move line up")
-Vmap("J", ":m '>+1<CR>gv=gv", "move line up (visual mode)")
-Vmap("K", ":m '<-2<CR>gv=gv", "move line down (visual mode)")
+Nmap("J", ":m .+1<CR>==", "move line down", { silent = true })
+Nmap("K", ":m .-2<CR>==", "move line up", { silent = true })
+Vmap("J", ":m '>+1<CR>gv=gv", "move line up (visual mode)", { silent = true })
+Vmap("K", ":m '<-2<CR>gv=gv", "move line down (visual mode)", { silent = true })
 
 -- Remap VIM 0 to first non-blank character
 Nmap("0", "^", "go to the beginning of the line")
@@ -79,10 +80,10 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- ZenMode
 
-Nmap("<leader>gz", ":ZenMode<cr>", "Open ZenMode")
+Nmap("<leader>gz", ":ZenMode<cr>", "Open ZenMode", { silent = true })
 -- Nmap("<leader>gz", ":NoNeckPain<cr>", "Toggle ZenMode")
 
 -- DB UI
 
-Nmap("<leader>db", ":tabe<cr>:DBUI<cr>", "open DBUI")
-Nmap("<leader>dt", ":DBUIToggle<cr>", "open DBUI")
+Nmap("<leader>db", ":tabe<cr>:DBUI<cr>", "open DBUI", { silent = true })
+Nmap("<leader>dt", ":DBUIToggle<cr>", "open DBUI", { silent = true })
