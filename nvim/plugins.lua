@@ -78,7 +78,7 @@ require("lazy").setup({
 		end,
 	},
 
-	{ "numToStr/Comment.nvim",  opts = {} },
+	{ "numToStr/Comment.nvim", opts = {} },
 
 	{
 		-- "jacoborus/tender.vim",
@@ -282,18 +282,33 @@ require("lazy").setup({
 		opts = { signs = false },
 	},
 
-	-- {
-	-- 	"youyoumu/pretty-ts-errors.nvim",
-	-- 	opts = {
-	-- 		executable = "pretty-ts-errors-markdown",
-	-- 		float_opts = {
-	-- 			border = "rounded", -- Border style for floating windows
-	-- 			max_width = 80, -- Maximum width of floating windows
-	-- 			max_height = 30, -- Maximum height of floating windows
-	-- 		},
-	-- 		auto_open = false,
-	-- 	},
-	-- },
+	{
+		"youyoumu/pretty-ts-errors.nvim",
+		opts = {
+			executable = "pretty-ts-errors-markdown", -- Path to the executable
+			float_opts = {
+				border = "rounded",                  -- Border style for floating windows
+				max_width = 80,                      -- Maximum width of floating windows
+				max_height = 20,                     -- Maximum height of floating windows
+				wrap = false,                        -- Whether to wrap long lines
+			},
+			auto_open = false,                     -- Automatically show errors on hover
+			lazy_window = false,                   -- Open the floating window only after errors are formatted
+		},
+		config = function()
+			-- Show error under cursor
+			vim.keymap.set('n', '<leader>te', function() require('pretty-ts-errors').show_formatted_error() end,
+				{ desc = "Show TS error" })
+
+			-- Show all errors in file
+			vim.keymap.set('n', '<leader>tE', function() require('pretty-ts-errors').open_all_errors() end,
+				{ desc = "Show all TS errors" })
+
+			-- Toggle auto-display
+			vim.keymap.set('n', '<leader>tt', function() require('pretty-ts-errors').toggle_auto_open() end,
+				{ desc = "Toggle TS error auto-display" })
+		end
+	},
 
 	{ -- Inline annotation and documentation generator
 		"danymat/neogen",
@@ -361,17 +376,6 @@ require("lazy").setup({
 	-- 		require("ts-error-translator").setup()
 	-- 	end,
 	-- },
-
-	{
-		"OlegGulevskyy/better-ts-errors.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		config = {
-			keymaps = {
-				toggle = "<leader>dd",       -- default '<leader>dd'
-				go_to_definition = "<leader>dx", -- default '<leader>dx'
-			},
-		},
-	},
 
 	{ -- notifications, messages, cmdline and the popupmenu
 		"folke/noice.nvim",
