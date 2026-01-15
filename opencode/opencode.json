@@ -9,6 +9,13 @@
         "chrome-devtools-mcp@latest"
       ],
       "enabled": false
+    },
+    "docker-mcp": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "docker-mcp"
+      ],
     }
   },
   "autoupdate": true,
