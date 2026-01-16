@@ -24,5 +24,10 @@
     "scroll_acceleration": {
       "enabled": true
     }
+  },
+  "agent": {
+    "compaction": {
+      "temperature": 0.5
+    }
   }
 }
