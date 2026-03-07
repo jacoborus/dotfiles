@@ -7,7 +7,6 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- these lines need to load before Lazy, otherwise ignored
-vim.g.wikimatic_path = "~/wiki"
 vim.g.windowswap_map_keys = 0 -- prevent default bindings
 
 require("mapping")
@@ -609,15 +608,6 @@ require("lazy").setup({
 		"wesQ3/vim-windowswap",
 		config = function()
 			Nmap("<leader>m", ":call WindowSwap#EasyWindowSwap()<CR>", "Swap window", { silent = true })
-		end,
-	},
-
-	{
-		"jacoborus/wikimatic",
-		opts = {},
-		config = function()
-			Nmap("<leader>ww", ":Wiki<cr>", "Open [ww]iki")
-			Nmap("<leader>wt", ":WikiTab<cr>", "Open [w]iki in new [t]ab")
 		end,
 	},
 
