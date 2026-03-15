@@ -11,5 +11,5 @@ opencode/*
 !opencode/command/*
 !opencode/skill/
 !opencode/skill/*
-!opencode/plugin/
-!opencode/plugin/*
+!opencode/plugins/
+!opencode/plugins/*
