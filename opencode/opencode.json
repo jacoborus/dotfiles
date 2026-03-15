@@ -16,18 +16,13 @@
         "uvx",
         "docker-mcp"
       ],
+      "enabled": false
     }
   },
   "autoupdate": true,
-  "tui": {
-    "scroll_speed": 2,
-    "scroll_acceleration": {
-      "enabled": true
-    }
-  },
   "agent": {
     "compaction": {
       "temperature": 0.5
     }
-  }
+  },
 }
