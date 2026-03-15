@@ -13,3 +13,5 @@ opencode/*
 !opencode/skill/*
 !opencode/plugins/
 !opencode/plugins/*
+!opencode/agents/
+!opencode/agents/*
