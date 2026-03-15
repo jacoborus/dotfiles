@@ -4,3 +4,12 @@
 secrets.*
 secret.*
 nvim/lazy-lock.json
+
+opencode/*
+!opencode/opencode.json
+!opencode/command/
+!opencode/command/*
+!opencode/skill/
+!opencode/skill/*
+!opencode/plugin/
+!opencode/plugin/*
