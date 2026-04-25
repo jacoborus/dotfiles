@@ -9,8 +9,8 @@ opencode/*
 !opencode/opencode.json
 !opencode/command/
 !opencode/command/*
-!opencode/skill/
-!opencode/skill/*
+!opencode/skills/
+!opencode/skills/*
 !opencode/plugins/
 !opencode/plugins/*
 !opencode/agents/
