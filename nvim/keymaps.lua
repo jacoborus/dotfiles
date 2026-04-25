@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 
 Nmap("gq", ":q<CR>", "Quit file", { silent = true })
 -- Nmap("<leader><cr>", ":nohlsearch<CR>", "Clear search higlights")-- moved to options.lua
-Nmap("<leader>s", ":w<CR>", "Write file to disk", { silent = true })
+Nmap("<leader>s", "<cmd>update<CR>", "Update file to disk", { silent = true })
 -- vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- change buffer
