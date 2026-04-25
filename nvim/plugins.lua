@@ -84,7 +84,7 @@ require("lazy").setup({
 		dir = "~/dev/tender",
 		config = function()
 			vim.o.background = "dark"
-			vim.cmd("colorscheme tender")
+			vim.cmd("colorscheme tender-blue")
 			vim.cmd([[highlight Headline guibg=#464632]])
 		end,
 	},
@@ -628,6 +628,7 @@ require("lazy").setup({
 	-- Git related plugins
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
+	'sindrets/diffview.nvim',
 
 	{
 		"lewis6991/gitsigns.nvim",
