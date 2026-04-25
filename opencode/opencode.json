@@ -17,6 +17,25 @@
         "docker-mcp"
       ],
       "enabled": false
+    },
+    "cloudflare": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@cloudflare/mcp-server-cloudflare",
+        "--url",
+        "https://mcp.cloudflare.com/mcp"
+      ],
+      "enabled": false
+    },
+    "markitdown": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "markitdown-mcp"
+      ],
+      "enabled": false
     }
   },
   "autoupdate": true,
@@ -24,5 +43,5 @@
     "compaction": {
       "temperature": 0.5
     }
-  },
+  }
 }
