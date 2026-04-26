@@ -1,8 +1,5 @@
 require("mapping")
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 Nmap("gq", ":q<CR>", "Quit file", { silent = true })
 -- Nmap("<leader><cr>", ":nohlsearch<CR>", "Clear search higlights")-- moved to options.lua
 Nmap("<leader>s", "<cmd>update<CR>", "Update file to disk", { silent = true })
