@@ -4,6 +4,10 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Enable project-local .nvim.lua config files
+vim.o.exrc = true
+vim.o.secure = true
+
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 vim.g.have_nerd_font = true

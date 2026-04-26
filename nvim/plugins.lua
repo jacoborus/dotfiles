@@ -256,8 +256,11 @@ local vue_ls_config = {
 		client.handlers["tsserver/request"] = function(_, result, context)
 			local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
 			if #clients == 0 then
+				clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "tsgo" })
+			end
+			if #clients == 0 then
 				vim.notify(
-					"Could not find `vtsls` lsp client, `vue_ls` would not work without it.",
+					"Could not find `vtsls` or `tsgo` lsp client, `vue_ls` would not work without one of them.",
 					vim.log.levels.ERROR
 				)
 				return
@@ -284,21 +287,24 @@ vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
 vim.lsp.enable({ "vtsls", "vue_ls" })
 
--- vim.lsp.config("tsgo", {
--- 	settings = {
--- 		typescript = {
--- 			inlayHints = {
--- 				parameterNames = { enabled = "literals", suppressWhenArgumentMatchesName = true },
--- 				parameterTypes = { enabled = true },
--- 				variableTypes = { enabled = true },
--- 				propertyDeclarationTypes = { enabled = true },
--- 				functionLikeReturnTypes = { enabled = true },
--- 				enumMemberValues = { enabled = true },
--- 			},
--- 		},
--- 	},
--- })
--- vim.lsp.enable("tsgo")
+-- Register tsgo config globally so it can be activated per-project via .nvim.lua
+-- To use tsgo in a specific project, create a `.nvim.lua` in that project's root
+-- (see `dot-nvim-lua.example.lua` in this directory for the template)
+vim.lsp.config("tsgo", {
+	settings = {
+		typescript = {
+			inlayHints = {
+				parameterNames = { enabled = "literals", suppressWhenArgumentMatchesName = true },
+				parameterTypes = { enabled = true },
+				variableTypes = { enabled = true },
+				propertyDeclarationTypes = { enabled = true },
+				functionLikeReturnTypes = { enabled = true },
+				enumMemberValues = { enabled = true },
+			},
+		},
+	},
+})
+-- vim.lsp.enable("tsgo") -- Do NOT enable globally; enable per-project in `.nvim.lua`
 
 for _, name in ipairs(servers) do
 	vim.lsp.enable(name)
