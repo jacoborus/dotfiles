@@ -25,9 +25,16 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-source "$HOME/dotfiles/sh/aliases.sh"
+source "$HOME/dotfiles/sh/common.aliases.sh"
 
-export FZF_DEFAULT_OPTS="--reverse --preview 'highlight -O ansi -l {}'"
+case "$(uname -s)" in
+	Darwin)
+		source "$HOME/dotfiles/sh/macos.aliases.sh"
+		;;
+	*)
+		source "$HOME/dotfiles/sh/linux.aliases.sh"
+		;;
+esac
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -40,6 +47,21 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-source "$HOME/dotfiles/sh/exports.sh"
-. "/home/jacobo/.deno/env"
-source /home/jacobo/.local/share/bash-completion/completions/deno.bash
+source "$HOME/dotfiles/sh/common.exports.sh"
+
+case "$(uname -s)" in
+	Darwin)
+		source "$HOME/dotfiles/sh/macos.exports.sh"
+		;;
+	*)
+		source "$HOME/dotfiles/sh/linux.exports.sh"
+		;;
+esac
+
+if [ -f "$HOME/.deno/env" ]; then
+	. "$HOME/.deno/env"
+fi
+
+if [ -f "$HOME/.local/share/bash-completion/completions/deno.bash" ]; then
+	source "$HOME/.local/share/bash-completion/completions/deno.bash"
+fi

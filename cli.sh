@@ -121,6 +121,14 @@ function installNode() {
 }
 
 function installDotfiles() {
+	local zshrcSource="$DOTDIR/sh/linux.zshrc"
+
+	case "$(uname -s)" in
+	Darwin)
+		zshrcSource="$DOTDIR/sh/macos.zshrc"
+		;;
+	esac
+
 	# Move old files to backup folder
 	echo -e "\e[33mInstalling dotfiles...\e[0m"
 	echo "Moving old files to backup folder..."
@@ -136,7 +144,7 @@ function installDotfiles() {
 	mkdir -p "$VIMDIR"
 	createSymlink "$DOTDIR/nvim/init.lua" "$VIMDIR/init.lua"
 	createSymlink "$DOTDIR/sh/bash.bashrc" "$HOME/.bashrc"
-	createSymlink "$DOTDIR/sh/zsh.zshrc" "$HOME/.zshrc"
+	createSymlink "$zshrcSource" "$HOME/.zshrc"
 	createSymlink "$DOTDIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 	createSymlink "$DOTDIR/sh/adesis.zsh-theme" "$ZSHTHEMESDIR/adesis.zsh-theme"
 	mkdir -p "$GHOSTTYDIR"
