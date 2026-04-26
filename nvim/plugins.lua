@@ -360,6 +360,7 @@ vim.api.nvim_create_autocmd("CmdUndefined", {
 
 vim.keymap.set("n", "<leader>ol", function()
 	vim.pack.add({ gh("hedyhli/outline.nvim") })
+	require("outline").setup()
 	vim.cmd.Outline()
 end, { desc = "Toggle outline" })
 
