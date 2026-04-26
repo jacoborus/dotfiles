@@ -1,4 +1,10 @@
-local gh = function(x) return "https://github.com/" .. x end
+local gh = function(repo, branch)
+	local spec = { src = "https://github.com/" .. repo }
+	if branch then
+		spec.branch = branch
+	end
+	return spec
+end
 
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(ev)
@@ -19,8 +25,8 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.g.windowswap_map_keys = 0
 
 vim.pack.add({
-	{ src = "~/dev/tender", name = "tender" },
-	-- gh("jacoborus/tender" ),
+	-- { src = "~/dev/tender", name = "tender" },
+	gh("jacoborus/tender", "lua" ),
 	gh("nvim-lualine/lualine.nvim"),
 	gh("nvim-lua/plenary.nvim"),
 	gh("tpope/vim-sleuth"),
