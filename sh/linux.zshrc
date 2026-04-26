@@ -6,7 +6,7 @@ source "$shellDir/common.exports.sh"
 source "$shellDir/linux.exports.sh"
 source "$shellDir/common.zshrc"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="adesis"
 plugins=(git)
 
 source "$ZSH/oh-my-zsh.sh"
