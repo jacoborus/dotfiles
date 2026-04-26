@@ -13,11 +13,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
 			if name == "telescope-fzf-native.nvim" then
 				vim.system({ "make" }, { cwd = ev.data.path }):wait()
 			end
-			if name == "LuaSnip" then
-				if vim.fn.executable("make") == 1 then
-					vim.system({ "make", "install_jsregexp" }, { cwd = ev.data.path }):wait()
-				end
-			end
 		end
 	end,
 })
@@ -30,7 +25,6 @@ vim.pack.add({
 	gh("nvim-lualine/lualine.nvim"),
 	gh("nvim-lua/plenary.nvim"),
 	gh("tpope/vim-sleuth"),
-	gh("onsails/lspkind.nvim"),
 	gh("christoomey/vim-tmux-navigator"),
 	gh("AndrewRadev/tagalong.vim"),
 	gh("tpope/vim-surround"),
@@ -168,7 +162,6 @@ require("which-key").setup({})
 
 vim.pack.add({
 	gh("nvim-treesitter/nvim-treesitter"),
-	gh("nvim-treesitter/nvim-treesitter-textobjects"),
 	gh("nvim-treesitter/nvim-treesitter-context"),
 })
 
@@ -188,24 +181,15 @@ vim.pack.add({
 
 require("plugin_config.nvim-tree")
 
-vim.pack.add({
-	gh("hrsh7th/nvim-cmp"),
-	gh("L3MON4D3/LuaSnip"),
-	gh("saadparwaiz1/cmp_luasnip"),
-	gh("hrsh7th/cmp-nvim-lsp"),
-	gh("hrsh7th/cmp-path"),
-	gh("hrsh7th/cmp-buffer"),
-})
+vim.o.autocomplete = true
+vim.o.pumborder = "rounded"
+vim.lsp.completion.enable()
 
 vim.pack.add({
 	gh("mason-org/mason.nvim"),
 })
 
 require("mason").setup()
-
-vim.lsp.config("*", {
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
-})
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
@@ -216,7 +200,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 		map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 		map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-		map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 		map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 		map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 		map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
@@ -225,14 +208,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("<leader>K", vim.lsp.buf.signature_help, "Signature Documentation")
 		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 	end,
-})
-
-vim.lsp.config("lua_ls", {
-	settings = {
-		Lua = {
-			completion = { callSnippet = "Replace" },
-		},
-	},
 })
 
 local servers = {
@@ -329,11 +304,8 @@ for _, name in ipairs(servers) do
 	vim.lsp.enable(name)
 end
 
-require("plugin_config.completions")
-
 vim.pack.add({
 	gh("folke/todo-comments.nvim"),
-	gh("youyoumu/pretty-ts-errors.nvim"),
 	gh("danymat/neogen"),
 	gh("folke/noice.nvim"),
 	gh("MunifTanjim/nui.nvim"),
@@ -343,30 +315,6 @@ vim.pack.add({
 require("todo-comments").setup({ signs = false })
 require("notify").setup({ merge_duplicates = true, render = "compact" })
 
-require("pretty-ts-errors").setup({
-	executable = "pretty-ts-errors-markdown",
-	float_opts = {
-		border = "rounded",
-		max_width = 80,
-		max_height = 20,
-		wrap = false,
-	},
-	auto_open = false,
-	lazy_window = false,
-})
-
-vim.keymap.set("n", "<leader>te", function()
-	require("pretty-ts-errors").show_formatted_error()
-end, { desc = "Show TS error" })
-
-vim.keymap.set("n", "<leader>tE", function()
-	require("pretty-ts-errors").open_all_errors()
-end, { desc = "Show all TS errors" })
-
-vim.keymap.set("n", "<leader>tt", function()
-	require("pretty-ts-errors").toggle_auto_open()
-end, { desc = "Toggle TS error auto-display" })
-
 require("neogen").setup({})
 Nmap("<leader>gd", ":Neogen<cr>", "[G]enerate [D]ocs")
 
@@ -375,7 +323,6 @@ require("noice").setup({
 		override = {
 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 			["vim.lsp.util.stylize_markdown"] = true,
-			["cmp.entry.get_documentation"] = true,
 		},
 	},
 	routes = {
@@ -406,12 +353,8 @@ vim.api.nvim_create_autocmd("CmdUndefined", {
 		vim.pack.add({
 			gh("kristijanhusak/vim-dadbod-ui"),
 			gh("tpope/vim-dadbod"),
-			gh("kristijanhusak/vim-dadbod-completion"),
 		})
 		vim.g.db_ui_use_nerd_fonts = 1
-		vim.cmd([[
-			autocmd FileType sql,mysql,plsql,sqlite lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
-		]])
 	end,
 })
 

@@ -46,7 +46,7 @@ vim.opt.timeoutlen = 300
 -- vim.o.wildignore = vim.o.wildignore .. "*/tmp/*,*.so,*.swp,*.zip"
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = "menuone,noselect,popup"
 
 vim.opt.backspace = "2"
 vim.opt.showcmd = true
