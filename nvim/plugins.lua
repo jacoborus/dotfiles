@@ -19,8 +19,8 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.g.windowswap_map_keys = 0
 
 vim.pack.add({
-	{ src = "file:///home/jacobo/dev/tender", name = "tender" },
-	gh("folke/neoconf.nvim"),
+	{ src = "~/dev/tender", name = "tender" },
+	-- gh("jacoborus/tender" ),
 	gh("nvim-lualine/lualine.nvim"),
 	gh("nvim-lua/plenary.nvim"),
 	gh("tpope/vim-sleuth"),
@@ -192,18 +192,14 @@ vim.pack.add({
 })
 
 vim.pack.add({
-	gh("neovim/nvim-lspconfig"),
 	gh("mason-org/mason.nvim"),
-	gh("mason-org/mason-lspconfig.nvim"),
-	gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
-	gh("j-hui/fidget.nvim"),
 })
 
-require("neoconf").setup({})
 require("mason").setup()
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+vim.lsp.config("*", {
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+})
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
@@ -225,34 +221,36 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local servers = {
-	astro = {},
-	autotools_ls = {},
-	bashls = {},
-	cssls = {},
-	dockerls = {},
-	emmet_ls = {},
-	eslint = {},
-	gopls = {},
-	golangci_lint_ls = {},
-	html = {},
-	jsonls = {},
-	lua_ls = {
-		settings = {
-			Lua = {
-				completion = { callSnippet = "Replace" },
-			},
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			completion = { callSnippet = "Replace" },
 		},
 	},
-	marksman = {},
-	sqlls = {},
-	vimls = {},
-	yamlls = {},
+})
+
+local servers = {
+	"astro",
+	"autotools_ls",
+	"bashls",
+	"cssls",
+	"dockerls",
+	"emmet_ls",
+	"eslint",
+	"gopls",
+	"golangci_lint_ls",
+	"html",
+	"jsonls",
+	"lua_ls",
+	"marksman",
+	"sqlls",
+	"vimls",
+	"yamlls",
 }
 
 local vue_language_server_path = vim.fn.expand("$MASON/packages")
-	.. "/vue-language-server"
-	.. "/node_modules/@vue/language-server"
+		.. "/vue-language-server"
+		.. "/node_modules/@vue/language-server"
 local vue_plugin = {
 	name = "@vue/typescript-plugin",
 	location = vue_language_server_path,
@@ -260,6 +258,8 @@ local vue_plugin = {
 	configNamespace = "typescript",
 }
 local vtsls_config = {
+	cmd = { "vtsls", "--stdio" },
+	root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
 	settings = {
 		vtsls = {
 			tsserver = {
@@ -303,25 +303,25 @@ vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
 vim.lsp.enable({ "vtsls", "vue_ls" })
 
-local ensure_installed = vim.tbl_keys(servers or {})
-vim.list_extend(ensure_installed, {
-	-- "stylua",
-	-- "shfmt",
-	-- "yamlfix",
-})
-require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+-- vim.lsp.config("tsgo", {
+-- 	settings = {
+-- 		typescript = {
+-- 			inlayHints = {
+-- 				parameterNames = { enabled = "literals", suppressWhenArgumentMatchesName = true },
+-- 				parameterTypes = { enabled = true },
+-- 				variableTypes = { enabled = true },
+-- 				propertyDeclarationTypes = { enabled = true },
+-- 				functionLikeReturnTypes = { enabled = true },
+-- 				enumMemberValues = { enabled = true },
+-- 			},
+-- 		},
+-- 	},
+-- })
+-- vim.lsp.enable("tsgo")
 
-require("mason-lspconfig").setup({
-	automatic_enable = true,
-	ensure_installed = ensure_installed,
-	handlers = {
-		function(server_name)
-			local server = servers[server_name] or {}
-			server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-			require("lspconfig")[server_name].setup(server)
-		end,
-	},
-})
+for _, name in ipairs(servers) do
+	vim.lsp.enable(name)
+end
 
 require("plugin_config.completions")
 
@@ -348,12 +348,15 @@ require("pretty-ts-errors").setup({
 	auto_open = false,
 	lazy_window = false,
 })
+
 vim.keymap.set("n", "<leader>te", function()
 	require("pretty-ts-errors").show_formatted_error()
 end, { desc = "Show TS error" })
+
 vim.keymap.set("n", "<leader>tE", function()
 	require("pretty-ts-errors").open_all_errors()
 end, { desc = "Show all TS errors" })
+
 vim.keymap.set("n", "<leader>tt", function()
 	require("pretty-ts-errors").toggle_auto_open()
 end, { desc = "Toggle TS error auto-display" })
