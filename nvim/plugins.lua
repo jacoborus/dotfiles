@@ -286,6 +286,10 @@ local vue_ls_config = {
 vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
 vim.lsp.enable({ "vtsls", "vue_ls" })
+vim.lsp.config("denols", {
+	root_markers = { "deno.json", "deno.jsonc" },
+})
+vim.lsp.enable({ "denols" })
 
 -- Register tsgo config globally so it can be activated per-project via .nvim.lua
 -- To use tsgo in a specific project, create a `.nvim.lua` in that project's root
@@ -370,7 +374,7 @@ vim.keymap.set("n", "<leader>ol", function()
 	vim.cmd.Outline()
 end, { desc = "Toggle outline" })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
+vim.api.nvim_create_autocmd("VimEnter", {
 	once = true,
 	callback = function()
 		vim.pack.add({ gh("stevearc/conform.nvim") })
@@ -385,6 +389,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				jsx = { "eslint", "prettier" },
+				json = { "prettier" },
 				tsx = { "eslint", "prettier" },
 				typescript = { "eslint", "prettier" },
 				vue = { "eslint", "prettier" },
