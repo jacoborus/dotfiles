@@ -185,6 +185,27 @@ vim.o.autocomplete = true
 vim.o.pumborder = "rounded"
 vim.lsp.completion.enable()
 
+-- Tab: next completion item when popup is visible, jump snippet placeholder, else insert tab
+vim.keymap.set("i", "<Tab>", function()
+	if vim.fn.pumvisible() == 1 then
+		return "<C-n>"
+	elseif vim.snippet.active({ direction = 1 }) then
+		vim.snippet.jump(1)
+		return ""
+	else
+		return "<Tab>"
+	end
+end, { expr = true })
+
+-- S-Tab: prev completion item when popup is visible, else passthrough
+vim.keymap.set("i", "<S-Tab>", function()
+	if vim.fn.pumvisible() == 1 then
+		return "<C-p>"
+	else
+		return "<S-Tab>"
+	end
+end, { expr = true })
+
 vim.pack.add({
 	gh("mason-org/mason.nvim"),
 })
