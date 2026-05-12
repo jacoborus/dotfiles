@@ -6,24 +6,12 @@ local gh = function(repo, branch)
 	return spec
 end
 
-vim.api.nvim_create_autocmd("PackChanged", {
-	callback = function(ev)
-		local name = ev.data.spec.name
-		if ev.data.kind == "install" or ev.data.kind == "update" then
-			if name == "telescope-fzf-native.nvim" then
-				vim.system({ "make" }, { cwd = ev.data.path }):wait()
-			end
-		end
-	end,
-})
-
 vim.g.windowswap_map_keys = 0
 
 vim.pack.add({
 	-- { src = "~/dev/tender", name = "tender" },
 	gh("jacoborus/tender", "lua" ),
 	gh("nvim-lualine/lualine.nvim"),
-	gh("nvim-lua/plenary.nvim"),
 	gh("tpope/vim-sleuth"),
 	gh("christoomey/vim-tmux-navigator"),
 	gh("AndrewRadev/tagalong.vim"),
@@ -169,9 +157,7 @@ vim.pack.add({
 require("plugin_config.treesitter")
 
 vim.pack.add({
-	gh("nvim-telescope/telescope.nvim"),
-	gh("nvim-telescope/telescope-fzf-native.nvim"),
-	gh("nvim-telescope/telescope-ui-select.nvim"),
+	gh("ibhagwan/fzf-lua"),
 })
 
 require("plugin_config.telescope")
@@ -233,11 +219,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local map = function(keys, func, desc)
 			vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 		end
-		map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-		map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-		map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-		map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-		map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+		map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+		map("gr", vim.lsp.buf.references, "[G]oto [R]eferences")
+		map("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+		map("<leader>ds", vim.lsp.buf.document_symbol, "[D]ocument [S]ymbols")
+		map("<leader>ws", vim.lsp.buf.workspace_symbol, "[W]orkspace [S]ymbols")
 		map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 		map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 		map("<leader>k", vim.lsp.buf.hover, "Hover Documentation")
