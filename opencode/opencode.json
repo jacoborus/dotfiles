@@ -1,21 +1,21 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "autoupdate": true,
+  "agent": {
+    "compaction": {
+      "temperature": 0.5
+    }
+  },
+  "instructions": ["~/.config/opencode/instructions.md"],
   "mcp": {
     "chrome-devtools": {
       "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "chrome-devtools-mcp@latest"
-      ],
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
       "enabled": false
     },
     "docker-mcp": {
       "type": "local",
-      "command": [
-        "uvx",
-        "docker-mcp"
-      ],
+      "command": ["uvx", "docker-mcp"],
       "enabled": false
     },
     "cloudflare": {
@@ -31,17 +31,8 @@
     },
     "markitdown": {
       "type": "local",
-      "command": [
-        "uvx",
-        "markitdown-mcp"
-      ],
+      "command": ["uvx", "markitdown-mcp"],
       "enabled": false
-    }
-  },
-  "autoupdate": true,
-  "agent": {
-    "compaction": {
-      "temperature": 0.5
     }
   }
 }
