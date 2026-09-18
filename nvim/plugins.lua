@@ -21,7 +21,8 @@ vim.g.windowswap_map_keys = 0
 
 vim.pack.add({
 	-- { src = "~/dev/tender", name = "tender" },
-	gh("jacoborus/tender", "lua" ),
+	gh("jtprogru/pack-ui.nvim"),
+	gh("jacoborus/tender", "lua"),
 	gh("nvim-lualine/lualine.nvim"),
 	gh("nvim-lua/plenary.nvim"),
 	gh("tpope/vim-sleuth"),
@@ -45,7 +46,6 @@ vim.pack.add({
 	gh("nvim-tree/nvim-web-devicons"),
 	gh("folke/which-key.nvim"),
 	gh("folke/lazydev.nvim"),
-	gh("milanglacier/minuet-ai.nvim"),
 })
 
 require("lazydev").setup({
@@ -207,19 +207,6 @@ vim.keymap.set("i", "<S-Tab>", function()
 	end
 end, { expr = true })
 
-require('minuet').setup({
-	lsp = {
-		enabled_ft = { '*' },
-	},
-	-- Uncomment and set the matching env var for your chosen provider:
-	-- provider = 'gemini',     -- export GEMINI_API_KEY=...
-	-- provider = 'claude',     -- export ANTHROPIC_API_KEY=...
-	-- provider = 'openai',     -- export OPENAI_API_KEY=...
-	provider = 'codestral',  -- export CODESTRAL_API_KEY=...
-	provider_options = {
-		codestral = { api_key = 'CODESTRAL_API_KEY' },
-	},
-})
 
 vim.pack.add({
 	gh("mason-org/mason.nvim"),
