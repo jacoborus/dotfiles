@@ -209,6 +209,7 @@ end, { expr = true })
 
 
 vim.pack.add({
+	gh("neovim/nvim-lspconfig"),
 	gh("mason-org/mason.nvim"),
 })
 
@@ -252,9 +253,24 @@ local servers = {
 	"yamlls",
 }
 
-local vue_language_server_path = vim.fn.expand("$MASON/packages")
-		.. "/vue-language-server"
-		.. "/node_modules/@vue/language-server"
+-- Resolve the @vue/language-server location: prefer the global npm prefix,
+-- fall back to Mason. Both layouts expose node_modules/@vue/language-server.
+local function find_vue_language_server()
+	local npm_root = vim.system({ "npm", "root", "-g" }):wait()
+	local prefix = npm_root.code == 0 and vim.trim(npm_root.stdout) or vim.fn.expand("~/.npm-packages/lib/node_modules")
+	local candidates = {
+		prefix .. "/@vue/language-server",
+		vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
+	}
+	for _, path in ipairs(candidates) do
+		if vim.uv.fs_stat(path) then
+			return path
+		end
+	end
+	return candidates[1]
+end
+
+local vue_language_server_path = find_vue_language_server()
 local vue_plugin = {
 	name = "@vue/typescript-plugin",
 	location = vue_language_server_path,
@@ -262,8 +278,6 @@ local vue_plugin = {
 	configNamespace = "typescript",
 }
 local vtsls_config = {
-	cmd = { "vtsls", "--stdio" },
-	root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
 	settings = {
 		vtsls = {
 			tsserver = {
@@ -271,67 +285,19 @@ local vtsls_config = {
 			},
 		},
 	},
+	-- lspconfig's vtsls filetypes don't include Vue SFC
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-}
-
-local vue_ls_config = {
-	on_init = function(client)
-		client.handlers["tsserver/request"] = function(_, result, context)
-			local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
-			if #clients == 0 then
-				clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "tsgo" })
-			end
-			if #clients == 0 then
-				vim.notify(
-					"Could not find `vtsls` or `tsgo` lsp client, `vue_ls` would not work without one of them.",
-					vim.log.levels.ERROR
-				)
-				return
-			end
-			local ts_client = clients[1]
-
-			local param = unpack(result)
-			local id, command, payload = unpack(param)
-			ts_client:exec_cmd({
-				title = "vue_request_forward",
-				command = "typescript.tsserverRequest",
-				arguments = {
-					command,
-					payload,
-				},
-			}, { bufnr = context.bufnr }, function(_, r)
-				local response_data = { { id, r.body } }
-				client:notify("tsserver/response", response_data)
-			end)
-		end
+	on_attach = function(client)
+		-- vue_ls handles semantic tokens for .vue buffers (vue-language-server v3.0.2+)
+		client.server_capabilities.semanticTokensProvider.full = vim.bo.filetype ~= "vue"
 	end,
 }
-vim.lsp.config("vtsls", vtsls_config)
-vim.lsp.config("vue_ls", vue_ls_config)
-vim.lsp.enable({ "vtsls", "vue_ls" })
-vim.lsp.config("denols", {
-	root_markers = { "deno.json", "deno.jsonc" },
-})
-vim.lsp.enable({ "denols" })
 
--- Register tsgo config globally so it can be activated per-project via .nvim.lua
--- To use tsgo in a specific project, create a `.nvim.lua` in that project's root
--- (see `dot-nvim-lua.example.lua` in this directory for the template)
-vim.lsp.config("tsgo", {
-	settings = {
-		typescript = {
-			inlayHints = {
-				parameterNames = { enabled = "literals", suppressWhenArgumentMatchesName = true },
-				parameterTypes = { enabled = true },
-				variableTypes = { enabled = true },
-				propertyDeclarationTypes = { enabled = true },
-				functionLikeReturnTypes = { enabled = true },
-				enumMemberValues = { enabled = true },
-			},
-		},
-	},
-})
--- vim.lsp.enable("tsgo") -- Do NOT enable globally; enable per-project in `.nvim.lua`
+vim.lsp.config("vtsls", vtsls_config)
+vim.lsp.enable({ "vtsls", "vue_ls" })
+
+-- Preserve old semantic token highlighting for Vue components
+vim.api.nvim_set_hl(0, "@lsp.type.component", { link = "@type" })
 
 for _, name in ipairs(servers) do
 	vim.lsp.enable(name)
