@@ -73,9 +73,19 @@ vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "un-indent" })
 vim.keymap.set("n", "<leader>lo", ":lopen<cr>", { desc = "open quickfix" })
 vim.keymap.set("n", "<leader>lc", ":lcl<cr>", { desc = "close quickfix" })
 
--- -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+-- Diagnostic keymaps
+local function jump_diagnostic(count)
+	return function()
+		vim.diagnostic.jump({
+			count = count,
+			on_jump = function(_, bufnr)
+				vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+			end,
+		})
+	end
+end
+vim.keymap.set("n", "[d", jump_diagnostic(-1), { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", jump_diagnostic(1), { desc = "Next diagnostic" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
