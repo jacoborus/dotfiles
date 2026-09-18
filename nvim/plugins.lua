@@ -58,17 +58,17 @@ require("plugin_config.statusline")
 
 require("plugin_config.ibl")
 
-Nmap("<leader>hh", ":HLT<CR>", "Show highlight_group")
-Nmap("<leader>hi", ":Inspect<CR>", "Inspect treesitter highlight_group")
+vim.keymap.set("n", "<leader>hh", ":HLT<CR>", { desc = "Show highlight_group" })
+vim.keymap.set("n", "<leader>hi", ":Inspect<CR>", { desc = "Inspect treesitter highlight_group" })
 
 vim.g.ctrlsf_auto_focus = { at = "start" }
-Nmap("<leader>ff", ":CtrlSF<space>", "CtrlSF")
-Nmap("<leader>fo", ":CtrlSFOpen<cr>", "CtrlSF [O]pen")
-Nmap("<leader>ft", ":CtrlSFToggle<cr>", "CtrlSF [T]oggle")
+vim.keymap.set("n", "<leader>ff", ":CtrlSF<space>", { desc = "CtrlSF" })
+vim.keymap.set("n", "<leader>fo", ":CtrlSFOpen<cr>", { desc = "CtrlSF [O]pen" })
+vim.keymap.set("n", "<leader>ft", ":CtrlSFToggle<cr>", { desc = "CtrlSF [T]oggle" })
 
 require("Comment").setup()
 
-Nmap("<leader>m", ":call WindowSwap#EasyWindowSwap()<CR>", "Swap window", { silent = true })
+vim.keymap.set("n", "<leader>m", ":call WindowSwap#EasyWindowSwap()<CR>", { desc = "Swap window", silent = true })
 
 require("zen-mode").setup({})
 
@@ -77,12 +77,6 @@ require("plugin_config.gitsigns")
 require("scrollbar").setup()
 
 require("neoscroll").setup({ duration_multiplier = 0.5 })
-vim.keymap.set("n", "<ScrollWheelUp>", "<C-y>", { silent = true })
-vim.keymap.set("n", "<ScrollWheelDown>", "<C-e>", { silent = true })
-vim.keymap.set("i", "<ScrollWheelUp>", "<C-y>", { silent = true })
-vim.keymap.set("i", "<ScrollWheelDown>", "<C-e>", { silent = true })
-vim.keymap.set("v", "<ScrollWheelUp>", "<C-y>", { silent = true })
-vim.keymap.set("v", "<ScrollWheelDown>", "<C-e>", { silent = true })
 
 vim.o.background = "dark"
 vim.cmd("colorscheme tender-blue")
@@ -133,7 +127,7 @@ require("todo-comments").setup({ signs = false })
 require("notify").setup({ merge_duplicates = true, render = "compact" })
 
 require("neogen").setup({})
-Nmap("<leader>gd", ":Neogen<cr>", "[G]enerate [D]ocs")
+vim.keymap.set("n", "<leader>gd", ":Neogen<cr>", { desc = "[G]enerate [D]ocs" })
 
 require("plugin_config.noice")
 

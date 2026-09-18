@@ -57,5 +57,5 @@ require("gitsigns").setup({
 
 require("scrollbar.handlers.gitsigns").setup()
 
-Nmap("[g", ":Gitsigns prev_hunk<CR>", "Navigate to previus git hunk")
-Nmap("]g", ":Gitsigns next_hunk<CR>", "Navigate to next git hunk")
+vim.keymap.set("n", "[g", ":Gitsigns prev_hunk<CR>", { desc = "Navigate to previus git hunk" })
+vim.keymap.set("n", "]g", ":Gitsigns next_hunk<CR>", { desc = "Navigate to next git hunk" })

@@ -93,10 +93,10 @@ vim.opt.updatetime = 300
 -- always show signcolumns
 vim.opt.signcolumn = "yes"
 
-Nmap("<leader><CR>", function()
+vim.keymap.set("n", "<leader><CR>", function()
 	require("notify").dismiss({ silent = true, pending = false })
 	vim.cmd.noh()
-end, "Clear search higlights and notifications")
+end, { desc = "Clear search higlights and notifications" })
 
 vim.cmd([[
 	xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
