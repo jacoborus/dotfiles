@@ -1,11 +1,11 @@
-local function nvimtree_on_attatch(bufnr)
+local function nvimtree_on_attach(bufnr)
 	local api = require("nvim-tree.api")
 
 	local function opts(desc)
 		return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
 	end
 
-	api.config.mappings.default_on_attach(bufnr)
+	api.map.on_attach.default(bufnr)
 
 	vim.keymap.set("n", "s", api.node.open.vertical, opts("Open: Vertical Split"))
 	vim.keymap.set("n", "t", api.node.open.tab, opts("Open: New Tab"))
@@ -56,7 +56,7 @@ require("nvim-tree").setup({
 	filters = {
 		dotfiles = true,
 	},
-	on_attach = nvimtree_on_attatch,
+	on_attach = nvimtree_on_attach,
 })
 
-vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<cr>", { silent = true })
+vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<cr>", { desc = "Toggle NvimTree", silent = true })
