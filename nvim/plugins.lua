@@ -19,34 +19,82 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 vim.g.windowswap_map_keys = 0
 
+-- Dependencies ------------------------------------------------------------
 vim.pack.add({
-	-- { src = "~/dev/tender", name = "tender" },
+	gh("nvim-lua/plenary.nvim"),
+	gh("nvim-tree/nvim-web-devicons"),
+	gh("folke/lazydev.nvim"),
+})
+
+-- UI: theme, statusline, decorations --------------------------------------
+vim.pack.add({
 	gh("jtprogru/pack-ui.nvim"),
+	-- { src = "~/dev/tender", name = "tender" },
 	gh("jacoborus/tender", "lua"),
 	gh("nvim-lualine/lualine.nvim"),
-	gh("nvim-lua/plenary.nvim"),
+	gh("lukas-reineke/indent-blankline.nvim"),
+	gh("petertriho/nvim-scrollbar"),
+	gh("karb94/neoscroll.nvim"),
+	gh("wesQ3/vim-windowswap"),
+	gh("folke/zen-mode.nvim"),
+	gh("gerw/vim-HiLinkTrace"),
+	gh("folke/which-key.nvim"),
+})
+
+-- Editing & search --------------------------------------------------------
+vim.pack.add({
 	gh("tpope/vim-sleuth"),
 	gh("christoomey/vim-tmux-navigator"),
 	gh("AndrewRadev/tagalong.vim"),
 	gh("tpope/vim-surround"),
 	gh("jiangmiao/auto-pairs"),
 	gh("numToStr/Comment.nvim"),
-	gh("gerw/vim-HiLinkTrace"),
 	gh("dyng/ctrlsf.vim"),
-	gh("lukas-reineke/indent-blankline.nvim"),
 	-- gh("ziglang/zig.vim"),
+})
+
+-- Git ---------------------------------------------------------------------
+vim.pack.add({
 	gh("lewis6991/gitsigns.nvim"),
-	gh("petertriho/nvim-scrollbar"),
-	gh("karb94/neoscroll.nvim"),
-	gh("wesQ3/vim-windowswap"),
-	gh("folke/zen-mode.nvim"),
 	gh("tpope/vim-fugitive"),
 	gh("tpope/vim-rhubarb"),
 	gh("sindrets/diffview.nvim"),
-	gh("nvim-tree/nvim-web-devicons"),
-	gh("folke/which-key.nvim"),
-	gh("folke/lazydev.nvim"),
 })
+
+-- Treesitter --------------------------------------------------------------
+vim.pack.add({
+	gh("nvim-treesitter/nvim-treesitter"),
+	gh("nvim-treesitter/nvim-treesitter-context"),
+})
+
+-- Pickers -----------------------------------------------------------------
+vim.pack.add({
+	gh("nvim-telescope/telescope.nvim"),
+	gh("nvim-telescope/telescope-fzf-native.nvim"),
+	gh("nvim-telescope/telescope-ui-select.nvim"),
+})
+
+-- File tree ---------------------------------------------------------------
+vim.pack.add({
+	gh("nvim-tree/nvim-tree.lua"),
+})
+
+-- LSP ---------------------------------------------------------------------
+vim.pack.add({
+	gh("neovim/nvim-lspconfig"),
+	gh("mason-org/mason.nvim"),
+})
+
+-- Messaging & docs --------------------------------------------------------
+vim.pack.add({
+	gh("folke/todo-comments.nvim"),
+	gh("danymat/neogen"),
+	gh("folke/noice.nvim"),
+	gh("MunifTanjim/nui.nvim"),
+	gh("rcarriga/nvim-notify"),
+})
+
+-- Setup -------------------------------------------------------------------
 
 require("lazydev").setup({
 	library = {
@@ -87,41 +135,13 @@ vim.o.timeoutlen = 300
 
 require("which-key").setup({})
 
-vim.pack.add({
-	gh("nvim-treesitter/nvim-treesitter"),
-	gh("nvim-treesitter/nvim-treesitter-context"),
-})
-
 require("plugin_config.treesitter")
-
-vim.pack.add({
-	gh("nvim-telescope/telescope.nvim"),
-	gh("nvim-telescope/telescope-fzf-native.nvim"),
-	gh("nvim-telescope/telescope-ui-select.nvim"),
-})
 
 require("plugin_config.telescope")
 
-vim.pack.add({
-	gh("nvim-tree/nvim-tree.lua"),
-})
-
 require("plugin_config.nvim-tree")
 
-vim.pack.add({
-	gh("neovim/nvim-lspconfig"),
-	gh("mason-org/mason.nvim"),
-})
-
 require("plugin_config.lsp")
-
-vim.pack.add({
-	gh("folke/todo-comments.nvim"),
-	gh("danymat/neogen"),
-	gh("folke/noice.nvim"),
-	gh("MunifTanjim/nui.nvim"),
-	gh("rcarriga/nvim-notify"),
-})
 
 require("todo-comments").setup({ signs = false })
 require("notify").setup({ merge_duplicates = true, render = "compact" })
@@ -130,6 +150,8 @@ require("neogen").setup({})
 vim.keymap.set("n", "<leader>gd", ":Neogen<cr>", { desc = "[G]enerate [D]ocs" })
 
 require("plugin_config.noice")
+
+-- Lazy-loaded plugins -----------------------------------------------------
 
 vim.api.nvim_create_autocmd("CmdUndefined", {
 	pattern = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
