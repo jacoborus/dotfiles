@@ -6,16 +6,6 @@ local gh = function(repo, branch)
 	return spec
 end
 
--- Avisa una sola vez por sesión cuando se usa un alias de un atajo antiguo.
-local notified = {}
-local function notify_once(new, old)
-	if notified[old] then
-		return
-	end
-	notified[old] = true
-	vim.notify(("Nuevo atajo: %s  (alias antiguo: %s)"):format(new, old), vim.log.levels.INFO)
-end
-
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(ev)
 		local name = ev.data.spec.name
@@ -115,12 +105,10 @@ require("plugin_config.statusline")
 
 require("plugin_config.ibl")
 
+require("plugin_config.hilink_trace")
+
 vim.keymap.set("n", "<leader>hi", ":Inspect<CR>", { desc = "Inspect highlight group at cursor" })
--- Alias del antiguo <leader>hh (vim-HiLinkTrace). El atajo nuevo es <leader>hi.
-vim.keymap.set("n", "<leader>hh", function()
-	vim.cmd("Inspect")
-	notify_once("<leader>hi", "<leader>hh")
-end, { desc = "Inspect highlight (alias de <leader>hi)" })
+vim.keymap.set("n", "<leader>hh", ":HLT<CR>", { desc = "HiLinkTrace at cursor" })
 
 vim.g.ctrlsf_auto_focus = { at = "start" }
 vim.keymap.set("n", "<leader>ff", ":CtrlSF<space>", { desc = "CtrlSF" })
