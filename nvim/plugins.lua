@@ -6,18 +6,29 @@ local gh = function(repo, branch)
 	return spec
 end
 
+-- Avisa una sola vez por sesión cuando se usa un alias de un atajo antiguo.
+local notified = {}
+local function notify_once(new, old)
+	if notified[old] then
+		return
+	end
+	notified[old] = true
+	vim.notify(("Nuevo atajo: %s  (alias antiguo: %s)"):format(new, old), vim.log.levels.INFO)
+end
+
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(ev)
 		local name = ev.data.spec.name
 		if ev.data.kind == "install" or ev.data.kind == "update" then
 			if name == "telescope-fzf-native.nvim" then
 				vim.system({ "make" }, { cwd = ev.data.path }):wait()
+			elseif name == "nvim-treesitter" then
+				-- Los parsers deben actualizarse junto al plugin.
+				require("nvim-treesitter").update()
 			end
 		end
 	end,
 })
-
-vim.g.windowswap_map_keys = 0
 
 -- Dependencies ------------------------------------------------------------
 vim.pack.add({
@@ -35,9 +46,7 @@ vim.pack.add({
 	gh("lukas-reineke/indent-blankline.nvim"),
 	{ src = "https://github.com/petertriho/nvim-scrollbar", version = "v1" },
 	gh("karb94/neoscroll.nvim"),
-	gh("wesQ3/vim-windowswap"),
 	gh("folke/zen-mode.nvim"),
-	gh("gerw/vim-HiLinkTrace"),
 	gh("folke/which-key.nvim"),
 })
 
@@ -48,7 +57,6 @@ vim.pack.add({
 	gh("AndrewRadev/tagalong.vim"),
 	gh("tpope/vim-surround"),
 	gh("jiangmiao/auto-pairs"),
-	gh("numToStr/Comment.nvim"),
 	gh("dyng/ctrlsf.vim"),
 	-- gh("ziglang/zig.vim"),
 })
@@ -106,17 +114,23 @@ require("plugin_config.statusline")
 
 require("plugin_config.ibl")
 
-vim.keymap.set("n", "<leader>hh", ":HLT<CR>", { desc = "Show highlight_group" })
-vim.keymap.set("n", "<leader>hi", ":Inspect<CR>", { desc = "Inspect treesitter highlight_group" })
+vim.keymap.set("n", "<leader>hi", ":Inspect<CR>", { desc = "Inspect highlight group at cursor" })
+-- Alias del antiguo <leader>hh (vim-HiLinkTrace). El atajo nuevo es <leader>hi.
+vim.keymap.set("n", "<leader>hh", function()
+	vim.cmd("Inspect")
+	notify_once("<leader>hi", "<leader>hh")
+end, { desc = "Inspect highlight (alias de <leader>hi)" })
 
 vim.g.ctrlsf_auto_focus = { at = "start" }
 vim.keymap.set("n", "<leader>ff", ":CtrlSF<space>", { desc = "CtrlSF" })
 vim.keymap.set("n", "<leader>fo", ":CtrlSFOpen<cr>", { desc = "CtrlSF [O]pen" })
 vim.keymap.set("n", "<leader>ft", ":CtrlSFToggle<cr>", { desc = "CtrlSF [T]oggle" })
 
-require("Comment").setup()
-
-vim.keymap.set("n", "<leader>m", ":call WindowSwap#EasyWindowSwap()<CR>", { desc = "Swap window", silent = true })
+-- Alias del antiguo <leader>m (vim-windowswap). El atajo nativo es <C-w>x.
+vim.keymap.set("n", "<leader>m", function()
+	vim.cmd("wincmd x")
+	notify_once("<C-w>x", "<leader>m")
+end, { desc = "Swap window (alias de <C-w>x)", silent = true })
 
 require("zen-mode").setup({})
 
