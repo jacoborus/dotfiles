@@ -49,8 +49,15 @@ vim.opt.timeoutlen = 300
 -- vim.o.wildmenu = true
 -- vim.o.wildignore = vim.o.wildignore .. "*/tmp/*,*.so,*.swp,*.zip"
 
+-- Autocompletado nativo (0.12): buffer + LSP vía 'omnifunc'.
+vim.o.autocomplete = true
+vim.o.complete = ".,w,b,u,t,o"
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = "menuone,noselect,popup"
+vim.o.completeopt = "menu,menuone,noselect,popup,nearest"
+
+-- Bordes de ventanas flotantes y del menú de completado.
+vim.o.winborder = "rounded"
+vim.o.pumborder = "rounded"
 
 vim.opt.backspace = "2"
 vim.opt.showcmd = true
