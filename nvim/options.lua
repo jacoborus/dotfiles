@@ -6,11 +6,9 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Enable project-local .nvim.lua config files
 vim.o.exrc = true
-vim.o.secure = true
 
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
-vim.g.have_nerd_font = true
 
 -- Make line numbers default
 vim.o.number = true
@@ -29,17 +27,13 @@ vim.o.history = 700
 -- Search options
 vim.o.ignorecase = true -- Case insensitive searching
 vim.o.smartcase = true -- UNLESS /C or capital in search
-vim.opt.hlsearch = true -- Highlight search results
-vim.opt.incsearch = true -- Find as you type
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
--- vim.opt.lazyredraw       = true -- Don't redraw while executing macros
-vim.opt.magic = true -- For regular expressions turn magic on
 
 -- Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 300
 -- Keep signcolumn on by default
-vim.wo.signcolumn = "yes"
+vim.o.signcolumn = "yes"
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
@@ -59,13 +53,9 @@ vim.o.completeopt = "menu,menuone,noselect,popup,nearest"
 vim.o.winborder = "rounded"
 vim.o.pumborder = "rounded"
 
-vim.opt.backspace = "2"
-vim.opt.showcmd = true
-
 vim.opt.showmode = false -- Don't show the mode, since it's already in the status line
 vim.opt.laststatus = 3
 vim.opt.autowrite = true
-vim.opt.autoread = true
 
 -- use spaces for tabs
 vim.opt.tabstop = 2
@@ -73,7 +63,6 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true -- Use spaces instead of tabs
-vim.opt.smarttab = true -- Be smart when using tabs
 
 -- Open new split panes to right and bottom
 vim.opt.splitbelow = true
@@ -91,14 +80,9 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Files, backups and undo
 -- ------------------------------------------------
--- Turn backup off, since most stuff is in git
-vim.opt.backup = false
+-- Turn off write backups; most stuff is in git.
 vim.opt.writebackup = false
-vim.opt.wb = false
 vim.opt.swapfile = false
-vim.opt.updatetime = 300
--- always show signcolumns
-vim.opt.signcolumn = "yes"
 
 vim.keymap.set("n", "<leader><CR>", function()
 	require("notify").dismiss({ silent = true, pending = false })
