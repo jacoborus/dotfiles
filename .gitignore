@@ -15,3 +15,5 @@ opencode/*
 !opencode/plugins/*
 !opencode/agents/
 !opencode/agents/*
+!opencode/themes/
+!opencode/themes/*
