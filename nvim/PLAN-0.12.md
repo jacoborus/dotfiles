@@ -41,6 +41,11 @@ cead729 fix(nvim): make on-save formatting work with installed tools
 2191f89 fix(nvim): align lualine with global statusline
 e0f91cf docs(nvim): record results of the 0.12 fixes
 f3a710a fix(nvim): swap buffers between splits preserving sizes
+ec5289d docs(nvim): document size-preserving window swap
+7bde9b6 feat(nvim): replace eslint/prettier with oxlint/oxfmt
+e8a2f2d feat(nvim): reimplement HiLinkTrace commands
+de5ae55 refactor(nvim): load dadbod eagerly
+5e39a65 feat(nvim): support cross-tab buffer swaps
 ```
 
 ---
@@ -136,8 +141,20 @@ Archivo: `plugin_config/conform.lua`
 - [x] Conservar tamaños del layout y la vista (`winsaveview`) de cada buffer.
 - [x] Mapear `<leader>m` al swap en dos pasos; `<C-w>x` se queda nativo.
 - [x] Probar con `vsplit` + `split`: buffers intercambiados, anchos/alturas intactos, foco y vistas conservados.
-- [x] Manejar cancelación en la misma ventana y ventana marcada cerrada / cambio de pestaña.
+- [x] Manejar cancelación en la misma ventana y ventana marcada cerrada (el cambio de pestaña ya no cancela, ver Fase 9).
 - [x] Commit: `fix(nvim): swap buffers between splits preserving sizes`.
+
+## Fase 9 — Follow-up: oxlint/oxfmt, HLT, cross-tab y dadbod
+
+- [x] Sustituir `eslint`/`prettier` por `oxlint`/`oxfmt` en conform y en el LSP.
+- [x] Instalar `oxlint` y `oxfmt` con Mason.
+- [x] Añadir `javascriptreact`/`typescriptreact`: las claves `jsx`/`tsx` anteriores no coincidían con el filetype real.
+- [x] Configurar `oxlint` con `cwd` al proyecto (`.oxlintrc.json`/`package.json`).
+- [x] Reimplementar `:HLT`, `:HLT!` y `:HLTm`: syntax stack, capturas de treesitter, cadena de links y `fg`/`bg`.
+- [x] Restaurar `<leader>hh` a `:HLT`; `<leader>hi` sigue como `:Inspect`.
+- [x] Soporte de swap entre pestañas (marcar en una tab y cambiar a otra).
+- [x] Dadbod eager para conservar los argumentos del comando.
+- [x] Verificado: oxfmt en JS/TS/JSX/TSX/Vue/HTML/JSON, LSP `oxlint`, `:HLT`/`:HLT!`, cross-tab y `:DBUI`.
 
 ---
 
@@ -148,3 +165,4 @@ Archivo: `plugin_config/conform.lua`
 - `<C-w>x` sigue nativo: solo intercambia dentro de la misma fila/columna. Para cruzar layouts mixtos, usar `<leader>m`.
 - `diffview.nvim`, `vim-rhubarb` y `pack-ui.nvim` se mantienen hasta confirmar uso.
 - El lockfile de `vim.pack` vive en `~/.config/nvim/nvim-pack-lock.json`, fuera del repo de dotfiles.
+- `oxfmt` es 0.x y `oxlint` no cubre el 100% de reglas/plugins de ESLint. `eslint_d`/`prettier` siguen instalados pero ya no se usan; si algún proyecto necesita una regla no soportada, se puede reactivar `eslint_d` solo para ese caso.
