@@ -93,6 +93,13 @@ vim.pack.add({
 	gh("rcarriga/nvim-notify"),
 })
 
+-- Database ----------------------------------------------------------------
+vim.pack.add({
+	gh("kristijanhusak/vim-dadbod-ui"),
+	gh("tpope/vim-dadbod"),
+})
+vim.g.db_ui_use_nerd_fonts = 1
+
 -- Setup -------------------------------------------------------------------
 
 require("lazydev").setup({
@@ -152,20 +159,6 @@ vim.keymap.set("n", "<leader>gd", ":Neogen<cr>", { desc = "[G]enerate [D]ocs" })
 require("plugin_config.noice")
 
 -- Lazy-loaded plugins -----------------------------------------------------
-
-vim.api.nvim_create_autocmd("CmdUndefined", {
-	pattern = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
-	once = true,
-	callback = function(ev)
-		vim.pack.add({
-			gh("kristijanhusak/vim-dadbod-ui"),
-			gh("tpope/vim-dadbod"),
-		})
-		vim.g.db_ui_use_nerd_fonts = 1
-		-- CmdUndefined aborta el comando original: relanzarlo ya con el plugin cargado.
-		vim.cmd(ev.match)
-	end,
-})
 
 local outline_setup = false
 vim.keymap.set("n", "<leader>ol", function()
