@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "theme": {
+    "name": "tender-blue"
+  },
+  "plugins": [],
+  "scroll": {
+    "speed": 1,
+    "acceleration": false
+  },
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "hide",
+    "scrollbar": false,
+    "thinking": "hide"
+  },
+  "animations": true,
+  "keybinds": {
+    "session.tab.previous": "alt+h,ctrl+shift+tab,alt+up",
+    "session.tab.next": "alt+l,ctrl+tab,alt+down"
+  }
+}
