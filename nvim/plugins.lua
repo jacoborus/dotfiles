@@ -127,11 +127,12 @@ vim.keymap.set("n", "<leader>ff", ":CtrlSF<space>", { desc = "CtrlSF" })
 vim.keymap.set("n", "<leader>fo", ":CtrlSFOpen<cr>", { desc = "CtrlSF [O]pen" })
 vim.keymap.set("n", "<leader>ft", ":CtrlSFToggle<cr>", { desc = "CtrlSF [T]oggle" })
 
--- Alias del antiguo <leader>m (vim-windowswap). El atajo nativo es <C-w>x.
-vim.keymap.set("n", "<leader>m", function()
-	vim.cmd("wincmd x")
-	notify_once("<C-w>x", "<leader>m")
-end, { desc = "Swap window (alias de <C-w>x)", silent = true })
+-- Intercambia buffers entre dos splits conservando los tamaños. Dos pasos:
+-- primera pulsación marca, segunda intercambia (<C-w>x no cruza layouts mixtos).
+vim.keymap.set("n", "<leader>m", require("plugin_config.window_swap").easy_swap, {
+	desc = "Swap buffers sin cambiar tamaños",
+	silent = true,
+})
 
 require("zen-mode").setup({})
 
