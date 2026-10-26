@@ -25,6 +25,7 @@
 | `highlighter` en `.ts` / `.go` / `.py` | `nil` | **activo** |
 | Autocompletado LSP | desactivado | **vtsls + `omnifunc` + `complete+=o`** |
 | Formatters disponibles | 3 de 10 | **10 de 10** |
+| Swap de splits | plugin `vim-windowswap` | **módulo Lua en `<leader>m` (2 pasos, conserva tamaños)** |
 
 Plugins eliminados de la config y del disco (`vim.pack.del`): `Comment.nvim`, `vim-windowswap`, `vim-HiLinkTrace`.
 
@@ -38,6 +39,8 @@ ae5c644 fix(nvim): enable native LSP completion and skip npm at startup
 cead729 fix(nvim): make on-save formatting work with installed tools
 835e9d1 refactor(nvim): drop duplicate and default options
 2191f89 fix(nvim): align lualine with global statusline
+e0f91cf docs(nvim): record results of the 0.12 fixes
+f3a710a fix(nvim): swap buffers between splits preserving sizes
 ```
 
 ---
@@ -95,14 +98,14 @@ Archivo: `plugin_config/conform.lua`
 ### 6.1 Plugins cubiertos por 0.12
 
 - [x] `numToStr/Comment.nvim` → nativo `gc`/`gcc`.
-- [x] `wesQ3/vim-windowswap` → nativo `<C-w>x`.
+- [x] `wesQ3/vim-windowswap` → reimplementado en Lua (ver Fase 8). `<C-w>x` nativo no era equivalente.
 - [x] `gerw/vim-HiLinkTrace` → `:Inspect` / `:InspectTree`.
 - [x] `vim.g.windowswap_map_keys` y `require("Comment").setup()` fuera.
 - [x] Borrar plugins del disco con `vim.pack.del({...}, { force = true })`; lockfile limpio.
 
 ### 6.2 Alias + notificación (una vez por sesión)
 
-- [x] `<leader>m` → alias de `<C-w>x`; notifica “Nuevo atajo: `<C-w>x`”.
+- [x] `<leader>m` → swap de buffers en dos pasos (marca/intercambia), conserva tamaños.
 - [x] `<leader>hh` → alias de `<leader>hi` (`:Inspect`); notifica “Nuevo atajo: `<leader>hi`”.
 - [x] Helper `notify_once` para no repetir el aviso.
 - [x] Probados ambos callbacks: sin errores y con notificación.
@@ -126,11 +129,22 @@ Archivo: `plugin_config/conform.lua`
 - [x] `vim.pack` sin errores y lockfile coherente.
 - [x] `git diff` revisado por commits.
 
+## Fase 8 — Swap de buffers entre splits
+
+- [x] Detectar que `<C-w>x` no cruza layouts mixtos (solo intercambia en la misma fila/columna).
+- [x] Implementar `plugin_config/window_swap.lua`: marca una ventana y en la segunda pulsación intercambia buffers.
+- [x] Conservar tamaños del layout y la vista (`winsaveview`) de cada buffer.
+- [x] Mapear `<leader>m` al swap en dos pasos; `<C-w>x` se queda nativo.
+- [x] Probar con `vsplit` + `split`: buffers intercambiados, anchos/alturas intactos, foco y vistas conservados.
+- [x] Manejar cancelación en la misma ventana y ventana marcada cerrada / cambio de pestaña.
+- [x] Commit: `fix(nvim): swap buffers between splits preserving sizes`.
+
 ---
 
 ## Notas / pendientes fuera de esta tanda
 
 - Migraciones opcionales: telescope → fzf-lua/snacks.picker, nvim-tree → oil/mini.files, noice → snacks.notifier.
 - `gr` se queda como está (telescope references). Si se quiere eliminar el retraso de `timeoutlen`, usar `grr` nativo y borrar el mapeo.
+- `<C-w>x` sigue nativo: solo intercambia dentro de la misma fila/columna. Para cruzar layouts mixtos, usar `<leader>m`.
 - `diffview.nvim`, `vim-rhubarb` y `pack-ui.nvim` se mantienen hasta confirmar uso.
 - El lockfile de `vim.pack` vive en `~/.config/nvim/nvim-pack-lock.json`, fuera del repo de dotfiles.
