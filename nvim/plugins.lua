@@ -91,6 +91,7 @@ vim.pack.add({
 vim.pack.add({
 	gh("neovim/nvim-lspconfig"),
 	gh("mason-org/mason.nvim"),
+	gh("stevearc/conform.nvim"),
 })
 
 -- Messaging & docs --------------------------------------------------------
@@ -140,12 +141,8 @@ require("scrollbar").setup()
 
 require("neoscroll").setup({ duration_multiplier = 0.5 })
 
-vim.o.background = "dark"
 vim.cmd("colorscheme tender-blue")
 vim.cmd([[highlight Headline guibg=#464632]])
-
-vim.o.timeout = true
-vim.o.timeoutlen = 300
 
 require("which-key").setup({})
 
@@ -170,19 +167,25 @@ require("plugin_config.noice")
 vim.api.nvim_create_autocmd("CmdUndefined", {
 	pattern = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
 	once = true,
-	callback = function()
+	callback = function(ev)
 		vim.pack.add({
 			gh("kristijanhusak/vim-dadbod-ui"),
 			gh("tpope/vim-dadbod"),
 		})
 		vim.g.db_ui_use_nerd_fonts = 1
+		-- CmdUndefined aborta el comando original: relanzarlo ya con el plugin cargado.
+		vim.cmd(ev.match)
 	end,
 })
 
+local outline_setup = false
 vim.keymap.set("n", "<leader>ol", function()
-	vim.pack.add({ gh("hedyhli/outline.nvim") })
-	require("outline").setup()
-	vim.cmd.Outline()
+	if not outline_setup then
+		vim.pack.add({ gh("hedyhli/outline.nvim") })
+		require("outline").setup()
+		outline_setup = true
+	end
+	vim.cmd("Outline")
 end, { desc = "Toggle outline" })
 
 require("plugin_config.conform")
