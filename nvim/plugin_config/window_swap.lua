@@ -2,7 +2,7 @@
 -- igual que hacía vim-windowswap. Dos pasos: marcar y luego intercambiar.
 local M = {}
 
----@type { tab: integer, win: integer }?
+---@type { win: integer }?
 local marked = nil
 
 local function notify(msg, level)
@@ -31,11 +31,10 @@ local function swap_buffers(win_a, win_b)
 end
 
 function M.easy_swap()
-	local cur_tab = vim.api.nvim_get_current_tabpage()
 	local cur_win = vim.api.nvim_get_current_win()
 
 	if not marked then
-		marked = { tab = cur_tab, win = cur_win }
+		marked = { win = cur_win }
 		notify("ventana marcada. Ve a la otra y pulsa <leader>m")
 		return
 	end
@@ -45,9 +44,6 @@ function M.easy_swap()
 
 	if not vim.api.nvim_win_is_valid(src.win) then
 		notify("la ventana marcada ya no existe; marca otra vez", vim.log.levels.WARN)
-		return
-	elseif src.tab ~= cur_tab or vim.api.nvim_win_get_tabpage(src.win) ~= cur_tab then
-		notify("cambiaste de pestaña; marca otra vez", vim.log.levels.WARN)
 		return
 	elseif src.win == cur_win then
 		notify("marca cancelada")
