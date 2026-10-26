@@ -33,7 +33,7 @@ vim.pack.add({
 	gh("jacoborus/tender", "lua"),
 	gh("nvim-lualine/lualine.nvim"),
 	gh("lukas-reineke/indent-blankline.nvim"),
-	gh("petertriho/nvim-scrollbar"),
+	{ src = "https://github.com/petertriho/nvim-scrollbar", version = "v1" },
 	gh("karb94/neoscroll.nvim"),
 	gh("wesQ3/vim-windowswap"),
 	gh("folke/zen-mode.nvim"),
