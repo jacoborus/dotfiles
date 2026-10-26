@@ -3,7 +3,7 @@
 - **Config:** `/home/jacobo/dotfiles/nvim`
 - **Neovim verificado:** 0.12.6
 - **Fecha:** 2026-10-26
-- **Estado:** en progreso (pausado para revisión)
+- **Estado:** completado
 
 ## Decisiones acordadas
 
@@ -16,111 +16,121 @@
 
 ---
 
-## Estado actual
+## Resultado final
 
-Archivos tocados hasta ahora:
+| Métrica | Antes | Después |
+|---|---|---|
+| Arranque (`nvim --headless`) | ~190–250 ms | **~90–100 ms** |
+| Parsers tree-sitter instalados | 7 (solo del sistema) | **32** |
+| `highlighter` en `.ts` / `.go` / `.py` | `nil` | **activo** |
+| Autocompletado LSP | desactivado | **vtsls + `omnifunc` + `complete+=o`** |
+| Formatters disponibles | 3 de 10 | **10 de 10** |
+
+Plugins eliminados de la config y del disco (`vim.pack.del`): `Comment.nvim`, `vim-windowswap`, `vim-HiLinkTrace`.
+
+Commits:
 
 ```
- M nvim/options.lua
- M nvim/plugin_config/lsp.lua
- M nvim/plugin_config/treesitter.lua
- M nvim/plugins.lua
+caf9f02 fix(nvim): restore treesitter parsers and highlighting
+04ab871 refactor(nvim): drop plugins superseded by 0.12
+ae5c644 fix(nvim): enable native LSP completion and skip npm at startup
+0a50af0 docs(nvim): add 0.12 cleanup plan
+cead729 fix(nvim): make on-save formatting work with installed tools
+835e9d1 refactor(nvim): drop duplicate and default options
+2191f89 fix(nvim): align lualine with global statusline
 ```
-
-Para revisar: `cd ~/dotfiles && git diff -- nvim`
-
-Pendiente inmediato: verificar que los parsers/formatters se instalaron, terminar la limpieza de opciones y los ajustes de `lualine`, `dadbod`, `conform` y `outline`.
 
 ---
 
 ## Fase 1 — Base y medición
 
 - [x] Revisar estado de git (`nvim/` limpio).
-- [x] Medir arranque base: `nvim --headless --startuptime`.
-  - Base medida: **~190–250 ms**; `options+keymaps` solos: **~3 ms**; `npm root -g`: **80–115 ms**.
-- [ ] Guardar medición final para comparar.
+- [x] Medir arranque base: **~190–250 ms**; `options+keymaps` solos: **~3 ms**; `npm root -g`: **80–115 ms**.
+- [x] Medición final: **~90–100 ms**.
 
-## Fase 2 — Tree-sitter (bug principal)
+## Fase 2 — Tree-sitter
 
-Archivo: `plugin_config/treesitter.lua`, `plugins.lua`
+Archivos: `plugin_config/treesitter.lua`, `plugins.lua`
 
 - [x] Sustituir `vim.treesitter.language.install(...)` (no existe en 0.12) por `require("nvim-treesitter").install({...})`.
 - [x] Separar lista de **parsers** (para instalar) de **filetypes** (para `FileType`).
 - [x] Añadir `vim.treesitter.start(ev.buf)` tras comprobar el parser con `vim.treesitter.language.get_lang()` + `language.add()`.
 - [x] Añadir hook en `PackChanged`: al actualizar `nvim-treesitter`, ejecutar `require("nvim-treesitter").update()`.
-- [x] Instalar parsers ahora (`install():wait()` → `ok=true`).
-- [ ] Verificar:
-  - [ ] `:checkhealth vim.treesitter`.
-  - [ ] `highlighter ~= nil` en `.lua`, `.ts`, `.go`, `.py`.
-  - [ ] `nvim-treesitter-context` funciona en TS/Go.
+- [x] Instalar parsers (`install():wait()` → `ok=true`, 32 parsers).
+- [x] Verificar:
+  - [x] `:checkhealth vim.treesitter` → `go`, `python`, `tsx`, `typescript`, `vue` OK.
+  - [x] `highlighter ~= nil` en `.lua`, `.ts`, `.go`, `.py`, `.md`.
+  - [x] `nvim-treesitter-context` usa los parsers nuevos.
 
 ## Fase 3 — Autocompletado LSP
 
-Archivo: `plugin_config/lsp.lua`, `options.lua`
+Archivos: `plugin_config/lsp.lua`, `options.lua`
 
-- [x] Quitar `vim.lsp.completion.enable()` sin argumentos (actualmente **desactiva**).
+- [x] Quitar `vim.lsp.completion.enable()` sin argumentos (desactivaba).
 - [x] Añadir `LspAttach` con `vim.lsp.completion.enable(true, client.id, ev.buf)`.
 - [x] Añadir `o` a `'complete'` para que `'autocomplete'` incluya LSP vía `omnifunc`.
-- [x] Actualizar `'completeopt'` con `nearest` (nuevo en 0.12).
-- [ ] Mantener los mapeos de `<Tab>`/`<S-Tab>` (ya funcionan con `pumvisible`); verificar en un `.ts`.
-- [ ] Verificar en un `.ts`: menú automático + `<C-y>` acepta.
+- [x] Actualizar `'completeopt'` con `nearest`.
+- [x] Verificar en `.ts`: cliente `vtsls`, `completionProvider=true`, `omnifunc=v:lua.vim.lsp.omnifunc`, `complete=.,w,b,u,t,o`.
+- [x] Los mapeos de `<Tab>`/`<S-Tab>` se mantienen.
 
 ## Fase 4 — Arranque: `npm root -g`
 
 Archivo: `plugin_config/lsp.lua`
 
 - [x] Resolver `@vue/language-server` con rutas conocidas (`~/.npm-packages`, Mason).
-- [x] Ejecutar `npm root -g` solo como último recurso (o eliminarlo si las rutas existen).
-- [ ] Medir de nuevo el arranque y comparar.
+- [x] Ejecutar `npm root -g` solo como último recurso.
+- [x] Medir de nuevo: **~90–100 ms** (antes ~190–250 ms).
 
 ## Fase 5 — Formatters
 
 Archivo: `plugin_config/conform.lua`
 
-- [ ] Verificar instalación Mason de: `stylua`, `black`, `isort`, `yamlfix`, `goimports`, `eslint_d`, `sql-formatter`.
-- [ ] Cambiar formatter `eslint` → `eslint_d` (el binario `eslint` no existe).
-- [ ] Poner `notify_on_error = true` (o dejar aviso visible si falla).
-- [ ] Verificar con `:ConformInfo` y formateando un `.lua`, `.py`, `.go`, `.yaml`, `.sql`.
+- [x] Instalar con Mason: `stylua`, `black`, `isort`, `yamlfix`, `goimports`, `eslint_d`, `sql-formatter`.
+- [x] Cambiar formatter `eslint` → `eslint_d`.
+- [x] Poner `notify_on_error = true`.
+- [x] Verificar con `:checkhealth conform` (10/10 OK) y formateando `.lua`, `.py`, `.go`, `.yaml`, `.sql`.
 
 ## Fase 6 — Limpieza y atajos
 
-### 6.1 Quitar plugins ya cubiertos por 0.12
+### 6.1 Plugins cubiertos por 0.12
 
-- [x] `numToStr/Comment.nvim` → nativo `gc`/`gcc` (decisión: sin alias para `gbc`).
+- [x] `numToStr/Comment.nvim` → nativo `gc`/`gcc`.
 - [x] `wesQ3/vim-windowswap` → nativo `<C-w>x`.
 - [x] `gerw/vim-HiLinkTrace` → `:Inspect` / `:InspectTree`.
 - [x] `vim.g.windowswap_map_keys` y `require("Comment").setup()` fuera.
-- [ ] Borrar plugins del disco con `vim.pack.del(...)` y comprobar lockfile.
+- [x] Borrar plugins del disco con `vim.pack.del({...}, { force = true })`; lockfile limpio.
 
 ### 6.2 Alias + notificación (una vez por sesión)
 
 - [x] `<leader>m` → alias de `<C-w>x`; notifica “Nuevo atajo: `<C-w>x`”.
 - [x] `<leader>hh` → alias de `<leader>hi` (`:Inspect`); notifica “Nuevo atajo: `<leader>hi`”.
 - [x] Helper `notify_once` para no repetir el aviso.
+- [x] Probados ambos callbacks: sin errores y con notificación.
 
 ### 6.3 Otros ajustes
 
-- [ ] `lualine`: `globalstatus = true` (coherente con `laststatus = 3`).
-- [ ] `dadbod`: reejecutar el comando en `CmdUndefined` (el primer `<leader>db` no hacía nada).
-- [ ] `conform`: añadirlo en `plugins.lua` y quitar el `VimEnter` (no aporta y puede pedir confirmación).
-- [ ] `outline`: no repetir `setup()` en cada pulsación.
-- [ ] `options.lua`: quitar defaults (`magic`, `showcmd`, `autoread`, `smarttab`, `hlsearch`, `incsearch`, `timeout`, `backup`, `background`), duplicados (`updatetime`, `signcolumn`, `timeoutlen`) y `secure`.
-- [ ] `options.lua`: `backspace` explícito o fuera; `have_nerd_font` fuera.
-- [x] Añadir `winborder = "rounded"`; mantener `pumborder`.
-- [ ] Revisar `history = 700` (default 10000) y `foldmethod`/`foldlevel` (se dejan como están si son intencionados).
+- [x] `lualine`: `globalstatus = true`.
+- [x] `dadbod`: relanzar el comando en `CmdUndefined` (el primer `<leader>db` ya funciona).
+- [x] `conform`: añadido en `plugins.lua`; eliminado el `VimEnter`.
+- [x] `outline`: `setup()` solo la primera vez.
+- [x] `options.lua`: quitados defaults, duplicados y `secure`.
+- [x] `options.lua`: `backspace` fuera (el default ya era `indent,eol,start`); `have_nerd_font` fuera.
+- [x] Añadidos `winborder = "rounded"` y `pumborder = "rounded"`.
+- [x] Revisados `history = 700` y `foldmethod`/`foldlevel`: se dejan como estaban (elección del usuario).
 
 ## Fase 7 — Verificación final
 
-- [ ] `nvim --headless --startuptime` y comparar con la base.
-- [ ] `:checkhealth` (treesitter, lsp, conform).
-- [ ] Abrir `.lua`, `.ts`, `.go`, `.py`, `.yaml` y comprobar highlighting, LSP y formato.
-- [ ] `vim.pack` sin errores y lockfile coherente.
-- [ ] Resumen de cambios + `git diff` para revisión.
+- [x] Arranque medido y comparado (**~90–100 ms**).
+- [x] `:checkhealth vim.treesitter` y `:checkhealth conform` sin errores.
+- [x] `.lua`, `.ts`, `.go`, `.py`, `.yaml`, `.sql` con highlighting, LSP y formato.
+- [x] `vim.pack` sin errores y lockfile coherente.
+- [x] `git diff` revisado por commits.
 
 ---
 
 ## Notas / pendientes fuera de esta tanda
 
 - Migraciones opcionales: telescope → fzf-lua/snacks.picker, nvim-tree → oil/mini.files, noice → snacks.notifier.
-- `gr` se queda como está (mapeo a telescope references) para no perder el alias; si se quiere eliminar el retraso, usar `grr` nativo y borrar el mapeo.
+- `gr` se queda como está (telescope references). Si se quiere eliminar el retraso de `timeoutlen`, usar `grr` nativo y borrar el mapeo.
 - `diffview.nvim`, `vim-rhubarb` y `pack-ui.nvim` se mantienen hasta confirmar uso.
+- El lockfile de `vim.pack` vive en `~/.config/nvim/nvim-pack-lock.json`, fuera del repo de dotfiles.
