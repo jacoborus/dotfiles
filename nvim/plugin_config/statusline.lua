@@ -68,7 +68,7 @@ require("lualine").setup({
 		theme = theme,
 		component_separators = "|",
 		section_separators = "",
-		globalstatus = false,
+		globalstatus = true,
 		-- globalstatus = true,
 	},
 	extensions = {
