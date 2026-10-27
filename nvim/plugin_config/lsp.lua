@@ -16,6 +16,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("<leader>k", vim.lsp.buf.hover, "Hover Documentation")
 		map("<leader>K", vim.lsp.buf.signature_help, "Signature Documentation")
 		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+		-- Habilita el completado nativo de este cliente en el buffer. Hace falta
+		-- para que <C-y> aplique snippets/text edits y para el preview del popup.
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		if client and client:supports_method("textDocument/completion") then
+			vim.lsp.completion.enable(true, client.id, event.buf)
+		end
 	end,
 })
 
@@ -26,25 +33,23 @@ local servers = {
 	"cssls",
 	"dockerls",
 	"emmet_ls",
-	"eslint",
 	"gopls",
 	"golangci_lint_ls",
 	"html",
 	"jsonls",
 	"lua_ls",
 	"marksman",
+	"oxlint",
 	"sqlls",
 	"vimls",
 	"yamlls",
 }
 
--- Resolve the @vue/language-server location: prefer the global npm prefix,
--- fall back to Mason. Both layouts expose node_modules/@vue/language-server.
+-- Resolve the @vue/language-server location. Comprobamos las rutas conocidas
+-- antes de lanzar `npm root -g`, que bloquea el arranque ~100ms.
 local function find_vue_language_server()
-	local npm_root = vim.system({ "npm", "root", "-g" }):wait()
-	local prefix = npm_root.code == 0 and vim.trim(npm_root.stdout) or vim.fn.expand("~/.npm-packages/lib/node_modules")
 	local candidates = {
-		prefix .. "/@vue/language-server",
+		vim.fn.expand("~/.npm-packages/lib/node_modules/@vue/language-server"),
 		vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
 	}
 	for _, path in ipairs(candidates) do
@@ -52,6 +57,15 @@ local function find_vue_language_server()
 			return path
 		end
 	end
+
+	-- Último recurso (máquina nueva o npm con otro prefijo).
+	local npm_root = vim.system({ "npm", "root", "-g" }):wait()
+	local prefix = npm_root.code == 0 and vim.trim(npm_root.stdout) or vim.fn.expand("~/.npm-packages/lib/node_modules")
+	local path = prefix .. "/@vue/language-server"
+	if vim.uv.fs_stat(path) then
+		return path
+	end
+
 	return candidates[1]
 end
 
@@ -87,10 +101,6 @@ vim.api.nvim_set_hl(0, "@lsp.type.component", { link = "@type" })
 for _, name in ipairs(servers) do
 	vim.lsp.enable(name)
 end
-
-vim.o.autocomplete = true
-vim.o.pumborder = "rounded"
-vim.lsp.completion.enable()
 
 -- Tab: next completion item when popup is visible, jump snippet placeholder, else insert tab
 vim.keymap.set("i", "<Tab>", function()
