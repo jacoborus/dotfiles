@@ -1,8 +1,10 @@
 local util = require("conform.util")
 
+local format_opts = { timeout_ms = 1000, lsp_format = "fallback" }
+
 require("conform").setup({
 	notify_on_error = true,
-	format_on_save = { timeout_ms = 1000, lsp_fallback = true },
+	format_on_save = format_opts,
 	formatters = {
 		oxlint = {
 			cwd = util.root_file({ ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts", "package.json" }),
@@ -23,4 +25,20 @@ require("conform").setup({
 		yaml = { "yamlfix" },
 		sql = { "sql_formatter" },
 	},
+})
+
+local function format_buffer()
+	local ok = require("conform").format(vim.tbl_extend("force", format_opts, { async = true }))
+	if not ok then
+		vim.notify("Format: no formatter for " .. vim.bo.filetype, vim.log.levels.WARN)
+	end
+end
+
+vim.api.nvim_create_user_command("Format", format_buffer, {
+	force = true,
+	desc = "Format current buffer",
+})
+
+vim.keymap.set("n", "<leader>bf", format_buffer, {
+	desc = "Format buffer",
 })
