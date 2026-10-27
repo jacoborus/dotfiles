@@ -46,6 +46,7 @@ ec5289d docs(nvim): document size-preserving window swap
 e8a2f2d feat(nvim): reimplement HiLinkTrace commands
 de5ae55 refactor(nvim): load dadbod eagerly
 5e39a65 feat(nvim): support cross-tab buffer swaps
+9bf7340 feat(nvim): add :Format command and <leader>bf
 ```
 
 ---
@@ -155,6 +156,15 @@ Archivo: `plugin_config/conform.lua`
 - [x] Soporte de swap entre pestañas (marcar en una tab y cambiar a otra).
 - [x] Dadbod eager para conservar los argumentos del comando.
 - [x] Verificado: oxfmt en JS/TS/JSX/TSX/Vue/HTML/JSON, LSP `oxlint`, `:HLT`/`:HLT!`, cross-tab y `:DBUI`.
+
+## Fase 10 — Formato manual
+
+- [x] Añadir `:Format` con conform (`lsp_format = "fallback"`).
+- [x] Añadir `<leader>bf` (“buffer format”; estaba libre).
+- [x] Reutilizar las mismas opciones que `format_on_save`.
+- [x] Avisar si no hay formatter para el filetype.
+- [x] Verificado: comando, atajo, formato manual, guardado y aviso sin formatter.
+- [x] Commit: `feat(nvim): add :Format command and <leader>bf`.
 
 ---
 
