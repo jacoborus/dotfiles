@@ -1,6 +1,6 @@
 # Ghostty Docs https://ghostty.org/docs/config.
 #
-command=tmux new-session -A -s main
+## command=tmux new-session -A -s main
 
 gtk-titlebar = false
 window-width = 120
