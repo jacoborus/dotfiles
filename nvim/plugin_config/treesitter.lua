@@ -22,6 +22,7 @@ require("nvim-treesitter").install({
 	"json",
 	"lua",
 	"markdown",
+	"markdown_inline", -- requerido por render-markdown para el texto inline
 	"python",
 	"regex",
 	"scss",

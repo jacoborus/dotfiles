@@ -65,6 +65,11 @@ vim.pack.add({
 	gh("nvim-treesitter/nvim-treesitter-context"),
 })
 
+-- Markdown ----------------------------------------------------------------
+vim.pack.add({
+	gh("MeanderingProgrammer/render-markdown.nvim"),
+})
+
 -- Pickers -----------------------------------------------------------------
 vim.pack.add({
 	gh("nvim-telescope/telescope.nvim"),
@@ -159,6 +164,26 @@ vim.keymap.set("n", "<leader>gd", ":Neogen<cr>", { desc = "[G]enerate [D]ocs" })
 require("plugin_config.noice")
 
 -- Lazy-loaded plugins -----------------------------------------------------
+
+-- render-markdown solo se configura al abrir el primer markdown. Si el plugin
+-- aún se está instalando, se reintenta en el siguiente buffer markdown.
+local render_markdown_setup = false
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		if render_markdown_setup then
+			return
+		end
+		if not pcall(require, "render-markdown") then
+			return
+		end
+		render_markdown_setup = true
+		local ok, err = pcall(require, "plugin_config.render-markdown")
+		if not ok then
+			vim.notify("render-markdown: " .. err, vim.log.levels.ERROR)
+		end
+	end,
+})
 
 local outline_setup = false
 vim.keymap.set("n", "<leader>ol", function()
